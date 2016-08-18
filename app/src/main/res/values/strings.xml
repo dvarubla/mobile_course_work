@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Course Project</string>
     <string name="title_activity_list_tasks">ListTasksActivity</string>
+    <string name="task">Task %1$d</string>
 </resources>

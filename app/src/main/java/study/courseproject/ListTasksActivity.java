@@ -16,14 +16,15 @@ public class ListTasksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_tasks);
+        formatButtonCaptions();
+    }
 
+    private void formatButtonCaptions(){
         int[] ids={R.id.task1, R.id.task2, R.id.task3};
-        Object g=findViewById(R.id.task1);
         for(int i=0; i<ids.length; i++){
             Button bt=(Button)findViewById(ids[i]);
             bt.setText(String.format(bt.getText().toString(), i+1));
         }
-
     }
 
 }

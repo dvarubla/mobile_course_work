@@ -1,5 +1,6 @@
 package study.courseproject;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.Button;
@@ -23,6 +24,13 @@ public class ListTasksActivity extends AppCompatActivity {
         int[] ids={R.id.task1, R.id.task2, R.id.task3};
         for(int i=0; i<ids.length; i++){
             Button bt=(Button)findViewById(ids[i]);
+            bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ListTasksActivity.this, CalcActivity.class);
+                    startActivity(intent);
+                }
+            });
             bt.setText(String.format(bt.getText().toString(), i+1));
         }
     }

@@ -1,62 +1,75 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+    android:background="?attr/colorButtonNormal"-->
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="0dp"
+    android:background="?attr/colorButtonNormal"
+    android:divider="@drawable/button_vert_divider"
+    android:showDividers="middle"
     android:stretchColumns="*">
-    <TableRow android:layout_weight="1">
+    <TableRow android:layout_weight="1"
+        android:padding="0dp"
+        android:divider="@drawable/button_horiz_divider"
+        android:showDividers="middle">
         <Button
-            android:layout_height="match_parent"
-            android:text="@string/calc_1"
+            style="@style/calc_button_number"
+            android:text="@string/calc_button_number"
             android:id="@+id/button1"
             />
 
         <Button
-            android:layout_height="match_parent"
-            android:text="@string/calc_2"
+            style="@style/calc_button_number"
+            android:text="@string/calc_button_number"
             android:id="@+id/button2"
             />
 
         <Button
-            android:layout_height="match_parent"
-            android:text="@string/calc_3"
+            style="@style/calc_button_number"
+            android:text="@string/calc_button_number"
             android:id="@+id/button3"
             />
     </TableRow>
-    <TableRow android:layout_weight="1">
+    <TableRow android:layout_weight="1"
+        android:divider="@drawable/button_horiz_divider"
+        android:showDividers="middle">
         <Button
-            android:layout_height="match_parent"
-            android:text="@string/calc_4"
+            style="@style/calc_button_number"
+            android:text="@string/calc_button_number"
             android:id="@+id/button4"
             />
 
         <Button
-            android:layout_height="match_parent"
-            android:text="@string/calc_5"
+            style="@style/calc_button_number"
+            android:text="@string/calc_button_number"
             android:id="@+id/button5"
             />
 
         <Button
-            android:layout_height="match_parent"
-            android:text="@string/calc_6"
+            style="@style/calc_button_number"
+            android:text="@string/calc_button_number"
             android:id="@+id/button6"
             />
     </TableRow>
-    <TableRow android:layout_weight="1">
+    <TableRow android:layout_weight="1"
+        android:divider="@drawable/button_horiz_divider"
+        android:showDividers="middle">
         <Button
-            android:layout_height="match_parent"
-            android:text="@string/calc_7"
+            style="@style/calc_button_number"
+            android:text="@string/calc_button_number"
             android:id="@+id/button7"
             />
 
         <Button
-            android:layout_height="match_parent"
-            android:text="@string/calc_8"
+            style="@style/calc_button_number"
+            android:text="@string/calc_button_number"
             android:id="@+id/button8"
             />
 
         <Button
-            android:layout_height="match_parent"
-            android:text="@string/calc_9"
+            style="@style/calc_button_number"
+            android:text="@string/calc_button_number"
             android:id="@+id/button9"
             />
     </TableRow>

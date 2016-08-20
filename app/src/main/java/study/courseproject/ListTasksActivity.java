@@ -1,15 +1,11 @@
 package study.courseproject;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.widget.Button;
-import java.lang.String;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.View;
+import android.widget.Button;
 
 public class ListTasksActivity extends AppCompatActivity {
 
@@ -17,13 +13,13 @@ public class ListTasksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_tasks);
-        formatButtonCaptions();
+        processButtons();
     }
 
-    private void formatButtonCaptions(){
-        int[] ids={R.id.task1, R.id.task2, R.id.task3};
-        for(int i=0; i<ids.length; i++){
-            Button bt=(Button)findViewById(ids[i]);
+    private void processButtons(){
+        int i=1;
+        for(View item: Util.getViewsByTag(findViewById(android.R.id.content).getRootView(), "menu_button")){
+            Button bt=(Button)item;
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -31,7 +27,8 @@ public class ListTasksActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-            bt.setText(String.format(bt.getText().toString(), i+1));
+            bt.setText(String.format(bt.getText().toString(), i));
+            i++;
         }
     }
 

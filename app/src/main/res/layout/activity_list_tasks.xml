@@ -25,18 +25,18 @@
         <Button
             style="@style/menu_button"
             android:text="@string/task"
-            android:id="@+id/task1" />
+            android:tag="menu_button" />
 
         <Button
             style="@style/menu_button"
             android:text="@string/task"
-            android:id="@+id/task2"
+            android:tag="menu_button"
             />
 
         <Button
             style="@style/menu_button"
             android:text="@string/task"
-            android:id="@+id/task3"
+            android:tag="menu_button"
             />
     </LinearLayout>
 </android.support.percent.PercentRelativeLayout>

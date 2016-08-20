@@ -16,19 +16,19 @@
         <Button
             style="@style/calc_button_number"
             android:text="@string/calc_button_number"
-            android:id="@+id/button1"
+            android:tag="number_button"
             />
 
         <Button
             style="@style/calc_button_number"
             android:text="@string/calc_button_number"
-            android:id="@+id/button2"
+            android:tag="number_button"
             />
 
         <Button
             style="@style/calc_button_number"
             android:text="@string/calc_button_number"
-            android:id="@+id/button3"
+            android:tag="number_button"
             />
     </TableRow>
     <TableRow android:layout_weight="1"
@@ -37,19 +37,19 @@
         <Button
             style="@style/calc_button_number"
             android:text="@string/calc_button_number"
-            android:id="@+id/button4"
+            android:tag="number_button"
             />
 
         <Button
             style="@style/calc_button_number"
             android:text="@string/calc_button_number"
-            android:id="@+id/button5"
+            android:tag="number_button"
             />
 
         <Button
             style="@style/calc_button_number"
             android:text="@string/calc_button_number"
-            android:id="@+id/button6"
+            android:tag="number_button"
             />
     </TableRow>
     <TableRow android:layout_weight="1"
@@ -58,19 +58,19 @@
         <Button
             style="@style/calc_button_number"
             android:text="@string/calc_button_number"
-            android:id="@+id/button7"
+            android:tag="number_button"
             />
 
         <Button
             style="@style/calc_button_number"
             android:text="@string/calc_button_number"
-            android:id="@+id/button8"
+            android:tag="number_button"
             />
 
         <Button
             style="@style/calc_button_number"
             android:text="@string/calc_button_number"
-            android:id="@+id/button9"
+            android:tag="number_button"
             />
     </TableRow>
   </TableLayout>

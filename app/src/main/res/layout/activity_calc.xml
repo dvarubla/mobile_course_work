@@ -10,9 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="study.courseproject.CalcActivity"
     grid:columnCount="2"
-    grid:rowCount="2"
-    grid:layout_gravity="center"
-    grid:orientation="horizontal">
+    grid:rowCount="4"
+    grid:layout_gravity="center">
 
     <TextView
         android:text="New Text"
@@ -21,9 +20,23 @@
         grid:layout_column="0"
         android:textAppearance="?android:attr/textAppearanceLarge"
         />
-    <LinearLayout grid:layout_row="1"
-        grid:layout_rowWeight="1"
-        grid:layout_column="0">
-    <include layout="@layout/numbers"/>
-    </LinearLayout>
+
+
+    <include grid:layout_row="1"
+        grid:layout_rowWeight="0.25"
+        grid:layout_column="0"
+        layout="@layout/operators"/>
+
+    <Space
+        grid:layout_row="2"
+        grid:layout_rowWeight="0.08"
+        grid:layout_column="0"
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"/>
+
+
+        <include grid:layout_row="3"
+            grid:layout_rowWeight="0.5"
+            grid:layout_column="0"
+            layout="@layout/numbers"/>
 </android.support.v7.widget.GridLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="0dp"
+    android:background="?attr/colorButtonNormal"
+    android:divider="@drawable/button_vert_divider"
+    android:showDividers="middle"
+    android:stretchColumns="*"
+    android:shrinkColumns="*">
+    <TableRow android:layout_weight="1"
+        android:padding="0dp"
+        android:divider="@drawable/button_horiz_divider"
+        android:showDividers="middle">
+        <Button
+            style="@style/calc_button_number"
+            android:text="+"
+            android:tag="operator_button"
+            />
+
+        <Button
+            style="@style/calc_button_number"
+            android:text="-"
+            android:tag="operator_button"
+            />
+
+        <Button
+            style="@style/calc_button_number"
+            android:text="*"
+            android:tag="operator_button"
+            />
+    </TableRow>
+    <TableRow android:layout_weight="1"
+        android:divider="@drawable/button_horiz_divider"
+        android:showDividers="middle">
+        <Button
+            style="@style/calc_button_number"
+            android:text="/"
+            android:tag="operator_button"
+            />
+
+        <Button
+            style="@style/calc_button_number"
+            android:text="div"
+            android:tag="operator_button"
+            />
+
+        <Button
+            style="@style/calc_button_number"
+            android:text="mod"
+            android:tag="operator_button"
+            />
+    </TableRow>
+</TableLayout>

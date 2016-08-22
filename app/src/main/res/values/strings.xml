@@ -3,4 +3,5 @@
     <string name="title_activity_list_tasks">ListTasksActivity</string>
     <string name="task">Task %1$d</string>
     <string name="calc_button_number">%1$d</string>
+    <string name="num_col">3</string>
 </resources>

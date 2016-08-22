@@ -1,75 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="0dp"
-    android:background="?attr/colorButtonNormal"
-    android:divider="@drawable/button_vert_divider"
-    android:showDividers="middle"
-    android:stretchColumns="*">
-    <TableRow android:layout_weight="1"
-        android:padding="0dp"
-        android:divider="@drawable/button_horiz_divider"
-        android:showDividers="middle">
+    android:clipChildren="true"
+    >
+    <android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_marginTop="-4dp"
+        android:layout_marginBottom="-4dp"
+        android:layout_marginLeft="-4dp"
+        android:layout_marginRight="-4dp"
+        android:layout_height="match_parent"
+        xmlns:grid="http://schemas.android.com/apk/res-auto"
+        grid:columnCount="3"
+        android:background="#000"
+        >
         <Button
-            style="@style/calc_button_number"
+            grid:layout_rowWeight="1"
+            grid:layout_columnWeight="1"
+            style="@style/AppTheme.calc_button_operator.margin"
             android:text="@string/calc_button_number"
             android:tag="number_button"
             />
 
         <Button
-            style="@style/calc_button_number"
+            grid:layout_rowWeight="1"
+            grid:layout_columnWeight="1"
+            style="@style/AppTheme.calc_button_operator.margin"
             android:text="@string/calc_button_number"
             android:tag="number_button"
             />
 
         <Button
-            style="@style/calc_button_number"
+            grid:layout_rowWeight="1"
+            grid:layout_columnWeight="1"
+            style="@style/AppTheme.calc_button_operator.margin"
             android:text="@string/calc_button_number"
             android:tag="number_button"
             />
-    </TableRow>
-    <TableRow android:layout_weight="1"
-        android:divider="@drawable/button_horiz_divider"
-        android:showDividers="middle">
         <Button
-            style="@style/calc_button_number"
+            grid:layout_rowWeight="1"
+            grid:layout_columnWeight="1"
+            style="@style/AppTheme.calc_button_operator.margin"
             android:text="@string/calc_button_number"
             android:tag="number_button"
             />
 
         <Button
-            style="@style/calc_button_number"
+            grid:layout_rowWeight="1"
+            grid:layout_columnWeight="1"
+            style="@style/AppTheme.calc_button_operator.margin"
             android:text="@string/calc_button_number"
             android:tag="number_button"
             />
 
         <Button
-            style="@style/calc_button_number"
+            grid:layout_rowWeight="1"
+            grid:layout_columnWeight="1"
+            style="@style/AppTheme.calc_button_operator.margin"
             android:text="@string/calc_button_number"
             android:tag="number_button"
             />
-    </TableRow>
-    <TableRow android:layout_weight="1"
-        android:divider="@drawable/button_horiz_divider"
-        android:showDividers="middle">
         <Button
-            style="@style/calc_button_number"
+            grid:layout_rowWeight="1"
+            grid:layout_columnWeight="1"
+            style="@style/AppTheme.calc_button_operator.margin"
             android:text="@string/calc_button_number"
             android:tag="number_button"
             />
 
         <Button
-            style="@style/calc_button_number"
+            grid:layout_rowWeight="1"
+            grid:layout_columnWeight="1"
+            style="@style/AppTheme.calc_button_operator.margin"
             android:text="@string/calc_button_number"
             android:tag="number_button"
             />
 
         <Button
-            style="@style/calc_button_number"
+            grid:layout_rowWeight="1"
+            grid:layout_columnWeight="1"
+            style="@style/AppTheme.calc_button_operator.margin"
             android:text="@string/calc_button_number"
             android:tag="number_button"
             />
-    </TableRow>
-  </TableLayout>
+    </android.support.v7.widget.GridLayout>
+</LinearLayout>

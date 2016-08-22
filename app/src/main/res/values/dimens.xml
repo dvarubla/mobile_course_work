@@ -4,4 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen tools:override="true" name="abc_button_inset_vertical_material">0dp</dimen>
     <dimen tools:override="true" name="abc_button_inset_horizontal_material">0dp</dimen>
+    <dimen tools:override="true" name="abc_control_corner_material">0dp</dimen>
 </resources>

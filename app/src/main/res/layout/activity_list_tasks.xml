@@ -23,18 +23,18 @@
         >
 
         <Button
-            style="@style/menu_button"
+            style="@style/AppTheme.menu_button"
             android:text="@string/task"
             android:tag="menu_button" />
 
         <Button
-            style="@style/menu_button"
+            style="@style/AppTheme.menu_button"
             android:text="@string/task"
             android:tag="menu_button"
             />
 
         <Button
-            style="@style/menu_button"
+            style="@style/AppTheme.menu_button"
             android:text="@string/task"
             android:tag="menu_button"
             />

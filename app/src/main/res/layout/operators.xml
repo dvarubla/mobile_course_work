@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="true"
     >
-<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v7.widget.GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_marginTop="-4dp"
     android:layout_marginBottom="-4dp"
@@ -20,8 +21,8 @@
         <Button
             grid:layout_rowWeight="1"
             grid:layout_columnWeight="1"
-            android:text="+"
             style="@style/AppTheme.calc_button_operator.margin"
+            android:text="@string/operator_plus"
             android:tag="operator_button"
             />
 
@@ -29,7 +30,7 @@
             grid:layout_rowWeight="1"
             grid:layout_columnWeight="1"
             style="@style/AppTheme.calc_button_operator.margin"
-            android:text="-"
+            android:text="@string/operator_minus"
             android:tag="operator_button"
             />
 
@@ -37,7 +38,7 @@
             grid:layout_rowWeight="1"
             grid:layout_columnWeight="1"
             style="@style/AppTheme.calc_button_operator.margin"
-            android:text="*"
+            android:text="@string/operator_mult"
             android:tag="operator_button"
             />
 
@@ -45,7 +46,7 @@
             grid:layout_rowWeight="1"
             grid:layout_columnWeight="1"
             style="@style/AppTheme.calc_button_operator.margin"
-            android:text="/"
+            android:text="@string/operator_float_div"
             android:tag="operator_button"
             />
 
@@ -53,7 +54,7 @@
             grid:layout_rowWeight="1"
             grid:layout_columnWeight="1"
             style="@style/AppTheme.calc_button_operator.margin"
-            android:text="div"
+            android:text="@string/operator_div"
             android:tag="operator_button"
             />
 
@@ -61,7 +62,7 @@
             grid:layout_rowWeight="1"
             grid:layout_columnWeight="1"
             style="@style/AppTheme.calc_button_operator.margin"
-            android:text="mod"
+            android:text="@string/operator_mod"
             android:tag="operator_button"
             />
 </android.support.v7.widget.GridLayout>

@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">Course Project</string>
-    <string name="title_activity_list_tasks">ListTasksActivity</string>
     <string name="task">Task %1$d</string>
     <string name="calc_button_number">%1$d</string>
     <string name="num_col">3</string>
+    <string name="operator_plus">+</string>
+    <string name="operator_minus">-</string>
+    <string name="operator_mult">*</string>
+    <string name="operator_float_div">/</string>
+    <string name="operator_div">div</string>
+    <string name="operator_mod">mod</string>
 </resources>

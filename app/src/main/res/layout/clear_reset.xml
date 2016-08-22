@@ -7,11 +7,20 @@
     android:divider="@drawable/button_horiz_divider"
     android:showDividers="middle"
     >
+
     <Button
         android:layout_weight="1"
         android:layout_height="match_parent"
         style="@style/AppTheme.calc_button_operator"
         android:text="CLR"
+        android:tag="operator_button"
+        />
+
+    <Button
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        style="@style/AppTheme.calc_button_operator"
+        android:text="."
         android:tag="operator_button"
         />
 

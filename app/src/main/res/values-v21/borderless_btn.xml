@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme.borderless_btn" parent="android:Widget.Material.Button">
+        <item name="android:background">@drawable/borderless_btn_mtrl</item>
+    </style>
+</resources>

@@ -6,14 +6,14 @@
     >
     <android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_marginTop="-4dp"
-        android:layout_marginBottom="-4dp"
-        android:layout_marginLeft="-4dp"
-        android:layout_marginRight="-4dp"
+        android:layout_marginTop="@dimen/сalc_button_block_margin"
+        android:layout_marginBottom="@dimen/сalc_button_block_margin"
+        android:layout_marginLeft="@dimen/сalc_button_block_margin"
+        android:layout_marginRight="@dimen/сalc_button_block_margin"
         android:layout_height="match_parent"
         xmlns:grid="http://schemas.android.com/apk/res-auto"
         grid:columnCount="3"
-        android:background="#000"
+        android:background="@android:color/black"
         >
         <Button
             grid:layout_rowWeight="1"

@@ -9,4 +9,5 @@
 
     <dimen name="menu_divider_height">4dp</dimen>
     <dimen name="button_horiz_divider_width">4dp</dimen>
+    <dimen name="сalc_button_block_margin">-4dp</dimen>
 </resources>

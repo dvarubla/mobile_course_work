@@ -2,5 +2,7 @@
 <resources>
     <style name="AppTheme.borderless_btn" parent="android:Widget.Material.Button">
         <item name="android:background">@drawable/borderless_btn_mtrl</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:stateListAnimator">@null</item>
     </style>
 </resources>

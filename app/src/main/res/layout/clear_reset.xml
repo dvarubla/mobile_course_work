@@ -20,8 +20,16 @@
         android:layout_weight="1"
         android:layout_height="match_parent"
         style="@style/AppTheme.calc_button_operator"
-        android:text="."
+        android:text="@string/operator_eq"
         android:tag="operator_button"
+        />
+
+    <Button
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        style="@style/AppTheme.calc_button_operator"
+        android:text="."
+        android:tag="dot_button"
         />
 
     <ImageButton
@@ -29,6 +37,6 @@
         android:layout_height="match_parent"
         style="@style/AppTheme.calc_button_operator"
         android:src="@android:drawable/ic_input_delete"
-        android:tag="operator_button"
+        android:tag="backspace_button"
         />
 </LinearLayout>

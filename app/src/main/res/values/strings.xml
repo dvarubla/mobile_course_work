@@ -5,8 +5,9 @@
     <string name="num_col">3</string>
     <string name="operator_plus">+</string>
     <string name="operator_minus">-</string>
-    <string name="operator_mult">*</string>
+    <string name="operator_mul">*</string>
     <string name="operator_float_div">/</string>
     <string name="operator_div">DIV</string>
     <string name="operator_mod">MOD</string>
+    <string name="operator_eq">=</string>
 </resources>

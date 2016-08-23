@@ -38,7 +38,7 @@
             grid:layout_rowWeight="1"
             grid:layout_columnWeight="1"
             style="@style/AppTheme.calc_button_operator.margin"
-            android:text="@string/operator_mult"
+            android:text="@string/operator_mul"
             android:tag="operator_button"
             />
 

@@ -22,11 +22,27 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         setContentView(R.layout.activity_calc);
         textView=(TextView)this.findViewById(R.id.textView);
         textView.setMovementMethod(new ScrollingMovementMethod());
-        this.processNumberButtons();
-        this.initHashMap();
-        this.processOperatorButtons();
+
+        setTextButtonClick(
+                (Button)findViewById(android.R.id.content).getRootView().findViewWithTag("point_button")
+        );
+
+        processNumberButtons();
+        initHashMap();
+        processOperatorButtons();
+
         ICalcModel model=new CalcModel();
         presenter=new CalcPresenter(this, model);
+    }
+
+    public void setTextButtonClick(final Button bt){
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                textView.setGravity(Gravity.BOTTOM);
+                presenter.onTextButtonClick(bt.getText().toString());
+            }
+        });
     }
 
     private void initHashMap(){
@@ -45,13 +61,7 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         for(View item: Util.getViewsByTag(findViewById(android.R.id.content).getRootView(), "number_button")){
             final Button bt=(Button)item;
             bt.setText(String.format(bt.getText().toString(), i));
-            bt.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    textView.setGravity(Gravity.BOTTOM);
-                    presenter.onNumberButtonClick(bt.getText().toString());
-                }
-            });
+            setTextButtonClick(bt);
             i++;
         }
     }

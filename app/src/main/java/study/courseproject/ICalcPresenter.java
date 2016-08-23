@@ -2,6 +2,6 @@ package study.courseproject;
 
 
 public interface ICalcPresenter extends ICalcModelListener{
-    void onNumberButtonClick(String text);
+    void onTextButtonClick(String text);
     void onOpButtonClick(CalcOpTypes.OpType type);
 }

@@ -12,7 +12,7 @@
         android:layout_weight="1"
         android:layout_height="match_parent"
         style="@style/AppTheme.calc_button_operator"
-        android:text="CE"
+        android:text="@string/calc_button_clear"
         android:tag="operator_button"
         />
 
@@ -28,8 +28,8 @@
         android:layout_weight="1"
         android:layout_height="match_parent"
         style="@style/AppTheme.calc_button_operator"
-        android:text="."
-        android:tag="dot_button"
+        android:text="@string/calc_button_point"
+        android:tag="point_button"
         />
 
     <ImageButton

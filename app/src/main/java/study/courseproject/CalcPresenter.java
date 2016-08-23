@@ -15,7 +15,7 @@ public class CalcPresenter implements ICalcPresenter{
     }
 
     @Override
-    public void onNumberButtonClick(String text) {
+    public void onTextButtonClick(String text) {
         String prev=(needClear)?"":this.view.getTextViewText();
         if(needClear){
             needClear=false;

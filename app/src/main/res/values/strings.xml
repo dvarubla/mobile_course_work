@@ -10,4 +10,6 @@
     <string name="operator_div">DIV</string>
     <string name="operator_mod">MOD</string>
     <string name="operator_eq">=</string>
+    <string name="calc_button_point">.</string>
+    <string name="calc_button_clear">CE</string>
 </resources>

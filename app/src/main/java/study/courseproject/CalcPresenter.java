@@ -33,6 +33,8 @@ public class CalcPresenter implements ICalcPresenter{
             model.addNumber(str);
             model.addOperator(type);
             needClear=true;
+        } else if(type==CalcOpTypes.OpType.MINUS){
+            view.setTextViewText("-");
         }
     }
 

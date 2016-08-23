@@ -38,6 +38,9 @@ public class CalcModel implements ICalcModel {
             throw new ArrayIndexOutOfBoundsException("Op index is greater than array size");
         }
         if(number.contains(".") || floatMode){
+            if(number.equals(".")){
+                number="0";
+            }
             if(!floatMode){
                 for(int i=0; i<currentOp; i++){
                     bFloats[i]=new BigDecimal(bInts[i]);

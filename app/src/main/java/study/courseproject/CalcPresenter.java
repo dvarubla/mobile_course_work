@@ -6,6 +6,7 @@ public class CalcPresenter implements ICalcPresenter{
     private ICalcView view;
     private ICalcModel model;
     private boolean needClear;
+    private boolean textEntered;
 
     CalcPresenter(ICalcView view, ICalcModel model){
         this.view=view;
@@ -20,6 +21,7 @@ public class CalcPresenter implements ICalcPresenter{
         if(needClear){
             needClear=false;
         }
+        textEntered=true;
         view.setTextViewText(prev+text);
     }
 
@@ -30,7 +32,10 @@ public class CalcPresenter implements ICalcPresenter{
         }
         String str=view.getTextViewText();
         if(!str.equals("")){
-            model.addNumber(str);
+            if(textEntered) {
+                model.addNumber(str);
+                textEntered=false;
+            }
             model.addOperator(type);
             needClear=true;
         } else if(type==CalcOpTypes.OpType.MINUS){

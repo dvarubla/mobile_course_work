@@ -12,7 +12,7 @@
         android:layout_weight="1"
         android:layout_height="match_parent"
         style="@style/AppTheme.calc_button_operator"
-        android:text="CLR"
+        android:text="CE"
         android:tag="operator_button"
         />
 

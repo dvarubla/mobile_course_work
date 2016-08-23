@@ -5,6 +5,7 @@ import java.math.BigInteger;
 
 public class CalcModel implements ICalcModel {
     final int NUM_OPS=2;
+    final int SCALE=10;
     private ICalcModelListener listener;
     private BigInteger bInts[];
     private BigDecimal bFloats[];
@@ -56,6 +57,14 @@ public class CalcModel implements ICalcModel {
             throw new NullPointerException("Op type is null");
         }
         switch(type){
+            case EQ:
+                if(floatMode){
+                    bFloats[0]=bFloats[1];
+                } else {
+                    bInts[0]=bInts[1];
+                }
+                currentOp=1;
+                break;
             case PLUS:
                 if(floatMode){
                     bFloats[0]=bFloats[0].add(bFloats[1]);
@@ -72,11 +81,36 @@ public class CalcModel implements ICalcModel {
                 }
                 currentOp=1;
                 break;
+            case MUL:
+                if(floatMode){
+                    bFloats[0]=bFloats[0].multiply(bFloats[1]);
+                } else {
+                    bInts[0]=bInts[0].multiply(bInts[1]);
+                }
+                currentOp=1;
+                break;
+            case FLOAT_DIV:
+                if(!floatMode){
+                    BigInteger tInts[]=bInts[0].divideAndRemainder(bInts[1]);
+                    if(tInts[1].equals(BigInteger.valueOf(0))){
+                        bInts[0]=tInts[0];
+                    } else {
+                        floatMode=true;
+                        for(int i=0; i<NUM_OPS; i++){
+                            bFloats[i]=new BigDecimal(bInts[i]);
+                        }
+                    }
+                }
+                if(floatMode){
+                    bFloats[0]=bFloats[0].divide(bFloats[1], SCALE, BigDecimal.ROUND_HALF_UP);
+                }
+                currentOp=1;
+                break;
             default:
                 throw new IllegalArgumentException("Unknown op type "+type);
         }
         if(floatMode){
-            listener.notifyResult(bFloats[0].toString());
+            listener.notifyResult(bFloats[0].stripTrailingZeros().toPlainString());
         } else {
             listener.notifyResult(bInts[0].toString());
         }

@@ -27,4 +27,8 @@
     <style name="AppTheme.calc_button_operator.margin">
         <item name="android:layout_margin">2dp</item>
     </style>
+
+    <style name="AppTheme.calc_text_view">
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>

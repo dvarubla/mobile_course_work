@@ -7,6 +7,6 @@
     <string name="operator_minus">-</string>
     <string name="operator_mult">*</string>
     <string name="operator_float_div">/</string>
-    <string name="operator_div">div</string>
-    <string name="operator_mod">mod</string>
+    <string name="operator_div">DIV</string>
+    <string name="operator_mod">MOD</string>
 </resources>

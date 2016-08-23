@@ -1,61 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+<android.support.v7.widget.GridLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="@dimen/сalc_button_block_margin"
+    android:layout_marginBottom="@dimen/сalc_button_block_margin"
+    android:layout_marginLeft="@dimen/сalc_button_block_margin"
+    android:layout_marginRight="@dimen/сalc_button_block_margin"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="study.courseproject.CalcActivity"
-    >
+    xmlns:grid="http://schemas.android.com/apk/res-auto"
+    grid:columnCount="3"
+    grid:rowCount="5"
+    tools:context="study.courseproject.CalcActivity">
 
 <TextView
     android:text="New Text"
     android:id="@+id/textView"
-    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     style="@style/AppTheme.calc_text_view"
+    grid:layout_columnWeight="1"
+    grid:layout_columnSpan="3"
     />
 
-<LinearLayout
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<include
+    grid:layout_columnWeight="0.5"
+    grid:layout_rowWeight="1"
+    grid:layout_rowSpan="3"
+    layout="@layout/operators"/>
 
+<Space
+    grid:layout_columnWeight="0.05"
+    grid:layout_rowWeight="1"
+    grid:layout_columnSpan="1"
+    grid:layout_rowSpan="3"/>
 
-    <include
-        android:layout_weight="0.26"
-        android:layout_height="match_parent"
-        android:layout_width="0dp"
-        layout="@layout/operators"/>
+<include
+    layout="@layout/clear_reset"
+    grid:layout_columnWeight="1"
+    grid:layout_rowWeight="0.25"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    />
 
-
-    <Space
-        android:layout_weight="0.03"
-        android:layout_height="match_parent"
-        android:layout_width="1dp"/>
-    <LinearLayout
-        android:layout_weight="0.5"
-        android:orientation="vertical"
-        android:layout_width="0dp"
-        android:layout_height="match_parent">
-    <include
-        layout="@layout/clear_reset"
-        android:layout_weight="0.25"
-        android:layout_height="0dp"
-        android:layout_width="match_parent" />
-    <Space
-        android:layout_weight="0.05"
-        android:layout_height="1dp"
-        android:layout_width="match_parent"/>
-    <include
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        layout="@layout/numbers"/>
-    </LinearLayout>
-
-</LinearLayout>
-</LinearLayout>
+<Space
+    grid:layout_columnWeight="1"
+    grid:layout_rowWeight="0.05"/>
+<include
+    grid:layout_columnWeight="1"
+    grid:layout_rowWeight="1"
+    layout="@layout/numbers"/>
+</android.support.v7.widget.GridLayout>

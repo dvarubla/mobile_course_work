@@ -31,8 +31,15 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         initHashMap();
         processOperatorButtons();
 
-        ICalcModel model=new CalcModel();
-        presenter=new CalcPresenter(this, model);
+        CalcPresenterSingleton s=CalcPresenterSingleton.getInstance();
+        if(s.hasPresenter()){
+            presenter=s.getPresenter();
+            presenter.setICalcView(this);
+        } else {
+            ICalcModel model = new CalcModel();
+            presenter = new CalcPresenter(this, model);
+            s.setPresenter(presenter);
+        }
     }
 
     public void setTextButtonClick(final Button bt){
@@ -78,6 +85,12 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
                 });
             }
         }
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        CalcPresenterSingleton.getInstance().removePresenter();
     }
 
     @Override

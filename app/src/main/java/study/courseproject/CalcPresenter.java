@@ -26,6 +26,11 @@ public class CalcPresenter implements ICalcPresenter{
     }
 
     @Override
+    public void setICalcView(ICalcView v) {
+        this.view=v;
+    }
+
+    @Override
     public void onOpButtonClick(CalcOpTypes.OpType type){
         if(type==null){
             throw new NullPointerException("Op type must not be null");

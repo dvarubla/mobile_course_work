@@ -17,7 +17,11 @@ public class CalcPresenterSingleton {
         return presenter!=null;
     }
 
-    public ICalcPresenter getMPresenter(){
+    public void removePresenter(){
+        presenter=null;
+    }
+
+    public ICalcPresenter getPresenter(){
         return presenter;
     }
 

@@ -13,12 +13,16 @@ import java.util.HashMap;
 public class CalcActivity extends AppCompatActivity implements ICalcView{
     private ICalcPresenter presenter;
     private TextView textView;
+    private boolean needSave;
 
     private HashMap<String, CalcOpTypes.OpType> map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        needSave=false;
+
         setContentView(R.layout.activity_calc);
         textView=(TextView)this.findViewById(R.id.textView);
         textView.setMovementMethod(new ScrollingMovementMethod());
@@ -88,9 +92,17 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
     }
 
     @Override
-    public void onPause(){
-        super.onPause();
-        CalcPresenterSingleton.getInstance().removePresenter();
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        needSave=true;
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(!needSave){
+            CalcPresenterSingleton.getInstance().removePresenter();
+        }
     }
 
     @Override

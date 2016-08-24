@@ -30,8 +30,9 @@
 
     <style name="AppTheme.calc_text_view">
         <item name="android:textSize">20sp</item>
-        <item name="android:singleLine">false</item>
-        <item name="android:scrollbars">vertical</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:scrollHorizontally">true</item>
         <item name="android:freezesText">true</item>
     </style>
 </resources>

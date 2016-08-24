@@ -2,30 +2,43 @@ package study.courseproject;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
 import java.util.HashMap;
 
 public class CalcActivity extends AppCompatActivity implements ICalcView{
+    final static String SCROLL_POSITION="scroll_position";
     private ICalcPresenter presenter;
     private TextView textView;
     private boolean needSave;
+    private HorizontalScrollView scrollView;
 
     private HashMap<String, CalcOpTypes.OpType> map;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         needSave=false;
 
         setContentView(R.layout.activity_calc);
         textView=(TextView)this.findViewById(R.id.textView);
-        textView.setMovementMethod(new ScrollingMovementMethod());
+        scrollView=(HorizontalScrollView)this.findViewById(R.id.scrollView);
+
+        if(savedInstanceState!=null){
+            scrollView.post(new Runnable() {
+                @Override
+                public void run() {
+                    scrollView.scrollTo(
+                            savedInstanceState.getInt(SCROLL_POSITION),
+                            0
+                    );
+                }
+            });
+        }
 
         setTextButtonClick(
                 (Button)findViewById(android.R.id.content).getRootView().findViewWithTag("point_button")
@@ -50,7 +63,6 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                textView.setGravity(Gravity.BOTTOM);
                 presenter.onTextButtonClick(bt.getText().toString());
             }
         });
@@ -95,6 +107,7 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
     public void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
         needSave=true;
+        outState.putInt(SCROLL_POSITION, scrollView.getScrollX());
     }
 
     @Override
@@ -111,7 +124,17 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
     }
 
     @Override
-    public void setTextViewText(String str) {
+    public void setTextViewText(String str, boolean scrollRight) {
         textView.setText(str);
+        scroll(scrollRight);
+    }
+
+    private void scroll(final boolean scrollRight){
+        scrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollView.fullScroll((scrollRight)?View.FOCUS_RIGHT:View.FOCUS_LEFT);
+            }
+        });
     }
 }

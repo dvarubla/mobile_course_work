@@ -1,7 +1,5 @@
 package study.courseproject;
 
-import java.util.Objects;
-
 public class CalcPresenter implements ICalcPresenter{
     private ICalcView view;
     private ICalcModel model;
@@ -22,7 +20,7 @@ public class CalcPresenter implements ICalcPresenter{
             needClear=false;
         }
         textEntered=true;
-        view.setTextViewText(prev+text);
+        view.setTextViewText(prev+text, true);
     }
 
     @Override
@@ -44,21 +42,21 @@ public class CalcPresenter implements ICalcPresenter{
             model.addOperator(type);
             needClear=true;
         } else if(type==CalcOpTypes.OpType.MINUS){
-            view.setTextViewText("-");
+            view.setTextViewText("-", true);
         }
     }
 
     @Override
     public void notifyResult(String s) {
-        view.setTextViewText(s);
+        view.setTextViewText(s, false);
     }
 
     @Override
     public void notifyError(Exception exc){
         if(exc instanceof DivisionByZeroException){
-            view.setTextViewText("AAAA");
+            view.setTextViewText("AAAA", true);
         } else {
-            view.setTextViewText("Unknown error");
+            view.setTextViewText("Unknown error", true);
         }
     }
 }

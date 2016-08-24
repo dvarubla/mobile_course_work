@@ -10,13 +10,19 @@
     tools:context="study.courseproject.CalcActivity"
     android:orientation="vertical"
     >
+    <HorizontalScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        >
     <TextView
+        android:text=""
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/AppTheme.calc_text_view"
-        android:maxLines="3"
         />
+    </HorizontalScrollView>
     <include
         android:layout_weight="0.1"
         layout="@layout/clear_reset"

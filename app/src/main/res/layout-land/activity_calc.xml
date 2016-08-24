@@ -13,15 +13,21 @@
     grid:rowCount="5"
     tools:context="study.courseproject.CalcActivity">
 
-<TextView
-    android:id="@+id/textView"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    style="@style/AppTheme.calc_text_view"
+<HorizontalScrollView
     grid:layout_columnWeight="1"
     grid:layout_columnSpan="3"
-    android:maxLines="2"
-    />
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/scrollView"
+    >
+        <TextView
+            android:text=""
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.calc_text_view"
+            />
+</HorizontalScrollView>
 
 <include
     grid:layout_columnWeight="0.5"

@@ -55,6 +55,17 @@ public class CalcModel implements ICalcModel {
         currentOp++;
     }
 
+    private boolean checkDivZero(){
+        if(
+                (floatMode && bFloats[1].equals(BigDecimal.ZERO))
+                || bInts[1].equals(BigInteger.ZERO)
+                ){
+            listener.notifyError(new DivisionByZeroException("aa"));
+            return true;
+        }
+        return false;
+    }
+
     private void performAction(){
         if(type==null){
             throw new NullPointerException("Op type is null");
@@ -93,9 +104,13 @@ public class CalcModel implements ICalcModel {
                 currentOp=1;
                 break;
             case FLOAT_DIV:
+                currentOp=1;
+                if(checkDivZero()){
+                    return;
+                }
                 if(!floatMode){
                     BigInteger tInts[]=bInts[0].divideAndRemainder(bInts[1]);
-                    if(tInts[1].equals(BigInteger.valueOf(0))){
+                    if(tInts[1].equals(BigInteger.ZERO)){
                         bInts[0]=tInts[0];
                     } else {
                         floatMode=true;
@@ -107,7 +122,6 @@ public class CalcModel implements ICalcModel {
                 if(floatMode){
                     bFloats[0]=bFloats[0].divide(bFloats[1], SCALE, BigDecimal.ROUND_HALF_UP);
                 }
-                currentOp=1;
                 break;
             default:
                 throw new IllegalArgumentException("Unknown op type "+type);

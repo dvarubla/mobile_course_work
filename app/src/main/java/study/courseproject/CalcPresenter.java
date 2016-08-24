@@ -47,4 +47,13 @@ public class CalcPresenter implements ICalcPresenter{
     public void notifyResult(String s) {
         view.setTextViewText(s);
     }
+
+    @Override
+    public void notifyError(Exception exc){
+        if(exc instanceof DivisionByZeroException){
+            view.setTextViewText("AAAA");
+        } else {
+            view.setTextViewText("Unknown error");
+        }
+    }
 }

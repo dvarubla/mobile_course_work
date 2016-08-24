@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 public class CalcActivity extends AppCompatActivity implements ICalcView{
+    final static String SCROLL_POSITION="scroll_position";
     private ICalcPresenter presenter;
     private TextView textView;
     private HorizontalScrollView scrollView;
@@ -17,11 +18,23 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
     private HashMap<String, CalcOpTypes.OpType> map;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calc);
         textView=(TextView)this.findViewById(R.id.textView);
         scrollView=(HorizontalScrollView)this.findViewById(R.id.scrollView);
+
+        if(savedInstanceState!=null){
+            scrollView.post(new Runnable() {
+                @Override
+                public void run() {
+                    scrollView.scrollTo(
+                            savedInstanceState.getInt(SCROLL_POSITION),
+                            0
+                    );
+                }
+            });
+        }
 
         setTextButtonClick(
                 (Button)findViewById(android.R.id.content).getRootView().findViewWithTag("point_button")
@@ -46,7 +59,6 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //textView.setGravity(Gravity.RIGHT);
                 presenter.onTextButtonClick(bt.getText().toString());
             }
         });
@@ -88,6 +100,12 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        outState.putInt(SCROLL_POSITION, scrollView.getScrollX());
+    }
+
+    @Override
     public void onPause(){
         super.onPause();
         CalcPresenterSingleton.getInstance().removePresenter();
@@ -99,8 +117,12 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
     }
 
     @Override
-    public void setTextViewText(String str, final boolean scrollRight) {
+    public void setTextViewText(String str, boolean scrollRight) {
         textView.setText(str);
+        scroll(scrollRight);
+    }
+
+    private void scroll(final boolean scrollRight){
         scrollView.post(new Runnable() {
             @Override
             public void run() {

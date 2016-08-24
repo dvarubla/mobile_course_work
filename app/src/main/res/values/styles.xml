@@ -32,5 +32,6 @@
         <item name="android:textSize">20sp</item>
         <item name="android:singleLine">false</item>
         <item name="android:scrollbars">vertical</item>
+        <item name="android:freezesText">true</item>
     </style>
 </resources>

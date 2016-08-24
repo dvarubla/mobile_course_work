@@ -24,14 +24,6 @@
         android:tag="operator_button"
         />
 
-    <Button
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        style="@style/AppTheme.calc_button_operator"
-        android:text="@string/calc_button_point"
-        android:tag="point_button"
-        />
-
     <ImageButton
         android:layout_weight="1"
         android:layout_height="match_parent"

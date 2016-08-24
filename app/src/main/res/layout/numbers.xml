@@ -84,5 +84,22 @@
             android:text="@string/calc_button_number"
             android:tag="number_button"
             />
+
+        <Button
+            grid:layout_rowWeight="1"
+            grid:layout_columnWeight="1"
+            style="@style/AppTheme.calc_button_operator.margin"
+            android:text="@string/calc_button_number"
+            android:tag="number_button"
+            grid:layout_columnSpan="2"
+            />
+
+        <Button
+            grid:layout_rowWeight="1"
+            grid:layout_columnWeight="1"
+            style="@style/AppTheme.calc_button_operator.margin"
+            android:text="@string/calc_button_point"
+            android:tag="point_button"
+            />
     </android.support.v7.widget.GridLayout>
 </LinearLayout>

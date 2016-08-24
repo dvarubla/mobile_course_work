@@ -62,7 +62,7 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
             final Button bt=(Button)item;
             bt.setText(String.format(bt.getText().toString(), i));
             setTextButtonClick(bt);
-            i++;
+            i=(i+1)%10;
         }
     }
 

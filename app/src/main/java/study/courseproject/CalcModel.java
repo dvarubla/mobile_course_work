@@ -34,7 +34,18 @@ public class CalcModel implements ICalcModel {
     @Override
     public void addNumber(String number){
         checkNullListener();
-        if(currentOp>=NUM_OPS){
+        addNumberWithIndex(number, currentOp);
+        currentOp++;
+    }
+
+    @Override
+    public void replaceNumber(String number){
+        checkNullListener();
+        addNumberWithIndex(number, currentOp-1);
+    }
+
+    private void addNumberWithIndex(String number, int index){
+        if(index>=NUM_OPS){
             throw new ArrayIndexOutOfBoundsException("Op index is greater than array size");
         }
         if(number.contains(".") || floatMode){
@@ -42,17 +53,16 @@ public class CalcModel implements ICalcModel {
                 number="0";
             }
             if(!floatMode){
-                for(int i=0; i<currentOp; i++){
+                for(int i=0; i<index; i++){
                     bFloats[i]=new BigDecimal(bInts[i]);
                 }
                 floatMode=true;
             }
-            bFloats[currentOp]=new BigDecimal(number);
+            bFloats[index]=new BigDecimal(number);
 
         } else {
-            bInts[currentOp]=new BigInteger(number);
+            bInts[index]=new BigInteger(number);
         }
-        currentOp++;
     }
 
     private boolean checkDivZero(){

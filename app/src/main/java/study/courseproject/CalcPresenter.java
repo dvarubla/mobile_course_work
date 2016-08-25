@@ -5,12 +5,14 @@ public class CalcPresenter implements ICalcPresenter{
     private ICalcModel model;
     private boolean needClear;
     private boolean textEntered;
+    private boolean needReplace;
 
     CalcPresenter(ICalcView view, ICalcModel model){
         this.view=view;
         this.model=model;
         model.setListener(this);
         needClear=false;
+        needReplace=false;
     }
 
     @Override
@@ -18,6 +20,10 @@ public class CalcPresenter implements ICalcPresenter{
         String prev=(needClear)?"":this.view.getTextViewText();
         if(needClear){
             needClear=false;
+            if(needReplace){
+                model.replaceNumber(this.view.getTextViewText());
+                needReplace=false;
+            }
         }
         textEntered=true;
         view.setTextViewText(prev+text, true);
@@ -44,6 +50,13 @@ public class CalcPresenter implements ICalcPresenter{
         } else if(type==CalcOpTypes.OpType.MINUS){
             view.setTextViewText("-", true);
         }
+    }
+
+    @Override
+    public void onBackspaceClick() {
+        String prev=view.getTextViewText();
+        view.setTextViewText(prev.substring(0, prev.length()-1), true);
+        needReplace=true;
     }
 
     @Override

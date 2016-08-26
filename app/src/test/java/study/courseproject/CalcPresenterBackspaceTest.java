@@ -1,5 +1,6 @@
 package study.courseproject;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
@@ -15,14 +16,22 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 
-public class CalcPresenterTest {
+public class CalcPresenterBackspaceTest {
+
+    ICalcView v;
+    StrStorage s;
+    CalcPresenter p;
+
+    @Before
+    public void before(){
+        v=mock(ICalcView.class);
+        s=new StrStorage("");
+        p=new CalcPresenter(v, new CalcModel());
+    }
 
     @Test
     public void testOneBackspace(){
-        ICalcView v=mock(ICalcView.class);
-        StrStorage s=new StrStorage("");
         attachView(v, s);
-        CalcPresenter p=new CalcPresenter(v, new CalcModel());
         p.onTextButtonClick("1");
         p.onTextButtonClick("2");
 
@@ -34,10 +43,7 @@ public class CalcPresenterTest {
 
     @Test
     public void testMultBackspace(){
-        ICalcView v=mock(ICalcView.class);
-        StrStorage s=new StrStorage("");
         attachView(v, s);
-        CalcPresenter p=new CalcPresenter(v, new CalcModel());
         p.onTextButtonClick("1");
         p.onTextButtonClick("2");
         p.onBackspaceClick();
@@ -53,9 +59,6 @@ public class CalcPresenterTest {
 
     @Test
     public void testBackspaceAfterEq() throws InterruptedException {
-        ICalcView v=mock(ICalcView.class);
-        CalcPresenter p=new CalcPresenter(v, new CalcModel());
-        StrStorage s=new StrStorage("");
         attachView(v, s);
         p.onTextButtonClick("1");
         p.onTextButtonClick("2");
@@ -83,6 +86,27 @@ public class CalcPresenterTest {
         p.onOpButtonClick(CalcOpTypes.OpType.EQ);
         signal.await(1, TimeUnit.SECONDS);
         verify(v).setTextViewText(eq("7"), anyBoolean());
+    }
+
+    @Test
+    public void testBackspaceAfterPlus() throws InterruptedException {
+        attachView(v, s);
+        p.onTextButtonClick("1");
+        p.onTextButtonClick("2");
+        p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        p.onTextButtonClick("4");
+        p.onTextButtonClick("5");
+
+        CountDownLatch signal = new CountDownLatch(1);
+        attachViewWithSignal(v, s, signal);
+
+        p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        signal.await(1, TimeUnit.SECONDS);
+        reset(v);
+
+        attachView(v, s);
+        p.onBackspaceClick();
+        verify(v).setTextViewText(eq(""), anyBoolean());
     }
 
     public void attachView(ICalcView v, final StrStorage storage){

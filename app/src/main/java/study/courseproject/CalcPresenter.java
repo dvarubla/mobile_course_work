@@ -4,7 +4,7 @@ public class CalcPresenter implements ICalcPresenter{
     private ICalcView view;
     private ICalcModel model;
     private boolean needClear;
-    private boolean textEntered;
+    private boolean textChanged;
     private boolean needReplace;
 
     CalcPresenter(ICalcView view, ICalcModel model){
@@ -25,7 +25,7 @@ public class CalcPresenter implements ICalcPresenter{
                 needReplace=false;
             }
         }
-        textEntered=true;
+        textChanged=true;
         view.setTextViewText(prev+text, true);
     }
 
@@ -40,13 +40,15 @@ public class CalcPresenter implements ICalcPresenter{
             throw new NullPointerException("Op type must not be null");
         }
         String str=view.getTextViewText();
-        if(!str.equals("")){
-            if(textEntered) {
+        if(str.length()!=0){
+            if(textChanged) {
                 model.addNumber(str);
-                textEntered=false;
+                textChanged =false;
             }
             model.addOperator(type);
-            needClear=true;
+            if(type!=CalcOpTypes.OpType.EQ) {
+                needClear = true;
+            }
         } else if(type==CalcOpTypes.OpType.MINUS){
             view.setTextViewText("-", true);
         }
@@ -54,9 +56,15 @@ public class CalcPresenter implements ICalcPresenter{
 
     @Override
     public void onBackspaceClick() {
-        String prev=view.getTextViewText();
-        view.setTextViewText(prev.substring(0, prev.length()-1), true);
-        needReplace=true;
+        if(needClear){
+            view.setTextViewText("", true);
+        } else {
+            String prev = view.getTextViewText();
+            if (prev.length() != 0) {
+                view.setTextViewText(prev.substring(0, prev.length() - 1), true);
+                textChanged = true;
+            }
+        }
     }
 
     @Override

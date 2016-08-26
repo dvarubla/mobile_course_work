@@ -7,7 +7,6 @@ import org.mockito.stubbing.Answer;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doAnswer;
@@ -15,19 +14,20 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class CalcPresenterTest {
 
     @Test
     public void testOneBackspace(){
         ICalcView v=mock(ICalcView.class);
+        StrStorage s=new StrStorage("");
+        attachView(v, s);
         CalcPresenter p=new CalcPresenter(v, new CalcModel());
-        when(v.getTextViewText()).thenReturn("").thenReturn("1");
         p.onTextButtonClick("1");
         p.onTextButtonClick("2");
+
         reset(v);
-        when(v.getTextViewText()).thenReturn("12");
+        attachView(v, s);
         p.onBackspaceClick();
         verify(v).setTextViewText(eq("1"), anyBoolean());
     }
@@ -35,23 +35,17 @@ public class CalcPresenterTest {
     @Test
     public void testMultBackspace(){
         ICalcView v=mock(ICalcView.class);
+        StrStorage s=new StrStorage("");
+        attachView(v, s);
         CalcPresenter p=new CalcPresenter(v, new CalcModel());
-        when(v.getTextViewText()).thenReturn("").thenReturn("1");
         p.onTextButtonClick("1");
         p.onTextButtonClick("2");
-
-        when(v.getTextViewText()).thenReturn("12");
         p.onBackspaceClick();
-
-        when(v.getTextViewText()).thenReturn("1");
         p.onBackspaceClick();
-
-        when(v.getTextViewText()).thenReturn("").thenReturn("5");
-        p.onTextButtonClick("5");
-        p.onTextButtonClick("7");
 
         reset(v);
-        when(v.getTextViewText()).thenReturn("57");
+        attachView(v, s);
+        p.onTextButtonClick("5");
         p.onBackspaceClick();
         verify(v).setTextViewText(eq("5"), anyBoolean());
     }
@@ -61,46 +55,86 @@ public class CalcPresenterTest {
     public void testBackspaceAfterEq() throws InterruptedException {
         ICalcView v=mock(ICalcView.class);
         CalcPresenter p=new CalcPresenter(v, new CalcModel());
-        when(v.getTextViewText()).thenReturn("").thenReturn("1").thenReturn("12");
+        StrStorage s=new StrStorage("");
+        attachView(v, s);
         p.onTextButtonClick("1");
         p.onTextButtonClick("2");
         p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
-        when(v.getTextViewText()).thenReturn("").thenReturn("4").thenReturn("45");
         p.onTextButtonClick("4");
         p.onTextButtonClick("5");
 
-        final CountDownLatch signal = new CountDownLatch(1);
-        doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation){
-                signal.countDown();
-                return null;
-            }
-        }).when(v).setTextViewText(anyString(), anyBoolean());
+        CountDownLatch signal = new CountDownLatch(1);
+        attachViewWithSignal(v, s, signal);
 
         p.onOpButtonClick(CalcOpTypes.OpType.EQ);
-        signal.await(5, TimeUnit.SECONDS);
+        signal.await(1, TimeUnit.SECONDS);
         reset(v);
 
-        when(v.getTextViewText()).thenReturn("57");
+        attachView(v, s);
         p.onBackspaceClick();
-        when(v.getTextViewText()).thenReturn("5");
 
         p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
         p.onTextButtonClick("2");
 
+        reset(v);
+        signal = new CountDownLatch(1);
+        attachViewWithSignal(v, s, signal);
+
+        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        signal.await(1, TimeUnit.SECONDS);
+        verify(v).setTextViewText(eq("7"), anyBoolean());
+    }
+
+    public void attachView(ICalcView v, final StrStorage storage){
         doAnswer(new Answer<Void>() {
             @Override
             public Void answer(InvocationOnMock invocation){
-                String s=(String)invocation.getArguments()[0];
-                assertEquals(s, "7");
+                String str=(String)invocation.getArguments()[0];
+                storage.setStr(str);
+                return null;
+            }
+        }).when(v).setTextViewText(anyString(), anyBoolean());
+
+        doAnswer(new Answer<String>() {
+            @Override
+            public String answer(InvocationOnMock invocation){
+                return storage.getStr();
+            }
+        }).when(v).getTextViewText();
+    }
+
+    public void attachViewWithSignal(ICalcView v, final StrStorage storage, final CountDownLatch signal){
+        doAnswer(new Answer<Void>() {
+            @Override
+            public Void answer(InvocationOnMock invocation){
+                String str=(String)invocation.getArguments()[0];
+                storage.setStr(str);
                 signal.countDown();
                 return null;
             }
         }).when(v).setTextViewText(anyString(), anyBoolean());
 
-        when(v.getTextViewText()).thenReturn("2");
-        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
-        signal.await(5, TimeUnit.SECONDS);
+        doAnswer(new Answer<String>() {
+            @Override
+            public String answer(InvocationOnMock invocation){
+                signal.countDown();
+                return storage.getStr();
+            }
+        }).when(v).getTextViewText();
+    }
+
+    public class StrStorage{
+        private String str;
+        StrStorage(String str){
+            this.str=str;
+        }
+
+        public String getStr(){
+            return str;
+        }
+
+        public void setStr(String str){
+            this.str=str;
+        }
     }
 }

@@ -10,7 +10,6 @@ public class CalcPresenter implements ICalcPresenter{
     CalcPresenter(ICalcView view, ICalcModel model){
         this.view=view;
         this.model=model;
-        model.setListener(this);
         needClear=false;
         needReplace=false;
     }

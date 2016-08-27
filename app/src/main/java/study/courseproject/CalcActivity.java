@@ -55,14 +55,23 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         initHashMap();
         processOperatorButtons();
 
+        createParts();
+    }
+
+    private void createParts(){
         CalcPresenterSingleton s=CalcPresenterSingleton.getInstance();
         if(s.hasPresenter()){
             presenter=s.getPresenter();
             presenter.setICalcView(this);
         } else {
-            ICalcModel model = new CalcModelAsync(new CalcModel());
-            presenter = new CalcPresenter(this, model);
-            s.setPresenter(presenter);
+            CalcModel model=new CalcModel();
+            CalcModelAsync asyncModel = new CalcModelAsync(model);
+            CalcPresenter presenter=new CalcPresenter(this, model);
+            CalcPresenterAsync asyncPresenter = new CalcPresenterAsync(this, presenter);
+            model.setListener(presenter);
+            asyncModel.setListener(asyncPresenter);
+            this.presenter=asyncPresenter;
+            s.setPresenter(this.presenter);
         }
     }
 

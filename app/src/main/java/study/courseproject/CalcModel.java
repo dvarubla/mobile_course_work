@@ -20,7 +20,6 @@ public class CalcModel implements ICalcModel {
         floatMode=false;
     }
 
-    @Override
     public void setListener(ICalcModelListener listener){
         this.listener=listener;
     }

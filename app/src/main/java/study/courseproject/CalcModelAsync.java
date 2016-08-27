@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 
-public class CalcModelAsync implements ICalcModel, ICalcModelListener{
+public class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
 
     class ModelTask extends AsyncTask<Void, Void, Entry<String,Boolean>>{
         @Override
@@ -25,15 +25,14 @@ public class CalcModelAsync implements ICalcModel, ICalcModelListener{
     private ICalcModelListener listener;
     private String result;
     private boolean resultSet;
+
     public CalcModelAsync(ICalcModel model){
         resultSet=false;
         this.model=model;
     }
 
-    @Override
-    public void setListener(ICalcModelListener listener) {
+    public void setListener(ICalcModelAsyncListener listener) {
         this.listener=listener;
-        model.setListener(this);
     }
 
     @Override

@@ -4,7 +4,7 @@ public class CalcPresenterAsync implements ICalcPresenterAsync {
     private ICalcPresenter presenter;
     private boolean working;
 
-    public CalcPresenterAsync(ICalcView v, ICalcPresenter presenter){
+    public CalcPresenterAsync(ICalcPresenter presenter){
         working=false;
         this.presenter=presenter;
     }

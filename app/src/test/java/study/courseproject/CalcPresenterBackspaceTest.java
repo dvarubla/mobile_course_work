@@ -5,9 +5,6 @@ import org.junit.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
-
 import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doAnswer;
@@ -26,7 +23,9 @@ public class CalcPresenterBackspaceTest {
     public void before(){
         v=mock(ICalcView.class);
         s=new StrStorage("");
-        p=new CalcPresenter(v, new CalcModel());
+        CalcModel m=new CalcModel();
+        p=new CalcPresenter(v, m);
+        m.setListener(p);
     }
 
     @Test
@@ -66,25 +65,16 @@ public class CalcPresenterBackspaceTest {
         p.onTextButtonClick("4");
         p.onTextButtonClick("5");
 
-        CountDownLatch signal = new CountDownLatch(1);
-        attachViewWithSignal(v, s, signal);
-
         p.onOpButtonClick(CalcOpTypes.OpType.EQ);
-        signal.await(1, TimeUnit.SECONDS);
-        reset(v);
 
-        attachView(v, s);
         p.onBackspaceClick();
 
         p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
         p.onTextButtonClick("2");
 
         reset(v);
-        signal = new CountDownLatch(1);
-        attachViewWithSignal(v, s, signal);
-
+        attachView(v, s);
         p.onOpButtonClick(CalcOpTypes.OpType.EQ);
-        signal.await(1, TimeUnit.SECONDS);
         verify(v).setTextViewText(eq("7"), anyBoolean());
     }
 
@@ -97,11 +87,7 @@ public class CalcPresenterBackspaceTest {
         p.onTextButtonClick("4");
         p.onTextButtonClick("5");
 
-        CountDownLatch signal = new CountDownLatch(1);
-        attachViewWithSignal(v, s, signal);
-
         p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
-        signal.await(1, TimeUnit.SECONDS);
         reset(v);
 
         attachView(v, s);
@@ -122,26 +108,6 @@ public class CalcPresenterBackspaceTest {
         doAnswer(new Answer<String>() {
             @Override
             public String answer(InvocationOnMock invocation){
-                return storage.getStr();
-            }
-        }).when(v).getTextViewText();
-    }
-
-    public void attachViewWithSignal(ICalcView v, final StrStorage storage, final CountDownLatch signal){
-        doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation){
-                String str=(String)invocation.getArguments()[0];
-                storage.setStr(str);
-                signal.countDown();
-                return null;
-            }
-        }).when(v).setTextViewText(anyString(), anyBoolean());
-
-        doAnswer(new Answer<String>() {
-            @Override
-            public String answer(InvocationOnMock invocation){
-                signal.countDown();
                 return storage.getStr();
             }
         }).when(v).getTextViewText();

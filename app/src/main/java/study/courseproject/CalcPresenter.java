@@ -36,7 +36,8 @@ public class CalcPresenter implements ICalcPresenter{
     @Override
     public void onOpButtonClick(CalcOpTypes.OpType type){
         if(type==null){
-            throw new NullPointerException("Op type must not be null");
+            notifyError(new NullPointerException("Op type must not be null"));
+            return;
         }
         String str=view.getTextViewText();
         if(str.length()!=0){
@@ -73,6 +74,7 @@ public class CalcPresenter implements ICalcPresenter{
 
     @Override
     public void notifyError(Exception exc){
+        needClear=true;
         if(exc instanceof DivisionByZeroException){
             view.setTextViewText("AAAA", true);
         } else {

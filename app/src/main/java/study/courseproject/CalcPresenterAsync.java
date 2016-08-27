@@ -48,6 +48,7 @@ public class CalcPresenterAsync implements ICalcPresenterAsync {
 
     @Override
     public void notifyError(Exception exc) {
-
+        working=false;
+        presenter.notifyError(exc);
     }
 }

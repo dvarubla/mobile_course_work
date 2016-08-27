@@ -16,31 +16,40 @@ public class CalcModel implements ICalcModel {
     CalcModel(){
         bInts=new BigInteger[NUM_OPS];
         bFloats=new BigDecimal[NUM_OPS];
-        currentOp=0;
-        floatMode=false;
+        reset();
     }
 
     public void setListener(ICalcModelListener listener){
         this.listener=listener;
     }
 
-    private void checkNullListener(){
-        if(listener==null){
-            throw new NullPointerException("You forgot to set listener");
-        }
+    private void reset(){
+        currentOp=0;
+        floatMode=false;
+    }
+
+    private void processError(Exception exc){
+        reset();
+        listener.notifyError(exc);
     }
 
     @Override
     public void addNumber(String number){
-        checkNullListener();
-        addNumberWithIndex(number, currentOp);
-        currentOp++;
+        try {
+            addNumberWithIndex(number, currentOp);
+            currentOp++;
+        } catch(Exception e){
+            processError(e);
+        }
     }
 
     @Override
     public void replaceNumber(String number){
-        checkNullListener();
-        addNumberWithIndex(number, currentOp-1);
+        try {
+            addNumberWithIndex(number, currentOp - 1);
+        } catch(Exception e){
+            processError(e);
+        }
     }
 
     private void addNumberWithIndex(String number, int index){
@@ -64,15 +73,13 @@ public class CalcModel implements ICalcModel {
         }
     }
 
-    private boolean checkDivZero(){
+    private void checkDivZero(){
         if(
                 (floatMode && bFloats[1].equals(BigDecimal.ZERO))
                 || bInts[1].equals(BigInteger.ZERO)
                 ){
-            listener.notifyError(new DivisionByZeroException("aa"));
-            return true;
+            throw new DivisionByZeroException("aa");
         }
-        return false;
     }
 
     private void performAction(){
@@ -114,9 +121,7 @@ public class CalcModel implements ICalcModel {
                 break;
             case FLOAT_DIV:
                 currentOp=1;
-                if(checkDivZero()){
-                    return;
-                }
+                checkDivZero();
                 if(!floatMode){
                     BigInteger tInts[]=bInts[0].divideAndRemainder(bInts[1]);
                     if(tInts[1].equals(BigInteger.ZERO)){
@@ -144,10 +149,13 @@ public class CalcModel implements ICalcModel {
 
     @Override
     public void addOperator(CalcOpTypes.OpType type){
-        checkNullListener();
-        if(currentOp==NUM_OPS){
-            performAction();
+        try {
+            if (currentOp == NUM_OPS) {
+                performAction();
+            }
+            this.type = type;
+        } catch(Exception e){
+            processError(e);
         }
-        this.type=type;
     }
 }

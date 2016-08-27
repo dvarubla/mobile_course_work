@@ -7,16 +7,22 @@ import java.util.Map.Entry;
 
 public class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
 
-    class ModelTask extends AsyncTask<Void, Void, Entry<String,Boolean>>{
+    class ModelTask extends AsyncTask<Void, Void, Entry<String,Exception>>{
         @Override
-        protected Entry<String,Boolean> doInBackground(Void... voids) {
-            return new SimpleEntry<>(result,resultSet);
+        protected Entry<String,Exception> doInBackground(Void... voids) {
+            Entry<String,Exception> ret=new SimpleEntry<>(result,exc);
+            result=null;
+            exc=null;
+            return ret;
         }
 
+        @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
         @Override
-        protected  void onPostExecute(Entry<String,Boolean> entry){
-            if(entry.getValue()){
+        protected  void onPostExecute(Entry<String,Exception> entry){
+            if(entry.getKey()!=null){
                 listener.notifyResult(entry.getKey());
+            } else if(entry.getValue()!=null){
+                listener.notifyError(entry.getValue());
             }
         }
     }
@@ -24,10 +30,9 @@ public class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
     private ICalcModel model;
     private ICalcModelListener listener;
     private String result;
-    private boolean resultSet;
+    private Exception exc;
 
     public CalcModelAsync(ICalcModel model){
-        resultSet=false;
         this.model=model;
     }
 
@@ -39,7 +44,7 @@ public class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
     public void addNumber(final String number) {
         new ModelTask(){
             @Override
-            protected Entry<String,Boolean> doInBackground(Void... voids) {
+            protected Entry<String,Exception> doInBackground(Void... voids) {
                 model.addNumber(number);
                 return super.doInBackground(voids);
             }
@@ -50,7 +55,7 @@ public class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
     public void replaceNumber(final String number) {
         new ModelTask(){
             @Override
-            protected Entry<String,Boolean> doInBackground(Void... voids) {
+            protected Entry<String,Exception> doInBackground(Void... voids) {
                 model.replaceNumber(number);
                 return super.doInBackground(voids);
             }
@@ -61,7 +66,7 @@ public class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
     public void addOperator(final CalcOpTypes.OpType type) {
         new ModelTask(){
             @Override
-            protected Entry<String,Boolean> doInBackground(Void... voids) {
+            protected Entry<String,Exception> doInBackground(Void... voids) {
                 model.addOperator(type);
                 return super.doInBackground(voids);
             }
@@ -70,11 +75,11 @@ public class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
 
     @Override
     public void notifyResult(String s) {
-        resultSet=true;
         result=s;
     }
 
     @Override
     public void notifyError(Exception exc) {
+        this.exc=exc;
     }
 }

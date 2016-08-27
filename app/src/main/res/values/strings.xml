@@ -12,4 +12,6 @@
     <string name="operator_eq">=</string>
     <string name="calc_button_point">.</string>
     <string name="calc_button_clear">CE</string>
+    <string name="unexpected_error">Unexpected error</string>
+    <string name="division_by_zero">Division by zero!</string>
 </resources>

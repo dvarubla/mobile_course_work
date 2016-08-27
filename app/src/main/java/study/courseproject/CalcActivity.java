@@ -1,5 +1,6 @@
 package study.courseproject;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -66,7 +67,7 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         } else {
             CalcModel model=new CalcModel();
             CalcModelAsync asyncModel = new CalcModelAsync(model);
-            CalcPresenter presenter=new CalcPresenter(this, model);
+            CalcPresenter presenter=new CalcPresenter(this, model, new ErrorStringObtainer(getApplicationContext()));
             CalcPresenterAsync asyncPresenter = new CalcPresenterAsync(presenter);
             model.setListener(presenter);
             asyncModel.setListener(asyncPresenter);
@@ -132,6 +133,14 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         if(!needSave){
             CalcPresenterSingleton.getInstance().removePresenter();
         }
+    }
+
+    @Override
+    public void showError(String str){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(str).setTitle(R.string.unexpected_error);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override

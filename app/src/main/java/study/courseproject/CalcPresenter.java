@@ -1,15 +1,19 @@
 package study.courseproject;
 
+import android.util.Log;
+
 public class CalcPresenter implements ICalcPresenter{
     private ICalcView view;
     private ICalcModel model;
     private boolean needClear;
     private boolean textChanged;
     private boolean needReplace;
+    private IErrorStringObtainer errStrObtainer;
 
-    CalcPresenter(ICalcView view, ICalcModel model){
+    CalcPresenter(ICalcView view, ICalcModel model, IErrorStringObtainer errorStringObtainer){
         this.view=view;
         this.model=model;
+        this.errStrObtainer =errorStringObtainer;
         needClear=false;
         needReplace=false;
     }
@@ -76,9 +80,10 @@ public class CalcPresenter implements ICalcPresenter{
     public void notifyError(Exception exc){
         needClear=true;
         if(exc instanceof DivisionByZeroException){
-            view.setTextViewText("AAAA", true);
+            view.setTextViewText(errStrObtainer.getString(exc), true);
         } else {
-            view.setTextViewText("Unknown error", true);
+            Log.e(view.getClass().getSimpleName(), Log.getStackTraceString(exc));
+            view.showError(Log.getStackTraceString(exc));
         }
     }
 }

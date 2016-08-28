@@ -1,5 +1,6 @@
 package study.courseproject;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -138,7 +139,14 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
     @Override
     public void showError(String str){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(str).setTitle(R.string.unexpected_error);
+        builder.setMessage(str)
+                .setTitle(R.string.unexpected_error)
+                .setPositiveButton(R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
         AlertDialog dialog = builder.create();
         dialog.show();
     }

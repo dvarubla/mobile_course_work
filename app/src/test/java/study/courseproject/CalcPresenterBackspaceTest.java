@@ -37,7 +37,7 @@ public class CalcPresenterBackspaceTest {
         reset(v);
         attachView(v, s);
         p.onBackspaceClick();
-        verify(v).setTextViewText(eq("1"), anyBoolean());
+        verify(v).setTextViewText(eq("1"), anyBoolean(), false);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class CalcPresenterBackspaceTest {
         attachView(v, s);
         p.onTextButtonClick("5");
         p.onBackspaceClick();
-        verify(v).setTextViewText(eq("5"), anyBoolean());
+        verify(v).setTextViewText(eq("5"), anyBoolean(), false);
     }
 
 
@@ -75,7 +75,7 @@ public class CalcPresenterBackspaceTest {
         reset(v);
         attachView(v, s);
         p.onOpButtonClick(CalcOpTypes.OpType.EQ);
-        verify(v).setTextViewText(eq("7"), anyBoolean());
+        verify(v).setTextViewText(eq("7"), anyBoolean(), false);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class CalcPresenterBackspaceTest {
 
         attachView(v, s);
         p.onBackspaceClick();
-        verify(v).setTextViewText(eq(""), anyBoolean());
+        verify(v).setTextViewText(eq(""), anyBoolean(), false);
     }
 
     public void attachView(ICalcView v, final StrStorage storage){
@@ -103,7 +103,7 @@ public class CalcPresenterBackspaceTest {
                 storage.setStr(str);
                 return null;
             }
-        }).when(v).setTextViewText(anyString(), anyBoolean());
+        }).when(v).setTextViewText(anyString(), anyBoolean(), false);
 
         doAnswer(new Answer<String>() {
             @Override

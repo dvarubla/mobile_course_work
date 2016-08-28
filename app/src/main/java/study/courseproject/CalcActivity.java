@@ -67,7 +67,7 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         } else {
             CalcModel model=new CalcModel();
             CalcModelAsync asyncModel = new CalcModelAsync(model);
-            CalcPresenter presenter=new CalcPresenter(this, model, new ErrorStringObtainer(getApplicationContext()));
+            CalcPresenter presenter=new CalcPresenter(this, model);
             CalcPresenterAsync asyncPresenter = new CalcPresenterAsync(presenter);
             model.setListener(presenter);
             asyncModel.setListener(asyncPresenter);
@@ -148,10 +148,21 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         return textView.getText().toString();
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void setTextViewText(String str, boolean scrollRight) {
+    public void setTextViewText(String str, boolean scrollRight, boolean error) {
         textView.setText(str);
+        if(error){
+            textView.setTextAppearance(this, R.style.AppTheme_calc_text_view_err);
+        } else {
+            textView.setTextAppearance(this, R.style.AppTheme_calc_text_view_normal);
+        }
         scroll(scrollRight);
+    }
+
+    @Override
+    public void setTextViewText(int str, boolean scrollRight, boolean error){
+        setTextViewText(getString(str), scrollRight, error);
     }
 
     private void scroll(final boolean scrollRight){

@@ -23,7 +23,8 @@ public class CalcModel implements ICalcModel {
         this.listener=listener;
     }
 
-    private void reset(){
+    @Override
+    public void reset(){
         currentOp=0;
         floatMode=false;
     }

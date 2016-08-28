@@ -41,6 +41,17 @@ public class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
     }
 
     @Override
+    public void reset() {
+        new ModelTask(){
+            @Override
+            protected Entry<String,Exception> doInBackground(Void... voids) {
+                model.reset();
+                return super.doInBackground(voids);
+            }
+        }.execute();
+    }
+
+    @Override
     public void addNumber(final String number) {
         new ModelTask(){
             @Override

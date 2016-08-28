@@ -76,9 +76,9 @@ public class CalcModel implements ICalcModel {
     private void checkDivZero(){
         if(
                 (floatMode && bFloats[1].equals(BigDecimal.ZERO))
-                || bInts[1].equals(BigInteger.ZERO)
+                || (!floatMode && bInts[1].equals(BigInteger.ZERO))
                 ){
-            throw new DivisionByZeroException("aa");
+            throw new DivisionByZeroException("FloatMode:"+floatMode+", type:"+type);
         }
     }
 
@@ -136,6 +136,17 @@ public class CalcModel implements ICalcModel {
                 if(floatMode){
                     bFloats[0]=bFloats[0].divide(bFloats[1], SCALE, BigDecimal.ROUND_HALF_UP);
                 }
+                break;
+            case MOD:
+                currentOp=1;
+                checkDivZero();
+                if(floatMode){
+                    floatMode=false;
+                    for(int i=0; i<NUM_OPS; i++){
+                        bInts[i]=bFloats[i].setScale(0, BigDecimal.ROUND_HALF_UP).toBigInteger();
+                    }
+                }
+                bInts[0]=bInts[0].remainder(bInts[1]);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown op type "+type);

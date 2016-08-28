@@ -12,6 +12,7 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
+import static study.courseproject.StrStorage.attachView;
 
 public class CalcPresenterBackspaceTest {
 
@@ -37,7 +38,7 @@ public class CalcPresenterBackspaceTest {
         reset(v);
         attachView(v, s);
         p.onBackspaceClick();
-        verify(v).setTextViewText(eq("1"), anyBoolean(), false);
+        verify(v).setTextViewText(eq("1"), anyBoolean(), eq(false));
     }
 
     @Test
@@ -52,7 +53,7 @@ public class CalcPresenterBackspaceTest {
         attachView(v, s);
         p.onTextButtonClick("5");
         p.onBackspaceClick();
-        verify(v).setTextViewText(eq("5"), anyBoolean(), false);
+        verify(v).setTextViewText(eq("5"), anyBoolean(), eq(false));
     }
 
 
@@ -75,7 +76,7 @@ public class CalcPresenterBackspaceTest {
         reset(v);
         attachView(v, s);
         p.onOpButtonClick(CalcOpTypes.OpType.EQ);
-        verify(v).setTextViewText(eq("7"), anyBoolean(), false);
+        verify(v).setTextViewText(eq("7"), anyBoolean(), eq(false));
     }
 
     @Test
@@ -92,39 +93,8 @@ public class CalcPresenterBackspaceTest {
 
         attachView(v, s);
         p.onBackspaceClick();
-        verify(v).setTextViewText(eq(""), anyBoolean(), false);
+        verify(v).setTextViewText(eq(""), anyBoolean(), eq(false));
     }
 
-    public void attachView(ICalcView v, final StrStorage storage){
-        doAnswer(new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation){
-                String str=(String)invocation.getArguments()[0];
-                storage.setStr(str);
-                return null;
-            }
-        }).when(v).setTextViewText(anyString(), anyBoolean(), false);
 
-        doAnswer(new Answer<String>() {
-            @Override
-            public String answer(InvocationOnMock invocation){
-                return storage.getStr();
-            }
-        }).when(v).getTextViewText();
-    }
-
-    public class StrStorage{
-        private String str;
-        StrStorage(String str){
-            this.str=str;
-        }
-
-        public String getStr(){
-            return str;
-        }
-
-        public void setStr(String str){
-            this.str=str;
-        }
-    }
 }

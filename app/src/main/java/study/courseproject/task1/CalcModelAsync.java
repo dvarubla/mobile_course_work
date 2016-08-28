@@ -1,4 +1,4 @@
-package study.courseproject;
+package study.courseproject.task1;
 
 import android.os.AsyncTask;
 

@@ -1,4 +1,4 @@
-package study.courseproject;
+package study.courseproject.task1;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -13,7 +13,7 @@ public class CalcModel implements ICalcModel {
     private boolean floatMode;
     private CalcOpTypes.OpType type;
 
-    CalcModel(){
+    public CalcModel(){
         bInts=new BigInteger[NUM_OPS];
         bFloats=new BigDecimal[NUM_OPS];
         reset();

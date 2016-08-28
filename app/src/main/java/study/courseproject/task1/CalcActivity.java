@@ -1,4 +1,4 @@
-package study.courseproject;
+package study.courseproject.task1;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -10,6 +10,9 @@ import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
 import java.util.HashMap;
+
+import study.courseproject.R;
+import study.courseproject.Util;
 
 public class CalcActivity extends AppCompatActivity implements ICalcView{
     final static String SCROLL_POSITION="scroll_position";

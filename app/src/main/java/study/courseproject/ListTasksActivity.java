@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import study.courseproject.task1.CalcActivity;
+
 public class ListTasksActivity extends AppCompatActivity {
 
     @Override

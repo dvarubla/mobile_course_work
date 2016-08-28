@@ -1,13 +1,15 @@
-package study.courseproject;
+package study.courseproject.task1;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
+
+import study.courseproject.StrStorage;
+import study.courseproject.task1.CalcModel;
+import study.courseproject.task1.CalcOpTypes;
+import study.courseproject.task1.CalcPresenter;
+import study.courseproject.task1.ICalcView;
 
 import static org.mockito.Mockito.anyBoolean;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;

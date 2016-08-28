@@ -1,4 +1,4 @@
-package study.courseproject;
+package study.courseproject.task1;
 
 public interface ICalcView {
     void showError(String str);

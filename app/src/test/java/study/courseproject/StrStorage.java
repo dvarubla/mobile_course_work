@@ -3,13 +3,15 @@ package study.courseproject;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
+import study.courseproject.task1.ICalcView;
+
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 
 public class StrStorage{
     private String str;
-    StrStorage(String str){
+    public StrStorage(String str){
         this.str=str;
     }
 

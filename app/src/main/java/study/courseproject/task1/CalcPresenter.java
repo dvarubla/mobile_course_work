@@ -1,6 +1,8 @@
-package study.courseproject;
+package study.courseproject.task1;
 
 import android.util.Log;
+
+import study.courseproject.R;
 
 public class CalcPresenter implements ICalcPresenter{
     private ICalcView view;
@@ -9,7 +11,7 @@ public class CalcPresenter implements ICalcPresenter{
     private boolean textChanged;
     private boolean needReplace;
 
-    CalcPresenter(ICalcView view, ICalcModel model){
+    public CalcPresenter(ICalcView view, ICalcModel model){
         this.view=view;
         this.model=model;
         needClear=false;

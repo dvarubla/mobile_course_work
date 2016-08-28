@@ -11,7 +11,7 @@
     xmlns:grid="http://schemas.android.com/apk/res-auto"
     grid:columnCount="3"
     grid:rowCount="5"
-    tools:context="study.courseproject.CalcActivity">
+    tools:context=".task1.CalcActivity">
 
 <HorizontalScrollView
     grid:layout_columnWeight="1"

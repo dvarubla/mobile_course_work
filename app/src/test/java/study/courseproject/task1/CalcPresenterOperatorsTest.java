@@ -1,7 +1,15 @@
-package study.courseproject;
+package study.courseproject.task1;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
+
+import study.courseproject.R;
+import study.courseproject.StrStorage;
+import study.courseproject.task1.CalcModel;
+import study.courseproject.task1.CalcOpTypes;
+import study.courseproject.task1.CalcPresenter;
+import study.courseproject.task1.ICalcView;
 
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.eq;
@@ -90,7 +98,7 @@ public class CalcPresenterOperatorsTest {
         reset(v);
         attachView(v, s);
         p.onOpButtonClick(CalcOpTypes.OpType.EQ);
-        verify(v).setTextViewText(eq(R.string.division_by_zero), anyBoolean(), eq(true));
+        verify(v).setTextViewText(Matchers.eq(R.string.division_by_zero), anyBoolean(), eq(true));
     }
 
     @Test

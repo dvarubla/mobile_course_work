@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import java.util.LinkedList;
 import java.util.List;
 
-class Util {
+public class Util {
     public static List<View> getViewsByTag(View root, String tag) {
         List<View> result = new LinkedList<>();
 

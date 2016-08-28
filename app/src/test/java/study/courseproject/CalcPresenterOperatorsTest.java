@@ -80,4 +80,28 @@ public class CalcPresenterOperatorsTest {
         p.onOpButtonClick(CalcOpTypes.OpType.EQ);
         verify(v).setTextViewText(eq("5"), anyBoolean(), eq(false));
     }
+
+    @Test
+    public void testDivZero(){
+        attachView(v, s);
+        p.onTextButtonClick("32");
+        p.onOpButtonClick(CalcOpTypes.OpType.DIV);
+        p.onTextButtonClick("0");
+        reset(v);
+        attachView(v, s);
+        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        verify(v).setTextViewText(eq(R.string.division_by_zero), anyBoolean(), eq(true));
+    }
+
+    @Test
+    public void testModZero(){
+        attachView(v, s);
+        p.onTextButtonClick("32");
+        p.onOpButtonClick(CalcOpTypes.OpType.MOD);
+        p.onTextButtonClick("0");
+        reset(v);
+        attachView(v, s);
+        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        verify(v).setTextViewText(eq(R.string.division_by_zero), anyBoolean(), eq(true));
+    }
 }

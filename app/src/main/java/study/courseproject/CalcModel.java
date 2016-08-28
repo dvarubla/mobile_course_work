@@ -142,11 +142,18 @@ public class CalcModel implements ICalcModel {
                 checkDivZero();
                 if(floatMode){
                     floatMode=false;
-                    for(int i=0; i<NUM_OPS; i++){
-                        bInts[i]=bFloats[i].setScale(0, BigDecimal.ROUND_HALF_UP).toBigInteger();
-                    }
+                    convertNumbersToInteger();
                 }
                 bInts[0]=bInts[0].remainder(bInts[1]);
+                break;
+            case DIV:
+                currentOp=1;
+                checkDivZero();
+                if(floatMode){
+                    floatMode=false;
+                    convertNumbersToInteger();
+                }
+                bInts[0]=bInts[0].divide(bInts[1]);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown op type "+type);
@@ -155,6 +162,12 @@ public class CalcModel implements ICalcModel {
             listener.notifyResult(bFloats[0].stripTrailingZeros().toPlainString());
         } else {
             listener.notifyResult(bInts[0].toString());
+        }
+    }
+
+    private void convertNumbersToInteger(){
+        for(int i=0; i<NUM_OPS; i++){
+            bInts[i]=bFloats[i].setScale(0, BigDecimal.ROUND_HALF_UP).toBigInteger();
         }
     }
 

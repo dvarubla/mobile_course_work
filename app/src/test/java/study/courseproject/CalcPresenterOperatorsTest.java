@@ -52,4 +52,32 @@ public class CalcPresenterOperatorsTest {
         p.onOpButtonClick(CalcOpTypes.OpType.EQ);
         verify(v).setTextViewText(eq("2"), anyBoolean(), eq(false));
     }
+
+    @Test
+    public void testDiv(){
+        attachView(v, s);
+        p.onTextButtonClick("31");
+        p.onOpButtonClick(CalcOpTypes.OpType.DIV);
+        p.onTextButtonClick("3");
+        p.onOpButtonClick(CalcOpTypes.OpType.DIV);
+        p.onTextButtonClick("2");
+        reset(v);
+        attachView(v, s);
+        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        verify(v).setTextViewText(eq("5"), anyBoolean(), eq(false));
+    }
+
+    @Test
+    public void testDivFloat(){
+        attachView(v, s);
+        p.onTextButtonClick("32.6");
+        p.onOpButtonClick(CalcOpTypes.OpType.DIV);
+        p.onTextButtonClick("3.1");
+        p.onOpButtonClick(CalcOpTypes.OpType.DIV);
+        p.onTextButtonClick("2.1");
+        reset(v);
+        attachView(v, s);
+        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        verify(v).setTextViewText(eq("5"), anyBoolean(), eq(false));
+    }
 }

@@ -78,7 +78,7 @@ public class CalcPresenterBackspaceTest {
         reset(v);
         attachView(v, s);
         p.onOpButtonClick(CalcOpTypes.OpType.EQ);
-        verify(v).setTextViewText(eq("7"), anyBoolean(), eq(false));
+        verify(v).setTextViewText(eq("2"), anyBoolean(), eq(false));
     }
 
     @Test

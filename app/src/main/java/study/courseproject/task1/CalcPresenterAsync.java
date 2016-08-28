@@ -41,9 +41,9 @@ public class CalcPresenterAsync implements ICalcPresenterAsync {
     }
 
     @Override
-    public void onClearClick() {
+    public void onResetClick() {
         if(!working){
-            presenter.onClearClick();
+            presenter.onResetClick();
         }
     }
 

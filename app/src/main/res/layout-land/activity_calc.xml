@@ -43,7 +43,7 @@
     grid:layout_rowSpan="3"/>
 
 <include
-    layout="@layout/clear_reset"
+    layout="@layout/control_buttons"
     grid:layout_columnWeight="1"
     grid:layout_rowWeight="0.25"
     android:layout_width="0dp"

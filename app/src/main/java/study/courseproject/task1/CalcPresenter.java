@@ -72,7 +72,7 @@ public class CalcPresenter implements ICalcPresenter{
     }
 
     @Override
-    public void onClearClick() {
+    public void onResetClick() {
         model.reset();
         view.setTextViewText("", false, false);
     }

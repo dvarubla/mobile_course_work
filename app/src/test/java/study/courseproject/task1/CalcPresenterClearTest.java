@@ -33,7 +33,7 @@ public class CalcPresenterClearTest {
 
         reset(v);
         attachView(v, s);
-        p.onClearClick();
+        p.onResetClick();
         verify(v).setTextViewText(eq(""), anyBoolean(), eq(false));
     }
 
@@ -45,7 +45,7 @@ public class CalcPresenterClearTest {
         p.onTextButtonClick("222");
         p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
         p.onTextButtonClick("2");
-        p.onClearClick();
+        p.onResetClick();
         p.onTextButtonClick("5");
         p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
         p.onTextButtonClick("5");

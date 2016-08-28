@@ -56,6 +56,13 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
             }
         });
 
+        findViewById(R.id.reset_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onResetClick();
+            }
+        });
+
         processNumberButtons();
         initHashMap();
         processOperatorButtons();

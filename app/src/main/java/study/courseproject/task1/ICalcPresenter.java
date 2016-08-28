@@ -7,5 +7,5 @@ public interface ICalcPresenter extends ICalcModelListener{
     void onOpButtonClick(CalcOpTypes.OpType type);
 
     void onBackspaceClick();
-    void onClearClick();
+    void onResetClick();
 }

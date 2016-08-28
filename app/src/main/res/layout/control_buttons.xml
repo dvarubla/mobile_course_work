@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         style="@style/AppTheme.calc_button_operator"
         android:text="@string/calc_button_clear"
-        android:tag="operator_button"
+        android:id="@+id/reset_button"
         />
 
     <Button

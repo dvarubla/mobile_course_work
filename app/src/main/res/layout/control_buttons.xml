@@ -28,7 +28,7 @@
         android:layout_weight="1"
         android:layout_height="match_parent"
         style="@style/AppTheme.calc_button_operator"
-        android:src="@android:drawable/ic_input_delete"
+        android:src="@drawable/ic_backspace_black_24dp"
         android:id="@+id/backspace_button"
-        />
+        android:contentDescription="@string/backspace" />
 </LinearLayout>

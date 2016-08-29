@@ -77,11 +77,17 @@ public class CalcPresenter implements ICalcPresenter{
     @Override
     public void notifyError(Exception exc){
         needClear=true;
-        if(exc instanceof DivisionByZeroException){
+        try {
+            throw exc;
+        } catch (SyntaxError syntaxError){
+            Log.w(view.getClass().getSimpleName(), Log.getStackTraceString(syntaxError));
+            view.setTextViewText(R.string.calc_syntax_error, false, true);
+        } catch (DivisionByZeroException divisionByZeroException){
+            Log.w(view.getClass().getSimpleName(), Log.getStackTraceString(divisionByZeroException));
             view.setTextViewText(R.string.division_by_zero, false, true);
-        } else {
-            Log.e(view.getClass().getSimpleName(), Log.getStackTraceString(exc));
-            view.showError(Log.getStackTraceString(exc));
+        } catch (Exception e){
+            Log.e(view.getClass().getSimpleName(), Log.getStackTraceString(e));
+            view.showError(Log.getStackTraceString(e));
         }
     }
 }

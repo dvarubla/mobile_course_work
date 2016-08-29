@@ -57,21 +57,26 @@ public class CalcModel implements ICalcModel {
         if(index>=NUM_OPS){
             throw new ArrayIndexOutOfBoundsException("Op index is greater than array size");
         }
-        if(number.contains(".") || floatMode){
-            if(number.equals(".")){
-                number="0";
-            }
-            if(!floatMode){
-                for(int i=0; i<index; i++){
-                    bFloats[i]=new BigDecimal(bInts[i]);
-                }
-                floatMode=true;
-            }
-            bFloats[index]=new BigDecimal(number);
 
-        } else {
-            bInts[index]=new BigInteger(number);
+        try {
+            if(number.contains(".") || floatMode){
+                if(number.equals(".")){
+                    number="0";
+                }
+                if(!floatMode){
+                    for(int i=0; i<index; i++){
+                        bFloats[i] = new BigDecimal(bInts[i]);
+                    }
+                    floatMode=true;
+                }
+                bFloats[index] = new BigDecimal(number);
+            } else {
+                bInts[index]=new BigInteger(number);
+            }
+        } catch(NumberFormatException e){
+            throw new SyntaxError("Number: "+number+" index: "+index);
         }
+
     }
 
     private void checkDivZero(){

@@ -108,4 +108,15 @@ public class CalcPresenterOperatorsTest {
         p.onOpButtonClick(CalcOpTypes.OpType.EQ);
         verify(v).setTextViewText(eq(R.string.division_by_zero), anyBoolean(), eq(true));
     }
+
+    @Test
+    public void testSyntaxErr(){
+        attachView(v, s);
+        p.onTextButtonClick("...");
+        reset(v);
+        attachView(v, s);
+        p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+
+        verify(v).setTextViewText(eq(R.string.calc_syntax_error), anyBoolean(), eq(true));
+    }
 }

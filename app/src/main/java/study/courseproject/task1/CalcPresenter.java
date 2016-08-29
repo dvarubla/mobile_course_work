@@ -9,15 +9,22 @@ public class CalcPresenter implements ICalcPresenter{
     private ICalcModel model;
     private boolean needClear;
     private boolean textChanged;
+    private boolean error;
 
     public CalcPresenter(ICalcView view, ICalcModel model){
         this.view=view;
         this.model=model;
         needClear=false;
+        error=false;
     }
 
     @Override
     public void onTextButtonClick(String text) {
+        addText(text);
+    }
+
+    private void addText(String text){
+        error=false;
         String prev=(needClear)?"":this.view.getTextViewText();
         if(needClear){
             needClear=false;
@@ -38,20 +45,22 @@ public class CalcPresenter implements ICalcPresenter{
             return;
         }
         String str=view.getTextViewText();
-        if(str.length()!=0){
+
+        if((str.length()==0 || error) && type==CalcOpTypes.OpType.MINUS){
+            addText("-");
+        } else if(str.length()!=0){
             if(textChanged) {
                 model.addNumber(str);
                 textChanged =false;
             }
             model.addOperator(type);
             needClear = true;
-        } else if(type==CalcOpTypes.OpType.MINUS){
-            view.setTextViewText("-", true, false);
         }
     }
 
     @Override
     public void onBackspaceClick() {
+        error=false;
         if(needClear){
             view.setTextViewText("", true, false);
         } else {
@@ -65,6 +74,8 @@ public class CalcPresenter implements ICalcPresenter{
 
     @Override
     public void onResetClick() {
+        error=false;
+        needClear=false;
         model.reset();
         view.setTextViewText("", false, false);
     }
@@ -77,6 +88,7 @@ public class CalcPresenter implements ICalcPresenter{
     @Override
     public void notifyError(Exception exc){
         needClear=true;
+        error=true;
         try {
             throw exc;
         } catch (SyntaxError syntaxError){

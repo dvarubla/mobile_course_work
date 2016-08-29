@@ -119,4 +119,16 @@ public class CalcPresenterOperatorsTest {
 
         verify(v).setTextViewText(eq(R.string.calc_syntax_error), anyBoolean(), eq(true));
     }
+
+    @Test
+    public void testMinusAfterError() throws InterruptedException {
+        attachView(v, s);
+        p.onTextButtonClick("....");
+        p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+
+        reset(v);
+        attachView(v, s);
+        p.onOpButtonClick(CalcOpTypes.OpType.MINUS);
+        verify(v).setTextViewText(eq("-"), anyBoolean(), eq(false));
+    }
 }

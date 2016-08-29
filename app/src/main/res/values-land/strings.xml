@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="num_col">2</string>
+    <string name="num_col" translatable="false">2</string>
 </resources>

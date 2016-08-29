@@ -10,6 +10,11 @@ public class CalcPresenterAsync implements ICalcPresenterAsync {
     }
 
     @Override
+    public void notifyWorking() {
+        working=true;
+    }
+
+    @Override
     public void notifyFinish() {
         working=false;
     }

@@ -78,9 +78,9 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         } else {
             CalcModel model=new CalcModel();
             CalcModelAsync asyncModel = new CalcModelAsync(model);
-            CalcPresenter presenter=new CalcPresenter(this, model);
+            CalcPresenter presenter=new CalcPresenter(this, asyncModel);
             CalcPresenterAsync asyncPresenter = new CalcPresenterAsync(presenter);
-            model.setListener(presenter);
+            model.setListener(asyncModel);
             asyncModel.setListener(asyncPresenter);
             this.presenter=asyncPresenter;
             s.setPresenter(this.presenter);

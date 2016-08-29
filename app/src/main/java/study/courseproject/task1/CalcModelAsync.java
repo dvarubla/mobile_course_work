@@ -1,24 +1,23 @@
 package study.courseproject.task1;
 
 import android.os.AsyncTask;
+import android.support.v4.util.Pair;
 
-import java.util.AbstractMap.SimpleEntry;
 import java.util.LinkedList;
-import java.util.Map.Entry;
 
 public class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
 
-    abstract class ModelTask extends AsyncTask<Void, Void, Entry<String,Exception>>{
+    abstract class ModelTask extends AsyncTask<Void, Void, Pair<String,Exception>>{
         public ModelTask(){
             super();
         }
         @Override
-        protected Entry<String,Exception> doInBackground(Void... voids) {
+        protected Pair<String, Exception> doInBackground(Void... voids) {
             doTask();
             if(exc!=null){
                 cancelTasks(this);
             }
-            Entry<String,Exception> ret=new SimpleEntry<>(result,exc);
+            Pair<String,Exception> ret=new Pair<>(result,exc);
             result=null;
             exc=null;
             return ret;
@@ -28,16 +27,16 @@ public class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
 
         @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
         @Override
-        protected  void onPostExecute(Entry<String,Exception> entry){
+        protected  void onPostExecute(Pair<String,Exception> pair){
             if(!tasks.isEmpty()) {
                 tasks.removeFirst();
             }
-            if(entry.getValue()!=null){
+            if(pair.second!=null){
                 dontAddTasks=false;
-                listener.notifyError(entry.getValue());
+                listener.notifyError(pair.second);
             } else if (tasks.isEmpty()) {
-                if (entry.getKey() != null) {
-                    listener.notifyResult(entry.getKey());
+                if (pair.first != null) {
+                    listener.notifyResult(pair.first);
                 } else {
                     listener.notifyFinish();
                 }

@@ -6,10 +6,6 @@ import org.mockito.Matchers;
 
 import study.courseproject.R;
 import study.courseproject.StrStorage;
-import study.courseproject.task1.CalcModel;
-import study.courseproject.task1.CalcOpTypes;
-import study.courseproject.task1.CalcPresenter;
-import study.courseproject.task1.ICalcView;
 
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.eq;

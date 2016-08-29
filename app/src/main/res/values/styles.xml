@@ -22,7 +22,7 @@
     <style name="AppTheme.calc_button_operator" parent="@style/AppTheme.borderless_btn">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/calc_item_font_size</item>
     </style>
     <style name="AppTheme.calc_button_operator.margin">
         <item name="android:layout_margin">2dp</item>
@@ -36,10 +36,10 @@
     </style>
 
     <style name="AppTheme.calc_text_view.normal" parent="@android:style/TextAppearance">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/calc_item_font_size</item>
     </style>
 
     <style name="AppTheme.calc_text_view.err" parent="@style/TextAppearance.Design.Error">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/calc_item_font_size</item>
     </style>
 </resources>

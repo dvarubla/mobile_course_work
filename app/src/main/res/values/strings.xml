@@ -4,9 +4,9 @@
     <string name="calc_button_number" translatable="false">%1$d</string>
     <string name="num_col" translatable="false">3</string>
     <string name="operator_plus" translatable="false">+</string>
-    <string name="operator_minus" translatable="false">-</string>
+    <string name="operator_minus" translatable="false">—</string>
     <string name="operator_mul" translatable="false">*</string>
-    <string name="operator_float_div" translatable="false">/</string>
+    <string name="operator_float_div" translatable="false">÷</string>
     <string name="operator_div" translatable="false">DIV</string>
     <string name="operator_mod" translatable="false">MOD</string>
     <string name="operator_eq" translatable="false">=</string>

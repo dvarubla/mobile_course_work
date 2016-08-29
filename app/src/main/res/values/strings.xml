@@ -1,19 +1,20 @@
 <resources>
     <string name="app_name">Course Project</string>
     <string name="task">Task %1$d</string>
-    <string name="calc_button_number">%1$d</string>
-    <string name="num_col">3</string>
-    <string name="operator_plus">+</string>
-    <string name="operator_minus">-</string>
-    <string name="operator_mul">*</string>
-    <string name="operator_float_div">/</string>
-    <string name="operator_div">DIV</string>
-    <string name="operator_mod">MOD</string>
-    <string name="operator_eq">=</string>
-    <string name="calc_button_point">.</string>
-    <string name="calc_button_clear">CE</string>
+    <string name="calc_button_number" translatable="false">%1$d</string>
+    <string name="num_col" translatable="false">3</string>
+    <string name="operator_plus" translatable="false">+</string>
+    <string name="operator_minus" translatable="false">-</string>
+    <string name="operator_mul" translatable="false">*</string>
+    <string name="operator_float_div" translatable="false">/</string>
+    <string name="operator_div" translatable="false">DIV</string>
+    <string name="operator_mod" translatable="false">MOD</string>
+    <string name="operator_eq" translatable="false">=</string>
+    <string name="calc_button_point" translatable="false">.</string>
+    <string name="calc_button_clear" translatable="false">CE</string>
     <string name="unexpected_error">Unexpected error</string>
     <string name="division_by_zero">Division by zero!</string>
-    <string name="ok">OK</string>
-    <string name="calc_syntax_error">Syntax error</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="calc_syntax_error">Syntax error!</string>
+    <string name="backspace" translatable="false">backspace</string>
 </resources>

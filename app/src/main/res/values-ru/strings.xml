@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Курсовой проект</string>
+    <string name="calc_syntax_error">Ошибка ввода!</string>
+    <string name="division_by_zero">Деление на 0!</string>
+    <string name="task">Задание %1$d</string>
+    <string name="unexpected_error" translatable="false">Неизвестная ошибка</string>
+</resources>

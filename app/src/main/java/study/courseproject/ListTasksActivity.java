@@ -7,13 +7,17 @@ import android.view.View;
 import android.widget.Button;
 
 import study.courseproject.task1.CalcActivity;
+import study.courseproject.task2.SnowmanActivity;
 
 public class ListTasksActivity extends AppCompatActivity {
+
+    private Class<?> classes[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_tasks);
+        classes=new Class<?>[]{CalcActivity.class, SnowmanActivity.class};
         processButtons();
     }
 
@@ -21,10 +25,11 @@ public class ListTasksActivity extends AppCompatActivity {
         int i=1;
         for(View item: Util.getViewsByTag(findViewById(android.R.id.content).getRootView(), "menu_button")){
             Button bt=(Button)item;
+            final int activityId=i-1;
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(ListTasksActivity.this, CalcActivity.class);
+                    Intent intent = new Intent(ListTasksActivity.this, classes[activityId]);
                     startActivity(intent);
                 }
             });

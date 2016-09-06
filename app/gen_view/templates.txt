@@ -1,0 +1,120 @@
+class:
+package study.courseproject.task2;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.support.v4.content.ContextCompat;
+import android.util.AttributeSet;
+import android.view.View;
+
+import study.courseproject.R;
+
+public class SnowmanView extends View {
+    private Paint paint;
+    private Path path;
+    private Context ctx;
+    private float scale;
+    private float leftX;
+    private float topX;
+
+    public SnowmanView(Context context) {
+        super(context);
+        init(context);
+    }
+
+    public SnowmanView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(context);
+    }
+
+    private void init(Context ctx){
+        paint=new Paint();
+        path=new Path();
+        this.ctx=ctx;
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        float width=${width};
+        float height=${height};
+        float prop=width/height;
+        if(prop*getHeight()<getWidth()){
+            scale=getHeight()/height;
+        } else {
+            scale=getWidth()/width;
+        }
+        leftX=(getWidth()-width*scale)/2;
+        topX=(getHeight()-height*scale)/2;
+    }
+
+    @Override
+    protected void onDraw(Canvas c){
+        c.translate(leftX, topX);
+        c.scale(scale, scale);
+        paint.setFlags(Paint.ANTI_ALIAS_FLAG);        
+        \${draw_calls}
+    }
+    
+    private void drawPath(Canvas c, int strokeColor, float strokeWidth){
+        paint.setColor(strokeColor);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(strokeWidth);
+        c.drawPath(path, paint);
+    }
+    
+    private void fillPath(Canvas c, int fillColor){
+        paint.setColor(fillColor);
+        paint.setStyle(Paint.Style.FILL);
+        c.drawPath(path, paint);
+    }
+
+    private void drawAndFillPath(Canvas c, int strokeColor, float strokeWidth, int fillColor){
+        fillPath(c, fillColor);
+        drawPath(c, strokeColor, strokeWidth);
+    }    
+
+    \${draw_methods};
+}
+
+###
+draw_method:
+    protected void draw_${name}(Canvas c${args}){
+        path.reset();
+        \${path_calls}
+        invalidate();
+    }
+
+###
+move_call:
+        path.moveTo(${args});
+
+###
+cubicTo_call:
+        path.cubicTo(${args});
+
+###
+setLastPoint_call:
+        path.setLastPoint(${args});
+
+###
+lineTo_call:
+        path.lineTo(${args});
+
+###
+draw_call:
+        draw_${name}(c${args});
+
+###
+draw_path:
+        drawPath(c, strokeColor, strokeWidth);
+
+###
+fill_path:
+        fillPath(c, fillColor);
+
+###
+draw_and_fill_path:
+        drawAndFillPath(c, strokeColor, strokeWidth, fillColor);

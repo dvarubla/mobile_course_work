@@ -17,7 +17,7 @@ public class SnowmanActivity extends AppCompatActivity implements ISnowmanView{
     private void createParts(){
         ISnowmanPresenter presenter = new SnowmanPresenter();
         presenter.setView(this);
-        SnowmanModel model=new SnowmanModel(4, presenter);
+        SnowmanModel model=new SnowmanModel(presenter);
     }
 
     @Override

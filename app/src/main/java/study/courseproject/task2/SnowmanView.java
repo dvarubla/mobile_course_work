@@ -2,7 +2,6 @@ package study.courseproject.task2;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.util.AttributeSet;
 
 public class SnowmanView extends SnowmanGenView{

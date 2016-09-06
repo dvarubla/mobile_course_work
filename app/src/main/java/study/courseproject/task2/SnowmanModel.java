@@ -6,16 +6,18 @@ import android.os.Looper;
 class SnowmanModel implements ISnowmanModel{
     private Handler handler;
     private ISnowmanModelListener listener;
-    SnowmanModel(int numBalls, ISnowmanModelListener listener){
+
+    SnowmanModel(ISnowmanModelListener listener){
         handler=new Handler(Looper.getMainLooper());
         this.listener=listener;
-        for(int i=0; i<numBalls; i++){
-            createBall(i);
-        }
+        createBall(0, 80, 0xFF0000, 0x121004);
+        createBall(1, 200, 0xFF0000, 0x121004);
+        createBall(2, 300, 0x00AA22, 0x050903);
+        createBall(3, 300, 0x000011, 0x050505);
     }
 
-    private void createBall(final int id){
-        new Thread(new BallRunnable(500, 0, 0x050505, new IBallRunnableListener() {
+    private void createBall(final int id, int sleepMsec, int initialColor, int deltaColor){
+        new Thread(new BallRunnable(sleepMsec, initialColor, deltaColor, new IBallRunnableListener() {
             @Override
             public void notifyColorChange(final int color) {
                 handler.post(new Runnable() {

@@ -11,6 +11,18 @@ public class SnowmanActivity extends AppCompatActivity implements ISnowmanView{
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_snowman);
-
+        createParts();
     }
+
+    private void createParts(){
+        ISnowmanPresenter presenter = new SnowmanPresenter();
+        presenter.setView(this);
+        SnowmanModel model=new SnowmanModel(4, presenter);
+    }
+
+    @Override
+    public void setBallColor(int ballId, int color){
+        ((SnowmanView)findViewById(R.id.snowman_view)).setBallColor(ballId, color);
+    }
+
 }

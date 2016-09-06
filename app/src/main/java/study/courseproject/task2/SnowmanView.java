@@ -6,31 +6,47 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 
 public class SnowmanView extends SnowmanGenView{
+    private int[] ballColors;
     public SnowmanView(Context context) {
         super(context);
+        init();
     }
 
     public SnowmanView(Context context, AttributeSet attrs){
         super(context, attrs);
+        init();
+    }
+
+    private void init(){
+        ballColors=new int[]{0,0,0,0};
+    }
+
+    void setBallColor(int ballId, int ballColor){
+        ballColors[ballId]=ballColor;
+        invalidate();
+    }
+
+    private int getBallColor(int ballId){
+        return ballColors[ballId-1];
     }
 
     @Override
     protected void draw_ball1(Canvas c, int fillColor){
-        super.draw_ball1(c, Color.BLUE);
+        super.draw_ball1(c, getBallColor(1));
     }
 
     @Override
     protected void draw_ball2(Canvas c, int fillColor){
-        super.draw_ball2(c, Color.BLUE);
+        super.draw_ball2(c, getBallColor(2));
     }
 
     @Override
     protected void draw_ball3(Canvas c, int fillColor){
-        super.draw_ball3(c, Color.BLUE);
+        super.draw_ball3(c, getBallColor(3));
     }
 
     @Override
     protected void draw_ball4(Canvas c, int fillColor){
-        super.draw_ball4(c, Color.BLUE);
+        super.draw_ball4(c, getBallColor(4));
     }
 }

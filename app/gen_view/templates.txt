@@ -11,7 +11,7 @@ import android.view.View;
 
 import study.courseproject.R;
 
-public class SnowmanView extends View {
+public class SnowmanGenView extends View {
     private Paint paint;
     private Path path;
     private Context ctx;
@@ -19,12 +19,12 @@ public class SnowmanView extends View {
     private float leftX;
     private float topX;
 
-    public SnowmanView(Context context) {
+    public SnowmanGenView(Context context) {
         super(context);
         init(context);
     }
 
-    public SnowmanView(Context context, AttributeSet attrs) {
+    public SnowmanGenView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }

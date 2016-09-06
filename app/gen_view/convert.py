@@ -5,7 +5,9 @@ from string import Template
 import sys
 
 XML_FILE = "image.xml"
-JAVA_FILE = "../src/main/java/study/courseproject/task2/SnowmanView.java"
+JAVA_FILE = "../src/main/java/study/courseproject/task2/SnowmanGenView.java"
+
+names_whitelist = ["ball1", "ball2", "ball3", "ball4"]
 
 with open("templates.txt", "rt") as f:
     templates_txt = f.read()
@@ -43,6 +45,9 @@ def process_color(color_str: str) -> str:
         color_str = "ff" + color_str
     return "0x" + color_str
 
+
+id_counter = 0
+
 for path in root.iter('path'):
     firstPnt = {"x": 0, "y": 0}
     pathFrags = re.findall(
@@ -72,7 +77,11 @@ for path in root.iter('path'):
             )
     rec_args = []
     sent_args = []
-    name = path.attrib["name"].replace("-", "_")
+    if path.attrib["name"] in names_whitelist:
+        name = path.attrib["name"].replace("-", "_")
+    else:
+        name = id_counter
+        id_counter += 1
     draw = False
     fill = False
     if "strokeColor" in path.attrib:

@@ -5,50 +5,11 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    id="svg2"
    viewBox="0 0 317.78104 450.29793"
    height="450.29794"
-   width="317.78104"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="sneg.svg">
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1280"
-     inkscape:window-height="950"
-     id="namedview3345"
-     showgrid="false"
-     inkscape:object-nodes="true"
-     inkscape:snap-intersection-paths="true"
-     inkscape:object-paths="true"
-     inkscape:snap-smooth-nodes="true"
-     inkscape:snap-midpoints="true"
-     inkscape:snap-global="false"
-     inkscape:zoom="1.466"
-     inkscape:cx="156.81514"
-     inkscape:cy="220.11851"
-     inkscape:window-x="0"
-     inkscape:window-y="26"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg2"
-     inkscape:snap-bbox="true"
-     inkscape:bbox-paths="true"
-     inkscape:bbox-nodes="true"
-     inkscape:snap-bbox-edge-midpoints="true"
-     inkscape:snap-bbox-midpoints="true"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0" />
+   width="317.78104">
   <defs
      id="defs4" />
   <metadata
@@ -87,9 +48,7 @@
   <path
      style="fill:#00ff00;fill-rule:evenodd;stroke:#000000;stroke-width:0.95089179px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      d="m 142.16669,2.4030685 30.51275,49.1969455 c 0,0 -6.9099,11.977016 -27.93454,18.065413 -21.02464,6.088388 -31.31588,0.213175 -31.31588,0.213175 L 102.10303,12.903489"
-     id="path3371"
-     inkscape:connector-curvature="0"
-     sodipodi:nodetypes="ccscc" />
+     id="path3371" />
   <ellipse
      style="fill:#00ff00;fill-rule:evenodd;stroke:#000000;stroke-width:0.9509207px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      id="path3363"
@@ -101,39 +60,27 @@
   <path
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="M 89.754891,176.31875 35.184632,122.43062 31.091862,82.185054"
-     id="path3399"
-     inkscape:connector-curvature="0"
-     sodipodi:nodetypes="ccc" />
+     id="path3399" />
   <path
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="M 1.0782193,85.595695 35.184632,122.43062 0.39609131,107.42379"
-     id="path3401"
-     inkscape:connector-curvature="0" />
+     id="path3401" />
   <path
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="M 55.648479,142.89447 31.091862,136.75531"
-     id="path3403"
-     inkscape:connector-curvature="0" />
+     id="path3403" />
   <path
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.4000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="m 223.52592,163.73858 53.88813,-54.57025 40.24557,-4.09277"
-     id="path3399-3"
-     inkscape:connector-curvature="0"
-     sodipodi:nodetypes="ccc" />
+     id="path3399-3" />
   <path
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="m 316.63643,87.340215 -39.22238,21.828115 7.50342,-36.152807"
-     id="path3401-6"
-     inkscape:connector-curvature="0"
-     sodipodi:nodetypes="ccc" />
+     id="path3401-6" />
   <path
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="m 256.9502,129.63217 4.36112,-26.51436"
-     id="path3403-7"
-     inkscape:connector-curvature="0"
-     inkscape:transform-center-x="-10.852594"
-     inkscape:transform-center-y="10.129088"
-     sodipodi:nodetypes="cc" />
+     id="path3403-7" />
   <rect
      style="fill:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none"
      id="rect4226"
@@ -151,13 +98,33 @@
   <path
      style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
      d="m 185.9968,112.77504 c -10.40791,29.92393 -46.89114,-0.50396 -47.89906,0"
-     id="path4245"
-     inkscape:connector-curvature="0"
-     sodipodi:nodetypes="cc" />
+     id="path4245" />
   <path
      style="fill:#ff0000;fill-rule:evenodd;stroke:#000000;stroke-width:0.84910238px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      d="m 166.39225,84.673759 27.68341,37.081221 -39.08247,-14.83248 c 0,0 -12.48467,-21.012701 11.39906,-22.248741"
-     id="path4243"
-     inkscape:connector-curvature="0"
-     sodipodi:nodetypes="cccc" />
+     id="path4243" />
+  <circle
+     style="fill:#000000;stroke-width:2.5;stroke-miterlimit:4;stroke-dasharray:none"
+     id="ball1"
+     cx="284.91748"
+     cy="49.482098"
+     r="23.533424" />
+  <circle
+     style="fill:#000000;stroke-width:2.5;stroke-miterlimit:4;stroke-dasharray:none"
+     id="ball4"
+     cx="146.65758"
+     cy="349.34296"
+     r="42.29195" />
+  <circle
+     style="fill:#000000;stroke-width:2.5;stroke-miterlimit:4;stroke-dasharray:none"
+     id="ball2"
+     cx="195.42973"
+     cy="192.79453"
+     r="24.89768" />
+  <circle
+     style="fill:#000000;stroke-width:2.5;stroke-miterlimit:4;stroke-dasharray:none"
+     id="ball3"
+     cx="119.71351"
+     cy="216.66902"
+     r="22.851295" />
 </svg>

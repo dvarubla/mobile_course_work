@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import study.courseproject.R;
 
-public class SnowmanActivity extends AppCompatActivity {
+public class SnowmanActivity extends AppCompatActivity implements ISnowmanView{
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

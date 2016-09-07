@@ -11,11 +11,12 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 
+import study.courseproject.ItemSingleton;
 import study.courseproject.R;
 import study.courseproject.Util;
 
 public class CalcActivity extends AppCompatActivity implements ICalcView{
-    final static String SCROLL_POSITION="scroll_position";
+    private final static String SCROLL_POSITION="scroll_position";
     private ICalcPresenter presenter;
     private TextView textView;
     private boolean needSave;
@@ -71,9 +72,9 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
     }
 
     private void createParts(){
-        CalcPresenterSingleton s=CalcPresenterSingleton.getInstance();
-        if(s.hasPresenter()){
-            presenter=s.getPresenter();
+        ItemSingleton<ICalcPresenter> s= ItemSingleton.getInstance(ICalcPresenter.class);
+        if(s.hasItem()){
+            presenter=s.getItem();
             presenter.setICalcView(this);
         } else {
             CalcModel model=new CalcModel();
@@ -83,11 +84,11 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
             model.setListener(asyncModel);
             asyncModel.setListener(asyncPresenter);
             this.presenter=asyncPresenter;
-            s.setPresenter(this.presenter);
+            s.setItem(this.presenter);
         }
     }
 
-    public void setTextButtonClick(final Button bt){
+    private void setTextButtonClick(final Button bt){
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,7 +143,7 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
     public void onDestroy(){
         super.onDestroy();
         if(!needSave){
-            CalcPresenterSingleton.getInstance().removePresenter();
+            ItemSingleton.getInstance(ICalcPresenter.class).removeItem();
         }
     }
 

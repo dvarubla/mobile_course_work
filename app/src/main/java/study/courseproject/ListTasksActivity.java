@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import study.courseproject.task1.CalcActivity;
 import study.courseproject.task2.SnowmanActivity;
+import study.courseproject.task3.JumpObjsActivity;
 
 public class ListTasksActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class ListTasksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_tasks);
-        classes=new Class<?>[]{CalcActivity.class, SnowmanActivity.class};
+        classes=new Class<?>[]{CalcActivity.class, SnowmanActivity.class, JumpObjsActivity.class};
         processButtons();
     }
 

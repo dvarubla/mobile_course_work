@@ -8,22 +8,32 @@ import java.util.concurrent.ExecutorService;
 class JumpTriangleModel implements IJumpTriangleModel {
     private static double DT=0.25f;
     private static int SLEEP_TMT=100;
-    private static float ENERGY_LOSS=0;
     private static double EPSILON=1e-5;
 
     private ExecutorService service;
     private IJumpTrianglePresenter presenter;
     private Handler handler;
+
     private double x, y;
     private double vertSpeed;
     private double horizSpeed;
+    private float energyLoss;
+    private float frictionCoeff;
     private double accel;
+
+    private boolean friction;
+    private boolean stopped;
+
     private DisplayLimits limits;
     JumpTriangleModel(ExecutorService service){
         this.service = service;
         handler=new Handler(Looper.getMainLooper());
         accel=9.8f;
         horizSpeed=10;
+        energyLoss=300;
+        frictionCoeff=1;
+        friction=false;
+        stopped=false;
     }
 
     @Override
@@ -66,35 +76,62 @@ class JumpTriangleModel implements IJumpTriangleModel {
         }.setCoords((float)x,(float)y));
     }
 
-    private void performIteration(){
-        double time=DT;
+    private void jump(){
         if(Math.abs(y-limits.maxY)<EPSILON){
-            return;
-        }
-        while(true) {
-            double dx = vertSpeed * time + accel * time * time / 2;
-            if (Math.abs(dx)>EPSILON && (y + dx) > limits.maxY) {
-                double spentTime = (
-                        -vertSpeed + Math.sqrt(vertSpeed * vertSpeed + 2*accel*(limits.maxY-y))
-                )/accel;
-                double energy = (float) Math.pow(vertSpeed + accel * (spentTime), 2) / 2;
-                energy -= ENERGY_LOSS;
-                vertSpeed = -(float) Math.sqrt(2 * energy);
-                y = limits.maxY;
-                time=time-spentTime;
-            } else {
-                y += dx;
-                vertSpeed+=accel*time;
-                break;
+            y=limits.maxY;
+            friction=true;
+        } else {
+            double time=DT;
+            while (true) {
+                double dx = vertSpeed * time + accel * time * time / 2;
+                if (Math.abs(dx) > EPSILON && (y + dx) > limits.maxY) {
+                    double spentTime = (
+                            -vertSpeed + Math.sqrt(vertSpeed * vertSpeed + 2 * accel * (limits.maxY - y))
+                    ) / accel;
+                    y = limits.maxY;
+                    double energy = (float) Math.pow(vertSpeed + accel * (spentTime), 2) / 2;
+                    energy -= energyLoss;
+                    if (energy < EPSILON) {
+                        break;
+                    }
+                    vertSpeed = -(float) Math.sqrt(2 * energy);
+                    time = time - spentTime;
+                } else {
+                    y += dx;
+                    vertSpeed += accel * time;
+                    break;
+                }
             }
         }
-        x+=horizSpeed*DT;
+    }
+
+    private void doHorizMove(){
+        if(friction) {
+            double dx=horizSpeed*DT/(1+frictionCoeff*DT*DT/2);
+            if(Math.abs(dx)<EPSILON){
+                stopped=true;
+                return;
+            }
+            horizSpeed=horizSpeed-frictionCoeff*dx;
+            x+=dx;
+        } else {
+            x += horizSpeed * DT;
+        }
         if(x>limits.maxX){
             x=limits.maxX-(x-limits.maxX);
             horizSpeed*=-1;
         } else if(x<limits.minX){
             x=limits.minX+(limits.minX-x);
             horizSpeed*=-1;
+        }
+    }
+
+    private void performIteration(){
+        if(!friction){
+            jump();
+        }
+        if(!stopped){
+            doHorizMove();
         }
     }
 

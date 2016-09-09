@@ -13,8 +13,9 @@ class JumpTrianglePresenter implements IJumpTrianglePresenter {
     }
 
     @Override
-    public void setCoords(float x, float y) {
-        view.setCoords(x, y, container.getMaxX(), container.getMaxY());
+    public void setCoords(float x, float y, float maxX, float maxY) {
+        view.setMaxCoords(maxX, maxY);
+        view.setCoords(x, y);
     }
 
     @Override

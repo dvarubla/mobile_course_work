@@ -16,12 +16,14 @@ class JumpTriangleModel implements IJumpTriangleModel {
     private Handler handler;
     private double x, y;
     private double vertSpeed;
+    private double horizSpeed;
     private double accel;
     private DisplayLimits limits;
     JumpTriangleModel(ExecutorService service){
         this.service = service;
         handler=new Handler(Looper.getMainLooper());
         accel=9.8f;
+        horizSpeed=10;
     }
 
     @Override
@@ -85,6 +87,14 @@ class JumpTriangleModel implements IJumpTriangleModel {
                 vertSpeed+=accel*time;
                 break;
             }
+        }
+        x+=horizSpeed*DT;
+        if(x>limits.maxX){
+            x=limits.maxX-(x-limits.maxX);
+            horizSpeed*=-1;
+        } else if(x<limits.minX){
+            x=limits.minX+(limits.minX-x);
+            horizSpeed*=-1;
         }
     }
 

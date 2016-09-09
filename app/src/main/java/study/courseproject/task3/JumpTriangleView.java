@@ -20,6 +20,7 @@ class JumpTriangleView extends View implements IJumpTriangleView {
         super(context);
         paint=new Paint();
         this.color=0xFFFFFFFF;
+        this.setVisibility(View.INVISIBLE);
     }
 
     public void setColor(int color){
@@ -49,8 +50,19 @@ class JumpTriangleView extends View implements IJumpTriangleView {
 
     @Override
     public void setCoords(float x, float y) {
-        this.setX(Math.min(Math.max(x-(width -1)/2, 0), maxX-(width -1)));
-        this.setY(Math.min(Math.max(y-(height -1)/2, 0), maxY-(height -1)));
+        this.setVisibility(View.VISIBLE);
+        this.setX(x-(width-1)/2);
+        this.setY(y-(height-1)/2);
+    }
+
+    @Override
+    public DisplayLimits getLimits(){
+        return new DisplayLimits(
+                (float)(width-1)/2,
+                (float)(height-1)/2,
+                maxX-(float)(width-1)/2,
+                maxY-(float)(height-1)/2
+        );
     }
 
     @Override

@@ -17,8 +17,8 @@ class JumpObjsView implements IJumpObjsView{
             @Override
             public void run(){
                 presenter.setMaxCoords(
-                        layout.getWidth()-layout.getPaddingRight()-layout.getPaddingLeft(),
-                        layout.getHeight()-layout.getPaddingBottom()-layout.getPaddingTop()
+                        layout.getWidth(),
+                        layout.getHeight()
                 );
             }
         });
@@ -26,14 +26,8 @@ class JumpObjsView implements IJumpObjsView{
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if(event.getActionMasked()==MotionEvent.ACTION_DOWN){
-                    float x=Math.min(
-                            Math.max(event.getX(), layout.getPaddingLeft()),
-                            layout.getWidth()-layout.getPaddingRight()
-                    )-layout.getPaddingLeft();
-                    float y=Math.min(
-                            Math.max(event.getY(), layout.getPaddingTop()),
-                            layout.getHeight()-layout.getPaddingBottom()
-                    )-layout.getPaddingTop();
+                    float x=Math.min(event.getX(), layout.getWidth());
+                    float y=Math.min(event.getY(), layout.getHeight());
                     presenter.onTouchDown(x, y);
                 }
                 return true;

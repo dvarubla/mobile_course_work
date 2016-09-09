@@ -21,6 +21,9 @@ class JumpTriangleModel implements IJumpTriangleModel {
     private float frictionCoeff;
     private double accel;
 
+    private double prevVertTimeLeft;
+    private double prevHorizDxLeft;
+
     private boolean friction;
     private boolean stopped;
 
@@ -34,6 +37,8 @@ class JumpTriangleModel implements IJumpTriangleModel {
         frictionCoeff=1;
         friction=false;
         stopped=false;
+        prevVertTimeLeft =0;
+        prevHorizDxLeft=0;
     }
 
     @Override
@@ -77,31 +82,30 @@ class JumpTriangleModel implements IJumpTriangleModel {
     }
 
     private void jump(){
-        if(Math.abs(y-limits.maxY)<EPSILON){
+        double time=DT+ prevVertTimeLeft;
+        double dx = vertSpeed * time + accel * time * time / 2;
+        if(Math.abs((y + dx)-limits.maxY)<EPSILON){
             y=limits.maxY;
             friction=true;
-        } else {
-            double time=DT;
-            while (true) {
-                double dx = vertSpeed * time + accel * time * time / 2;
-                if (Math.abs(dx) > EPSILON && (y + dx) > limits.maxY) {
-                    double spentTime = (
-                            -vertSpeed + Math.sqrt(vertSpeed * vertSpeed + 2 * accel * (limits.maxY - y))
-                    ) / accel;
-                    y = limits.maxY;
-                    double energy = (float) Math.pow(vertSpeed + accel * (spentTime), 2) / 2;
-                    energy -= energyLoss;
-                    if (energy < EPSILON) {
-                        break;
-                    }
-                    vertSpeed = -(float) Math.sqrt(2 * energy);
-                    time = time - spentTime;
-                } else {
-                    y += dx;
-                    vertSpeed += accel * time;
-                    break;
-                }
+            return;
+        }
+        if ((y + dx) > limits.maxY) {
+            double elapsedTime = (
+                    -vertSpeed + Math.sqrt(vertSpeed * vertSpeed + 2 * accel * (limits.maxY - y))
+            ) / accel;
+            y = limits.maxY;
+            double energy = (float) Math.pow(vertSpeed + accel * (elapsedTime), 2) / 2;
+            energy -= energyLoss;
+            if (energy < EPSILON) {
+                friction=true;
+                return;
             }
+            vertSpeed = -(float) Math.sqrt(2 * energy);
+            prevVertTimeLeft = time - elapsedTime;
+        } else {
+            y += dx;
+            vertSpeed += accel * time;
+            prevVertTimeLeft =0;
         }
     }
 
@@ -117,11 +121,15 @@ class JumpTriangleModel implements IJumpTriangleModel {
         } else {
             x += horizSpeed * DT;
         }
+        x+=prevHorizDxLeft;
+        prevHorizDxLeft=0;
         if(x>limits.maxX){
-            x=limits.maxX-(x-limits.maxX);
+            prevHorizDxLeft=-(x-limits.maxX);
+            x=limits.maxX;
             horizSpeed*=-1;
         } else if(x<limits.minX){
-            x=limits.minX+(limits.minX-x);
+            prevHorizDxLeft=limits.minX-x;
+            x=limits.minX;
             horizSpeed*=-1;
         }
     }

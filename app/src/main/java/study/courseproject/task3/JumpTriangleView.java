@@ -2,25 +2,46 @@ package study.courseproject.task3;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.view.View;
 
 class JumpTriangleView extends View implements IJumpTriangleView {
     private Paint paint;
+    private Path path;
     private IJumpTrianglePresenter presenter;
     private int color;
     private int width;
     private int height;
     private float maxX;
     private float maxY;
+    private float strokeWidth;
     private static float XY_PROPORTION=1.0f/1.5f;
-    private static float Y_SIZE_DIV=10;
+    private static float STROKE_WIDTH_DIV=5;
+    private static float Y_SIZE_DIV=7;
 
     public JumpTriangleView(Context context) {
         super(context);
-        paint=new Paint();
         this.color=0xFFFFFFFF;
         this.setVisibility(View.INVISIBLE);
+    }
+
+    private void createPath(){
+        path=new Path();
+        path.moveTo(strokeWidth/2, height-1-strokeWidth/2);
+        path.lineTo((float)(width-1)/3, strokeWidth/2);
+        path.lineTo(width-1-strokeWidth/2, height-1-strokeWidth/2);
+        path.close();
+    }
+
+    private void createPaint(){
+        paint=new Paint();
+        paint.setFlags(Paint.ANTI_ALIAS_FLAG);
+        paint.setStrokeJoin(Paint.Join.ROUND);
+        paint.setColor(color);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(strokeWidth);
     }
 
     public void setColor(int color){
@@ -34,9 +55,7 @@ class JumpTriangleView extends View implements IJumpTriangleView {
 
     @Override
     protected void onDraw(Canvas c){
-        paint.setColor(color);
-        paint.setStyle(Paint.Style.FILL);
-        c.drawRect(0, 0, width -1, height -1, paint);
+        c.drawPath(path, paint);
     }
 
     void setPresenter(IJumpTrianglePresenter presenter) {
@@ -71,5 +90,8 @@ class JumpTriangleView extends View implements IJumpTriangleView {
         maxY=y;
         height=(int)(maxY/Y_SIZE_DIV);
         width=(int)(maxY/Y_SIZE_DIV/XY_PROPORTION);
+        strokeWidth=(float)height/STROKE_WIDTH_DIV;
+        createPaint();
+        createPath();
     }
 }

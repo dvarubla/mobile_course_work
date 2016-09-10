@@ -29,6 +29,11 @@ class JumpObjsPresenter implements IJumpObjsPresenter, IJumpObjsContainer {
     }
 
     @Override
+    public void stop() {
+        executor.shutdownNow();
+    }
+
+    @Override
     public void remove(IJumpTrianglePresenter p) {
         view.removeView(p.getView());
     }

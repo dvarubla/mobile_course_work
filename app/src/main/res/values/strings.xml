@@ -22,4 +22,8 @@
     <string name="settings_friction_coefficient">Friction coefficient</string>
     <string name="settings_energy_loss_when_collide">Energy loss when collide</string>
     <string name="settings">Settings</string>
+    <string name="settings_err_range">%1$.2f ≤ value ≤ %2$.2f</string>
+    <string name="settings_empty">Value can\'t be empty</string>
+    <string name="settings_background_color">Background color</string>
+    <string name="settings_foreground_color">Foreground color</string>
 </resources>

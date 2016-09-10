@@ -48,5 +48,22 @@
             android:inputType="numberDecimal"
             android:id="@+id/editTextEnergyLoss"
     />
-
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_background_color"
+    />
+    <View android:layout_width="match_parent"
+          android:layout_margin="4dp"
+          android:layout_height="25dp"
+          android:background="@android:color/black"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_foreground_color"
+    />
+    <View android:layout_width="match_parent"
+          android:layout_margin="4dp"
+          android:layout_height="25dp"
+          android:background="@android:color/black"/>
 </LinearLayout>

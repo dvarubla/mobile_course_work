@@ -1,7 +1,7 @@
 package study.courseproject.task3;
 
-interface IConfig {
-    enum Names{
+public interface IConfig {
+    enum Name {
         ACCEL,
         HORIZ_SPEED,
         FRICTION_COEFF,
@@ -9,7 +9,7 @@ interface IConfig {
         BG_COLOR,
         OBJ_COLOR
     }
-    <T> T getValue(Names key);
-    <T> void putValue(Names key, T value);
+    <T> T getValue(Name key);
+    <T> void putValue(Name key, T value);
     void setDefaults();
 }

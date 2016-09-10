@@ -2,7 +2,6 @@ package study.courseproject.task3;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.View;
@@ -27,7 +26,7 @@ class JumpTriangleView extends View implements IJumpTriangleView {
     }
 
     void setConfig(IConfig config){
-        this.color=config.getValue(IConfig.Names.OBJ_COLOR);
+        this.color=config.getValue(IConfig.Name.OBJ_COLOR);
     }
 
     private void createPath(){

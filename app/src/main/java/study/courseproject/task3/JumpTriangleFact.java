@@ -15,7 +15,7 @@ class JumpTriangleFact implements IJumpTriangleFact {
         JumpTriangleView v=new JumpTriangleView(context);
         JumpTriangleModel m=new JumpTriangleModel(executor);
         JumpTrianglePresenter p=new JumpTrianglePresenter(v, m);
-        m.setPresenter(p);
+        m.setListener(p);
         v.setPresenter(p);
         p.setParent(container);
         return p;

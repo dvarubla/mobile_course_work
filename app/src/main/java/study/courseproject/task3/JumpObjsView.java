@@ -37,6 +37,11 @@ class JumpObjsView implements IJumpObjsView{
 
     @Override
     public void addView(IJumpTriangleView view) {
-        this.layout.addView(view.getRealView());
+        layout.addView(view.getRealView());
+    }
+
+    @Override
+    public void removeView(IJumpTriangleView view) {
+        layout.removeView(view.getRealView());
     }
 }

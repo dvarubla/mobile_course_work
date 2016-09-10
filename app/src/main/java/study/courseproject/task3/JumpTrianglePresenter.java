@@ -32,6 +32,11 @@ class JumpTrianglePresenter implements IJumpTrianglePresenter {
         );
     }
 
+    @Override
+    public void notifyStop() {
+        this.container.remove(this);
+    }
+
     void setParent(IJumpObjsContainer container) {
         this.container=container;
     }

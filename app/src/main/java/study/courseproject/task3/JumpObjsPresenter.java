@@ -27,4 +27,9 @@ class JumpObjsPresenter implements IJumpObjsPresenter, IJumpObjsContainer {
         maxX=x;
         maxY=y;
     }
+
+    @Override
+    public void remove(IJumpTrianglePresenter p) {
+        view.removeView(p.getView());
+    }
 }

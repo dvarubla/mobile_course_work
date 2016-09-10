@@ -23,8 +23,11 @@ class JumpTriangleView extends View implements IJumpTriangleView {
 
     public JumpTriangleView(Context context) {
         super(context);
-        this.color=0xFFFFFFFF;
         this.setVisibility(View.INVISIBLE);
+    }
+
+    void setConfig(IConfig config){
+        this.color=config.getObjColor();
     }
 
     private void createPath(){
@@ -42,10 +45,6 @@ class JumpTriangleView extends View implements IJumpTriangleView {
         paint.setColor(color);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(strokeWidth);
-    }
-
-    public void setColor(int color){
-        this.color=color;
     }
 
     @Override

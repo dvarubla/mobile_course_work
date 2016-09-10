@@ -14,7 +14,8 @@ public class JumpObjsActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jump_obj);
         final RelativeLayout layout= (RelativeLayout) findViewById(R.id.jump_obj_layout);
-        presenter=new JumpObjsFact(new JumpTriangleFact(this)).create(layout);
+        IConfig config=new Config();
+        presenter=new JumpObjsFact(new JumpTriangleFact(this, config), config).create(layout);
     }
 
     @Override

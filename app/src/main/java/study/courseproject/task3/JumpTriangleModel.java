@@ -33,13 +33,13 @@ class JumpTriangleModel implements IJumpTriangleModel {
     private boolean friction;
     private boolean stopped;
 
-    JumpTriangleModel(ExecutorService service){
+    JumpTriangleModel(ExecutorService service, IConfig config){
         this.service = service;
         handler=new Handler(Looper.getMainLooper());
-        accel=0.098;
-        horizSpeed=0.1;
-        energyLoss=0.01;
-        frictionCoeff=0.3;
+        accel=config.getAccel();
+        horizSpeed=config.getHorizSpeed();
+        energyLoss=config.getEnergyLoss();
+        frictionCoeff=config.getFrictionCoeff();
         friction=false;
         stopped=false;
         prevVertTimeLeft =0;

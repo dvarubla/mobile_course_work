@@ -7,9 +7,9 @@ import android.widget.RelativeLayout;
 
 class JumpObjsView implements IJumpObjsView{
     private RelativeLayout layout;
-    JumpObjsView(final RelativeLayout layout){
+    JumpObjsView(RelativeLayout layout, IConfig config){
         this.layout=layout;
-        layout.setBackgroundColor(0xFF00FF00);
+        layout.setBackgroundColor(config.getBgColor());
     }
 
     @Override

@@ -1,5 +1,6 @@
 package study.courseproject.task3;
 
+import android.animation.Animator;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -41,7 +42,27 @@ class JumpObjsView implements IJumpObjsView{
     }
 
     @Override
-    public void removeView(IJumpTriangleView view) {
-        layout.removeView(view.getRealView());
+    public void removeView(final IJumpTriangleView view) {
+        view.getRealView().animate().setDuration(2000).alpha(0f).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                layout.removeView(view.getRealView());
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
     }
 }

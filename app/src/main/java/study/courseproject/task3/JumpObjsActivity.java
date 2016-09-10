@@ -14,8 +14,9 @@ public class JumpObjsActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jump_obj);
-        final RelativeLayout layout= (RelativeLayout) findViewById(R.id.jump_obj_layout);
+        final RelativeLayout layout=(RelativeLayout)findViewById(R.id.jump_obj_layout);
         IConfig config=new Config();
+        config.setDefaults();
         presenter=new JumpObjsFact(new JumpTriangleFact(this, config), config).create(layout);
     }
 

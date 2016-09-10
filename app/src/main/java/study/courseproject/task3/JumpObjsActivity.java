@@ -2,12 +2,13 @@ package study.courseproject.task3;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import study.courseproject.R;
 
-public class JumpObjsActivity extends Activity{
+public class JumpObjsActivity extends AppCompatActivity {
     private IJumpObjsPresenter presenter;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {

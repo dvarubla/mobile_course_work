@@ -8,7 +8,11 @@ import java.util.concurrent.ExecutorService;
 class JumpTriangleModel implements IJumpTriangleModel {
     private static double DT=0.25f;
     private static int SLEEP_TMT=100;
-    private static double EPSILON=1e-5;
+    private static double EPSILON=1e-8;
+    private static double MAX_X=1;
+    private static double MAX_Y=1;
+    private static double MIN_X=0;
+
 
     private ExecutorService service;
     private IJumpTrianglePresenter presenter;
@@ -17,8 +21,8 @@ class JumpTriangleModel implements IJumpTriangleModel {
     private double x, y;
     private double vertSpeed;
     private double horizSpeed;
-    private float energyLoss;
-    private float frictionCoeff;
+    private double energyLoss;
+    private double frictionCoeff;
     private double accel;
 
     private double prevVertTimeLeft;
@@ -27,14 +31,13 @@ class JumpTriangleModel implements IJumpTriangleModel {
     private boolean friction;
     private boolean stopped;
 
-    private DisplayLimits limits;
     JumpTriangleModel(ExecutorService service){
         this.service = service;
         handler=new Handler(Looper.getMainLooper());
-        accel=9.8f;
-        horizSpeed=10;
-        energyLoss=300;
-        frictionCoeff=1;
+        accel=0.098;
+        horizSpeed=0.1;
+        energyLoss=0.01;
+        frictionCoeff=0.3;
         friction=false;
         stopped=false;
         prevVertTimeLeft =0;
@@ -42,10 +45,9 @@ class JumpTriangleModel implements IJumpTriangleModel {
     }
 
     @Override
-    public void start(DisplayLimits limits, final float x, final float y) {
-        this.limits = limits;
-        this.x = Math.min(Math.max(x, limits.minX), limits.maxX);
-        this.y = Math.min(Math.max(y, limits.minY), limits.maxY);
+    public void start(final float x, final float y) {
+        this.x=x;
+        this.y=y;
         vertSpeed = 0;
         setCoords();
 
@@ -84,16 +86,16 @@ class JumpTriangleModel implements IJumpTriangleModel {
     private void jump(){
         double time=DT+ prevVertTimeLeft;
         double dx = vertSpeed * time + accel * time * time / 2;
-        if(Math.abs((y + dx)-limits.maxY)<EPSILON){
-            y=limits.maxY;
+        if(Math.abs((y + dx)-MAX_Y)<EPSILON){
+            y=MAX_Y;
             friction=true;
             return;
         }
-        if ((y + dx) > limits.maxY) {
+        if ((y + dx) > MAX_Y) {
             double elapsedTime = (
-                    -vertSpeed + Math.sqrt(vertSpeed * vertSpeed + 2 * accel * (limits.maxY - y))
+                    -vertSpeed + Math.sqrt(vertSpeed * vertSpeed + 2 * accel * (MAX_Y - y))
             ) / accel;
-            y = limits.maxY;
+            y = MAX_Y;
             double energy = (float) Math.pow(vertSpeed + accel * (elapsedTime), 2) / 2;
             energy -= energyLoss;
             if (energy < EPSILON) {
@@ -123,13 +125,13 @@ class JumpTriangleModel implements IJumpTriangleModel {
         }
         x+=prevHorizDxLeft;
         prevHorizDxLeft=0;
-        if(x>limits.maxX){
-            prevHorizDxLeft=-(x-limits.maxX);
-            x=limits.maxX;
+        if(x>MAX_X){
+            prevHorizDxLeft=-(x-MAX_X);
+            x=MAX_X;
             horizSpeed*=-1;
-        } else if(x<limits.minX){
-            prevHorizDxLeft=limits.minX-x;
-            x=limits.minX;
+        } else if(x<MIN_X){
+            prevHorizDxLeft=MIN_X-x;
+            x=MIN_X;
             horizSpeed*=-1;
         }
     }

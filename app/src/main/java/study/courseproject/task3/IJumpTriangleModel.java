@@ -1,5 +1,5 @@
 package study.courseproject.task3;
 
 interface IJumpTriangleModel {
-    void start(DisplayLimits limits, float x, float y);
+    void start(float x, float y);
 }

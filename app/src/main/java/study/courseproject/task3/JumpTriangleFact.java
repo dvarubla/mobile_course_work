@@ -4,10 +4,10 @@ import android.content.Context;
 
 import java.util.concurrent.ExecutorService;
 
-class JumpTriangleFact implements IJumpTriangleFact {
+public class JumpTriangleFact implements IJumpTriangleFact {
     private Context context;
     private IConfig config;
-    JumpTriangleFact(Context context, IConfig config){
+    public JumpTriangleFact(Context context, IConfig config){
         this.context=context;
         this.config=config;
     }

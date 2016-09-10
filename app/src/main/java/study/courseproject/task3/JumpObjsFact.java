@@ -4,10 +4,10 @@ import android.widget.RelativeLayout;
 
 import java.util.concurrent.ExecutorService;
 
-class JumpObjsFact implements IJumpObjsFact{
+public class JumpObjsFact implements IJumpObjsFact{
     private IJumpTriangleFact triangleFact;
     private IConfig config;
-    JumpObjsFact(IJumpTriangleFact triangleFact, IConfig config){
+    public JumpObjsFact(IJumpTriangleFact triangleFact, IConfig config){
         this.triangleFact=triangleFact;
         this.config=config;
     }

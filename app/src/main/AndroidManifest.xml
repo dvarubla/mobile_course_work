@@ -27,9 +27,14 @@
                 android:name=".task2.SnowmanActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".task3.JumpObjsActivity">
+        <activity android:name=".task3.JumpObjsActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".task4.JumpObjSettingsActivity">
+        <activity android:name=".task4.JumpObjSettingsActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".task4.ConfJumpObjsActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

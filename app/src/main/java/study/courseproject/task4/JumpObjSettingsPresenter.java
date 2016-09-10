@@ -2,6 +2,8 @@ package study.courseproject.task4;
 
 import study.courseproject.task3.IConfig;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,10 +14,18 @@ class JumpObjSettingsPresenter implements IJumpObjSettingsPresenter {
     private IJumpObjSettingsView view;
     private IJumpObjSettingsModel model;
 
-    JumpObjSettingsPresenter(IJumpObjSettingsView view, IJumpObjSettingsModel model){
-        this.view=view;
+    JumpObjSettingsPresenter(IJumpObjSettingsModel model){
         this.model=model;
         initHashMap();
+    }
+
+    @Override
+    public void setView(IJumpObjSettingsView view){
+        this.view=view;
+        view.setConstraints(map);
+        for(Map.Entry<IConfig.Name, DoubleConstraint> entry: map.entrySet()){
+            view.setDouble(entry.getKey(), model.<Double>get(entry.getKey()));
+        }
     }
 
     private void initHashMap(){
@@ -24,10 +34,6 @@ class JumpObjSettingsPresenter implements IJumpObjSettingsPresenter {
         map.put(IConfig.Name.HORIZ_SPEED, new DoubleConstraint(0, 0.7));
         map.put(IConfig.Name.FRICTION_COEFF, new DoubleConstraint(0, 1));
         map.put(IConfig.Name.ENERGY_LOSS, new DoubleConstraint(0, 1));
-        view.setConstraints(map);
-        for(Map.Entry<IConfig.Name, DoubleConstraint> entry: map.entrySet()){
-            view.setDouble(entry.getKey(), model.<Double>get(entry.getKey()));
-        }
     }
 
     @Override

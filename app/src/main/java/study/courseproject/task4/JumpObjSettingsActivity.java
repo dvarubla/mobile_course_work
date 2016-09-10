@@ -5,13 +5,18 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import study.courseproject.ItemSingleton;
 import study.courseproject.R;
 import study.courseproject.task3.Config;
 import study.courseproject.task3.IConfig;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpObjSettingsView{
+    private boolean needSave;
+
     private class ConstraintField{
         IConfig.Name type;
         DoubleConstraint constraint;
@@ -23,16 +28,17 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
     private IJumpObjSettingsPresenter presenter;
     private HashMap<Integer, ConstraintField> constrMap;
     private HashMap<IConfig.Name, Integer> idsMap;
+    private DecimalFormat df;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jump_obj_settings);
+        df = new DecimalFormat("#.####");
+        df.setRoundingMode(RoundingMode.CEILING);
 
         createParts();
         processDoubleFields();
-        final EditText t=((EditText)findViewById(R.id.editTextAccel));
-
     }
 
     private void processDoubleFields(){
@@ -54,8 +60,8 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
                                 ) {
                                 t.setError(getString(
                                         R.string.settings_err_range,
-                                        entry.getValue().constraint.min,
-                                        entry.getValue().constraint.max
+                                        df.format(entry.getValue().constraint.min),
+                                        df.format(entry.getValue().constraint.max)
                                 ));
                         }
                     } else {
@@ -67,9 +73,38 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
     }
 
     private void createParts(){
-        IConfig c=new Config();
-        c.setDefaults();
-        presenter=new JumpObjSettingsPresenter(this, new JumpObjSettingsModel(c));
+        ItemSingleton<IJumpObjSettingsPresenter> s=ItemSingleton.getInstance(IJumpObjSettingsPresenter.class);
+        if(s.hasItem()) {
+            presenter=s.getItem();
+            presenter.setView(this);
+        } else {
+            ItemSingleton<IConfig> configS=ItemSingleton.getInstance(IConfig.class);
+            IConfig c;
+            if(configS.hasItem()) {
+                c=configS.getItem();
+            } else {
+                c = new Config();
+                c.setDefaults();
+                configS.setItem(c);
+            }
+            presenter = new JumpObjSettingsPresenter(new JumpObjSettingsModel(c));
+            presenter.setView(this);
+            s.setItem(presenter);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        needSave=true;
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(!needSave){
+            ItemSingleton.getInstance(IJumpObjSettingsPresenter.class).removeItem();
+        }
     }
 
     @Override
@@ -84,7 +119,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
 
     @Override
     public void setDouble(IConfig.Name name, double val){
-        ((EditText)findViewById(idsMap.get(name))).setText(String.valueOf(val));
+        ((EditText)findViewById(idsMap.get(name))).setText(df.format(val));
     }
 
     private void add(

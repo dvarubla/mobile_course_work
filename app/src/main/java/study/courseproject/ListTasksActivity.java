@@ -9,6 +9,7 @@ import android.widget.Button;
 import study.courseproject.task1.CalcActivity;
 import study.courseproject.task2.SnowmanActivity;
 import study.courseproject.task3.JumpObjsActivity;
+import study.courseproject.task4.ConfJumpObjsActivity;
 import study.courseproject.task4.JumpObjSettingsActivity;
 
 public class ListTasksActivity extends AppCompatActivity {
@@ -19,7 +20,12 @@ public class ListTasksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_tasks);
-        classes=new Class<?>[]{CalcActivity.class, SnowmanActivity.class, JumpObjsActivity.class};
+        classes=new Class<?>[]{
+                CalcActivity.class,
+                SnowmanActivity.class,
+                JumpObjsActivity.class,
+                ConfJumpObjsActivity.class
+        };
         processButtons();
         findViewById(R.id.settings_button).setOnClickListener(new View.OnClickListener() {
             @Override

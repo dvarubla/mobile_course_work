@@ -17,4 +17,9 @@
     <string name="ok" translatable="false">OK</string>
     <string name="calc_syntax_error">Syntax error!</string>
     <string name="backspace" translatable="false">backspace</string>
+    <string name="settings_acceleration">Acceleration</string>
+    <string name="settings_horizontal_speed">Horizontal speed</string>
+    <string name="settings_friction_coefficient">Friction coefficient</string>
+    <string name="settings_energy_loss_when_collide">Energy loss when collide</string>
+    <string name="settings">Settings</string>
 </resources>

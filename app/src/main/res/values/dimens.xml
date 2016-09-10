@@ -7,7 +7,8 @@
     <dimen tools:override="true" name="abc_button_inset_horizontal_material">0dp</dimen>
     <dimen tools:override="true" name="abc_control_corner_material">0dp</dimen>
 
-    <dimen name="menu_divider_height">4dp</dimen>
+    <dimen name="menu_divider_height">2dp</dimen>
     <dimen name="button_horiz_divider_width">4dp</dimen>
     <dimen name="сalc_button_block_margin">-4dp</dimen>
+    <dimen name="menu_block_width">500dp</dimen>
 </resources>

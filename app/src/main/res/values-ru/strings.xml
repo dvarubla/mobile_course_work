@@ -5,4 +5,17 @@
     <string name="division_by_zero">Деление на 0!</string>
     <string name="task">Задание %1$d</string>
     <string name="unexpected_error">Неизвестная ошибка</string>
+    <string name="cancel">Отмена</string>
+    <string name="settings_view">К объектам</string>
+    <string name="settings_set_color">Установить цвет</string>
+    <string name="settings_reset">Сброс</string>
+    <string name="settings_object_color">Цвет объекта</string>
+    <string name="settings_object">Объект</string>
+    <string name="settings_horizontal_speed">Горизонтальная скорость</string>
+    <string name="settings_friction_coefficient">Коэффициент трения</string>
+    <string name="settings_energy_loss_when_collide">Потери энергии при падении</string>
+    <string name="settings_choose_color">Выбрать цвет</string>
+    <string name="settings_background_color">Цвет фона</string>
+    <string name="settings_acceleration">Ускорение</string>
+    <string name="settings">Настройки</string>
 </resources>

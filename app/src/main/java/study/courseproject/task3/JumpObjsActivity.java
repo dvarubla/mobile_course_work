@@ -21,8 +21,8 @@ public class JumpObjsActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onDestroy(){
-        super.onDestroy();
+    public void onStop(){
+        super.onStop();
         presenter.stop();
     }
 }

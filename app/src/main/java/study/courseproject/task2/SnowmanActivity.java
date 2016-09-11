@@ -24,10 +24,11 @@ public class SnowmanActivity extends AppCompatActivity implements ISnowmanView{
             presenter=singleton.getItem();
             presenter.setView(this);
         } else {
-            presenter = new SnowmanPresenter();
+            SnowmanPresenter presenter = new SnowmanPresenter();
             presenter.setView(this);
             presenter.setModel(new SnowmanModel(presenter));
             singleton.setItem(presenter);
+            this.presenter=presenter;
         }
     }
 
@@ -38,8 +39,8 @@ public class SnowmanActivity extends AppCompatActivity implements ISnowmanView{
     }
 
     @Override
-    public void onDestroy(){
-        super.onDestroy();
+    public void onStop(){
+        super.onStop();
         if(!needSave){
             presenter.close();
             ItemSingleton.getInstance(ISnowmanPresenter.class).removeItem();

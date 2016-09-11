@@ -140,8 +140,8 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
     }
 
     @Override
-    public void onDestroy(){
-        super.onDestroy();
+    public void onStop(){
+        super.onStop();
         if(!needSave){
             ItemSingleton.getInstance(ICalcPresenter.class).removeItem();
         }

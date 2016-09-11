@@ -12,8 +12,7 @@ class JumpObjsView implements IJumpObjsView{
         layout.setBackgroundColor(config.<Integer>getValue(IConfig.Name.BG_COLOR));
     }
 
-    @Override
-    public void setPresenter(final IJumpObjsPresenter presenter){
+    void setPresenter(final IJumpObjsPresenter presenter){
         layout.post(new Runnable(){
             @Override
             public void run(){

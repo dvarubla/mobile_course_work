@@ -19,8 +19,7 @@ class SnowmanPresenter implements ISnowmanPresenter{
         model.close();
     }
 
-    @Override
-    public void setModel(ISnowmanModel model) {
+    void setModel(ISnowmanModel model) {
         this.model = model;
     }
 }

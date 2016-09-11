@@ -4,6 +4,4 @@ interface ISnowmanPresenter extends ISnowmanModelListener{
     void setView(ISnowmanView view);
 
     void close();
-
-    void setModel(ISnowmanModel model);
 }

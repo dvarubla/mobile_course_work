@@ -80,7 +80,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
     }
 
     private void setPreviewColor(IConfig.Name name, int color){
-        TextView v=(TextView) findViewById(R.id.colorPreview);
+        TextView v=(TextView) findViewById(R.id.color_preview);
         if(name== IConfig.Name.BG_COLOR){
             v.setBackgroundColor(color);
         } else {
@@ -161,13 +161,13 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
 
     private void initMaps() {
         idsSeekbarMap =new HashMap<>();
-        idsSeekbarMap.put(IConfig.Name.ACCEL, R.id.seekBarAccel);
-        idsSeekbarMap.put(IConfig.Name.HORIZ_SPEED, R.id.seekBarHorizSpeed);
-        idsSeekbarMap.put(IConfig.Name.ENERGY_LOSS, R.id.seekBarEnergyLoss);
-        idsSeekbarMap.put(IConfig.Name.FRICTION_COEFF, R.id.seekBarFrictionCoeff);
+        idsSeekbarMap.put(IConfig.Name.ACCEL, R.id.seek_bar_accel);
+        idsSeekbarMap.put(IConfig.Name.HORIZ_SPEED, R.id.seek_bar_horiz_speed);
+        idsSeekbarMap.put(IConfig.Name.ENERGY_LOSS, R.id.seek_bar_energy_loss);
+        idsSeekbarMap.put(IConfig.Name.FRICTION_COEFF, R.id.seek_bar_friction_coeff);
         idsColorBtnMap =new HashMap<>();
-        idsColorBtnMap.put(IConfig.Name.BG_COLOR, new ColorBtn(R.id.buttonBgColor));
-        idsColorBtnMap.put(IConfig.Name.OBJ_COLOR, new ColorBtn(R.id.buttonObjColor));
+        idsColorBtnMap.put(IConfig.Name.BG_COLOR, new ColorBtn(R.id.button_bg_color));
+        idsColorBtnMap.put(IConfig.Name.OBJ_COLOR, new ColorBtn(R.id.button_obj_color));
     }
 
     @Override

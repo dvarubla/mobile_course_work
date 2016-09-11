@@ -123,13 +123,15 @@ class JumpTriangleModel implements IJumpTriangleModel {
 
     private void doHorizMove(){
         if(friction) {
+            double sign=Math.signum(horizSpeed);
+            horizSpeed=Math.abs(horizSpeed);
             double dx=horizSpeed*DT-frictionCoeff*accel*DT*DT/2;
-            if(dx<EPSILON){
+            if(horizSpeed*dx<EPSILON){
                 stopped=true;
                 return;
             }
-            horizSpeed=horizSpeed-frictionCoeff*accel*DT;
-            x+=dx;
+            horizSpeed=sign*(horizSpeed-frictionCoeff*accel*DT);
+            x+=sign*dx;
         } else {
             x += horizSpeed * DT;
         }

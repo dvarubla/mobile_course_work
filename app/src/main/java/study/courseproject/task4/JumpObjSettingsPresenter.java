@@ -32,7 +32,7 @@ class JumpObjSettingsPresenter implements IJumpObjSettingsPresenter {
         map=new HashMap<>();
         map.put(IConfig.Name.ACCEL, new DoubleConstraint(0, 0.7));
         map.put(IConfig.Name.HORIZ_SPEED, new DoubleConstraint(0, 0.7));
-        map.put(IConfig.Name.FRICTION_COEFF, new DoubleConstraint(0, 1));
+        map.put(IConfig.Name.FRICTION_COEFF, new DoubleConstraint(0, 10));
         map.put(IConfig.Name.ENERGY_LOSS, new DoubleConstraint(0, 1));
     }
 

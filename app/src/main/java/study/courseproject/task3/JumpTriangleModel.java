@@ -9,8 +9,7 @@ class JumpTriangleModel implements IJumpTriangleModel {
     private static double DT=0.25f;
     private static int SLEEP_TMT=100;
     private static int STOP_TMT=2000;
-    private static double FRICTION_EPSILON=1e-3;
-    private static double JUMP_EPSILON=1e-7;
+    private static double EPSILON =1e-5;
     private static double MAX_X=1;
     private static double MAX_Y=1;
     private static double MIN_X=0;
@@ -102,11 +101,6 @@ class JumpTriangleModel implements IJumpTriangleModel {
     private void jump(){
         double time=DT+ prevVertTimeLeft;
         double dx = vertSpeed * time + accel * time * time / 2;
-        if(Math.abs((y + dx)-MAX_Y)<JUMP_EPSILON){
-            y=MAX_Y;
-            friction=true;
-            return;
-        }
         if ((y + dx) > MAX_Y) {
             double elapsedTime = (
                     -vertSpeed + Math.sqrt(vertSpeed * vertSpeed + 2 * accel * (MAX_Y - y))
@@ -114,7 +108,7 @@ class JumpTriangleModel implements IJumpTriangleModel {
             y = MAX_Y;
             double energy = (float) Math.pow(vertSpeed + accel * (elapsedTime), 2) / 2;
             energy -= energyLoss;
-            if (energy < JUMP_EPSILON) {
+            if (energy < EPSILON) {
                 friction=true;
                 return;
             }
@@ -129,12 +123,12 @@ class JumpTriangleModel implements IJumpTriangleModel {
 
     private void doHorizMove(){
         if(friction) {
-            double dx=horizSpeed*DT/(1+frictionCoeff*DT*DT/2);
-            if(Math.abs(dx)< FRICTION_EPSILON){
+            double dx=horizSpeed*DT-frictionCoeff*accel*DT*DT/2;
+            if(dx<EPSILON){
                 stopped=true;
                 return;
             }
-            horizSpeed=horizSpeed-frictionCoeff*dx;
+            horizSpeed=horizSpeed-frictionCoeff*accel*DT;
             x+=dx;
         } else {
             x += horizSpeed * DT;

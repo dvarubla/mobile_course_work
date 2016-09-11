@@ -11,10 +11,10 @@ public class Config implements IConfig{
 
     @Override
     public void setDefaults(){
-        putValue(Name.ACCEL, 0.7);
-        putValue(Name.HORIZ_SPEED, 0.7);
+        putValue(Name.ACCEL, 0.3);
+        putValue(Name.HORIZ_SPEED, 0.2);
         putValue(Name.FRICTION_COEFF, 0.3);
-        putValue(Name.ENERGY_LOSS, 0.01);
+        putValue(Name.ENERGY_LOSS, 0.05);
         putValue(Name.BG_COLOR, 0xFFFFEDBB);
         putValue(Name.OBJ_COLOR, 0xFF0529B2);
     }

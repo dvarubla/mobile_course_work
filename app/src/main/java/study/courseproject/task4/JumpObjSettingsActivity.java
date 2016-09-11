@@ -1,11 +1,15 @@
 package study.courseproject.task4;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import study.courseproject.ItemSingleton;
+import study.courseproject.ListTasksActivity;
 import study.courseproject.R;
 import study.courseproject.task3.Config;
 import study.courseproject.task3.IConfig;
@@ -39,6 +43,14 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
 
         createParts();
         processDoubleFields();
+
+        findViewById(R.id.gotoView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(JumpObjSettingsActivity.this, ConfJumpObjsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void processDoubleFields(){

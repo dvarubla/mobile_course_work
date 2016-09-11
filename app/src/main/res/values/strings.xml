@@ -26,4 +26,7 @@
     <string name="settings_empty">Value can\'t be empty</string>
     <string name="settings_background_color">Background color</string>
     <string name="settings_foreground_color">Foreground color</string>
+    <string name="settings_view">Go to view</string>
+    <string name="settings_save">Save</string>
+    <string name="settings_reset">Reset</string>
 </resources>

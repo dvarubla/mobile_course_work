@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import com.flask.colorpicker.ColorPickerView;
 import com.flask.colorpicker.OnColorSelectedListener;
 import com.flask.colorpicker.builder.ColorPickerClickListener;
@@ -75,6 +76,15 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
         }
     }
 
+    private void setPreviewColor(IConfig.Name name, int color){
+        TextView v=(TextView) findViewById(R.id.colorPreview);
+        if(name== IConfig.Name.BG_COLOR){
+            v.setBackgroundColor(color);
+        } else {
+            v.setTextColor(color);
+        }
+    }
+
     private void processColorBtns(){
         for(final HashMap.Entry<IConfig.Name, ColorBtn> entry: idsColorBtnMap.entrySet()){
             findViewById(entry.getValue().id).setOnClickListener(new View.OnClickListener() {
@@ -97,6 +107,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
                             public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
                                 idsColorBtnMap.get(entry.getKey()).color=selectedColor;
                                 presenter.colorChanged(entry.getKey(), selectedColor);
+                                setPreviewColor(entry.getKey(), selectedColor);
                             }
                         })
                         .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -164,5 +175,6 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
     @Override
     public void setColor(IConfig.Name name, int value) {
         idsColorBtnMap.get(name).color=value;
+        setPreviewColor(name, value);
     }
 }

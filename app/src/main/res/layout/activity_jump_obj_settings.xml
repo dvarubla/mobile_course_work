@@ -111,6 +111,7 @@
             android:background="@android:color/black"
             android:textColor="@android:color/white"
             android:textAppearance="?android:textAppearanceLarge"
+            android:id="@+id/colorPreview"
     />
 
 </LinearLayout>

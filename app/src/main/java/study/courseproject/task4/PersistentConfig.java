@@ -26,6 +26,12 @@ class PersistentConfig implements IPersistentConfig{
         new ConfigName(IConfig.Name.FRICTION_COEFF, "frictionCoeff"),
         new ConfigName(IConfig.Name.ENERGY_LOSS, "energyLoss")
     };
+
+    private ConfigName intNames[]={
+        new ConfigName(IConfig.Name.BG_COLOR, "bgColor"),
+        new ConfigName(IConfig.Name.OBJ_COLOR, "objColor")
+    };
+
     PersistentConfig(Context ctx){
         this.ctx=ctx;
         configRead=false;
@@ -41,6 +47,11 @@ class PersistentConfig implements IPersistentConfig{
                     config.putValue(name.intName, Double.longBitsToDouble(p.getLong(name.strName, 0)));
                 }
             }
+            for(ConfigName name: intNames){
+                if(p.contains(name.strName)){
+                    config.putValue(name.intName, p.getInt(name.strName, 0));
+                }
+            }
             savedConfig=config;
             unsavedConfig=new Config();
             unsavedConfig.putAll(savedConfig);
@@ -54,6 +65,9 @@ class PersistentConfig implements IPersistentConfig{
         SharedPreferences.Editor editor = p.edit();
         for(ConfigName name: doubleNames){
             editor.putLong(name.strName, Double.doubleToLongBits(unsavedConfig.<Double>getValue(name.intName)));
+        }
+        for(ConfigName name: intNames){
+            editor.putInt(name.strName, unsavedConfig.<Integer>getValue(name.intName));
         }
         editor.apply();
         savedConfig.putAll(unsavedConfig);

@@ -15,11 +15,11 @@ public class StrStorage{
         this.str=str;
     }
 
-    public String getStr(){
+    private String getStr(){
         return str;
     }
 
-    public void setStr(String str){
+    private void setStr(String str){
         this.str=str;
     }
 

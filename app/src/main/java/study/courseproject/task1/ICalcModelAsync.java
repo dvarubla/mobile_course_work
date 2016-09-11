@@ -1,4 +1,4 @@
 package study.courseproject.task1;
 
-public interface ICalcModelAsync extends ICalcModel{
+interface ICalcModelAsync extends ICalcModel{
 }

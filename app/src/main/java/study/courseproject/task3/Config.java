@@ -9,10 +9,6 @@ public class Config implements IConfig{
         map=new HashMap<>();
     }
 
-    private Config(HashMap<Name,Object> map){
-        this.map=map;
-    }
-
     @Override
     public void setDefaults(){
         putValue(Name.ACCEL, 0.7);

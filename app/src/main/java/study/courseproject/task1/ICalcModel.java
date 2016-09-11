@@ -1,6 +1,6 @@
 package study.courseproject.task1;
 
-public interface ICalcModel {
+interface ICalcModel {
 
     void reset();
 

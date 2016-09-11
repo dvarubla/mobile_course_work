@@ -2,7 +2,6 @@ package study.courseproject.task4;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.Preference;
 import study.courseproject.task3.Config;
 import study.courseproject.task3.IConfig;
 

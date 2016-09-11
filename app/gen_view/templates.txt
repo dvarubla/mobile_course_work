@@ -76,7 +76,7 @@ public class SnowmanGenView extends View {
         drawPath(c, strokeColor, strokeWidth);
     }    
 
-    \${draw_methods};
+    \${draw_methods}
 }
 
 ###

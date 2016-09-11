@@ -1,5 +1,4 @@
 package study.courseproject.task2;
-import android.util.Log;
 
 class BallRunnable implements Runnable, IBallRunnable{
     private static int NUM_COLOR_PARTS=3;

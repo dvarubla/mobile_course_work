@@ -3,9 +3,9 @@ package study.courseproject.task1;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-public class CalcModel implements ICalcModel {
-    final int NUM_OPS=2;
-    final int SCALE=10;
+class CalcModel implements ICalcModel {
+    private final int NUM_OPS=2;
+    private final int SCALE=10;
     private ICalcModelListener listener;
     private BigInteger bInts[];
     private BigDecimal bFloats[];
@@ -13,7 +13,7 @@ public class CalcModel implements ICalcModel {
     private boolean floatMode;
     private CalcOpTypes.OpType type;
 
-    public CalcModel(){
+    CalcModel(){
         bInts=new BigInteger[NUM_OPS];
         bFloats=new BigDecimal[NUM_OPS];
         reset();

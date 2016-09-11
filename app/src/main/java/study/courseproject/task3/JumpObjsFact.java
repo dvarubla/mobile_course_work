@@ -2,8 +2,6 @@ package study.courseproject.task3;
 
 import android.widget.RelativeLayout;
 
-import java.util.concurrent.ExecutorService;
-
 public class JumpObjsFact implements IJumpObjsFact{
     private IJumpTriangleFact triangleFact;
     private IConfig config;

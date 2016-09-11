@@ -16,9 +16,9 @@ import static study.courseproject.StrStorage.attachView;
 
 public class CalcPresenterOperatorsTest {
 
-    ICalcView v;
-    StrStorage s;
-    CalcPresenter p;
+    private ICalcView v;
+    private StrStorage s;
+    private CalcPresenter p;
 
     @Before
     public void before(){

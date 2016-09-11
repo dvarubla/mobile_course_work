@@ -27,10 +27,10 @@ public class AsyncPresenterTest {
     @Rule
     public ErrorCollector collector= new ErrorCollector();
 
-    ICalcModel model;
-    CalcModelAsync asyncModel;
-    ICalcPresenter presenter;
-    CalcPresenterAsync asyncPresenter;
+    private ICalcModel model;
+    private CalcModelAsync asyncModel;
+    private ICalcPresenter presenter;
+    private CalcPresenterAsync asyncPresenter;
 
     @Before
     public void before(){
@@ -231,11 +231,11 @@ public class AsyncPresenterTest {
             reset();
         }
 
-        public void reset(){
+        void reset(){
             signal=new CountDownLatch(1);
         }
 
-        public CountDownLatch get(){
+        CountDownLatch get(){
             return signal;
         }
     }

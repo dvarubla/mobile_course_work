@@ -24,7 +24,6 @@
     <string name="settings_energy_loss_when_collide">Energy loss when collide</string>
     <string name="settings">Settings</string>
     <string name="settings_view">Go to view</string>
-    <string name="settings_save">Save</string>
     <string name="settings_reset">Reset</string>
     <string name="settings_background_color">Background color</string>
     <string name="settings_object_color">Object color</string>

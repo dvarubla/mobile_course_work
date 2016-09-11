@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 class JumpObjSettingsPresenter implements IJumpObjSettingsPresenter {
-    private double EPSILON=1e-6;
+    private static double EPSILON=1e-6;
 
     private HashMap<IConfig.Name, DoubleConstraint> doubleMap;
     private IConfig.Name colors[];

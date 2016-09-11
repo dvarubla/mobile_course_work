@@ -92,7 +92,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
                 public void onClick(View v) {
                     ColorPickerDialogBuilder
                         .with(JumpObjSettingsActivity.this)
-                        .setTitle("Choose color")
+                        .setTitle(getString(R.string.settings_choose_color))
                         .initialColor(idsColorBtnMap.get(entry.getKey()).color)
                         .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
                         .density(10)
@@ -102,7 +102,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
                             public void onColorSelected(int selectedColor) {
                             }
                         })
-                        .setPositiveButton("ok", new ColorPickerClickListener() {
+                        .setPositiveButton(getString(R.string.ok), new ColorPickerClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
                                 idsColorBtnMap.get(entry.getKey()).color=selectedColor;
@@ -110,7 +110,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
                                 setPreviewColor(entry.getKey(), selectedColor);
                             }
                         })
-                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {}
                         })

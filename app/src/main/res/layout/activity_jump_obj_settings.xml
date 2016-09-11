@@ -40,42 +40,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_acceleration"/>
-    <EditText
+    <SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:id="@+id/editTextAccel"
-    />
+            android:id="@+id/seekBarAccel"/>
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_horizontal_speed"/>
-    <EditText
+    <SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:id="@+id/editTextHorizSpeed"
-    />
+            android:id="@+id/seekBarHorizSpeed"/>
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_friction_coefficient"/>
-    <EditText
+    <SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:id="@+id/editTextFrictionCoeff"
-    />
+            android:id="@+id/seekBarFrictionCoeff"/>
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_energy_loss_when_collide"/>
-    <EditText
+    <SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:id="@+id/editTextEnergyLoss"
-    />
+            android:id="@+id/seekBarEnergyLoss"/>
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

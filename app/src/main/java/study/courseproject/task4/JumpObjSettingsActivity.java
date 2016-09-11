@@ -3,46 +3,28 @@ package study.courseproject.task4;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.SeekBar;
 import study.courseproject.ItemSingleton;
-import study.courseproject.ListTasksActivity;
 import study.courseproject.R;
 import study.courseproject.task3.Config;
 import study.courseproject.task3.IConfig;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 
 public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpObjSettingsView{
     private boolean needSave;
-
-    private class ConstraintField{
-        IConfig.Name type;
-        DoubleConstraint constraint;
-        ConstraintField(IConfig.Name type, DoubleConstraint constraint){
-            this.type=type;
-            this.constraint=constraint;
-        }
-    }
     private IJumpObjSettingsPresenter presenter;
-    private HashMap<Integer, ConstraintField> constrMap;
     private HashMap<IConfig.Name, Integer> idsMap;
-    private DecimalFormat df;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jump_obj_settings);
-        df = new DecimalFormat("#.####");
-        df.setRoundingMode(RoundingMode.CEILING);
 
+        initMap();
+        processSeekBars();
         createParts();
-        processDoubleFields();
 
         findViewById(R.id.gotoView).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,32 +35,24 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
         });
     }
 
-    private void processDoubleFields(){
-        for(final HashMap.Entry<Integer, ConstraintField> entry : constrMap.entrySet()){
-            final EditText t=((EditText)findViewById(entry.getKey()));
-            t.addTextChangedListener(new TextWatcher() {
+    private void processSeekBars(){
+        for(final HashMap.Entry<IConfig.Name, Integer> entry: idsMap.entrySet()){
+            SeekBar bar=(SeekBar)findViewById(entry.getValue());
+            bar.setMax(MAX);
+            bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                }
 
                 @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
 
                 @Override
-                public void afterTextChanged(Editable s) {
-                    if(s.length()!=0) {
-                        if (!presenter.textEditChanged(
-                                entry.getValue().type,
-                                Float.valueOf(s.toString()))
-                                ) {
-                                t.setError(getString(
-                                        R.string.settings_err_range,
-                                        df.format(entry.getValue().constraint.min),
-                                        df.format(entry.getValue().constraint.max)
-                                ));
-                        }
-                    } else {
-                        t.setError(getString(R.string.settings_empty));
-                    }
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    presenter.seekBarChanged(entry.getKey(), seekBar.getProgress());
                 }
             });
         }
@@ -119,27 +93,23 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
         }
     }
 
-    @Override
-    public void setConstraints(HashMap<IConfig.Name, DoubleConstraint> constrMap) {
-        this.constrMap =new HashMap<>();
+    private void initMap() {
         this.idsMap=new HashMap<>();
-        add(R.id.editTextAccel, IConfig.Name.ACCEL, constrMap);
-        add(R.id.editTextHorizSpeed, IConfig.Name.HORIZ_SPEED, constrMap);
-        add(R.id.editTextEnergyLoss, IConfig.Name.ENERGY_LOSS, constrMap);
-        add(R.id.editTextFrictionCoeff, IConfig.Name.FRICTION_COEFF, constrMap);
-    }
-
-    @Override
-    public void setDouble(IConfig.Name name, double val){
-        ((EditText)findViewById(idsMap.get(name))).setText(df.format(val));
+        add(R.id.seekBarAccel, IConfig.Name.ACCEL);
+        add(R.id.seekBarHorizSpeed, IConfig.Name.HORIZ_SPEED);
+        add(R.id.seekBarEnergyLoss, IConfig.Name.ENERGY_LOSS);
+        add(R.id.seekBarFrictionCoeff, IConfig.Name.FRICTION_COEFF);
     }
 
     private void add(
             int id,
-            IConfig.Name name,
-            HashMap<IConfig.Name, DoubleConstraint> constrMap
+            IConfig.Name name
     ){
-        this.constrMap.put(id, new ConstraintField(name, constrMap.get(name)));
         this.idsMap.put(name, id);
+    }
+
+    @Override
+    public void setSeekBarValue(IConfig.Name name, int value) {
+        ((SeekBar)findViewById(idsMap.get(name))).setProgress(value);
     }
 }

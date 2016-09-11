@@ -5,7 +5,7 @@ import study.courseproject.task3.IConfig;
 import java.util.HashMap;
 
 interface IJumpObjSettingsView {
-    void setConstraints(HashMap<IConfig.Name, DoubleConstraint> map);
-
-    void setDouble(IConfig.Name name, double val);
+    int MIN=0;
+    int MAX=200;
+    void setSeekBarValue(IConfig.Name name, int value);
 }

@@ -14,16 +14,15 @@ public class ConfJumpObjsActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jump_obj);
         final RelativeLayout layout=(RelativeLayout)findViewById(R.id.jump_obj_layout);
-        ItemSingleton<IConfig> configS=ItemSingleton.getInstance(IConfig.class);
-        IConfig c;
+        ItemSingleton<IPersistentConfig> configS=ItemSingleton.getInstance(IPersistentConfig.class);
+        IPersistentConfig c;
         if(configS.hasItem()) {
             c=configS.getItem();
         } else {
-            c = new Config();
-            c.setDefaults();
+            c = new PersistentConfig(this);
             configS.setItem(c);
         }
-        presenter=new JumpObjsFact(new JumpTriangleFact(this, c), c).create(layout);
+        presenter=new JumpObjsFact(new JumpTriangleFact(this, c.getConfig()), c.getConfig()).create(layout);
     }
 
     @Override

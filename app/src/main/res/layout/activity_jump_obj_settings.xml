@@ -21,11 +21,8 @@
             style="@style/AppTheme.settings_button"
     />
     <Button
-            android:text="@string/settings_save"
-            style="@style/AppTheme.settings_button"
-    />
-    <Button
             android:text="@string/settings_reset"
+            android:id="@+id/reset_button"
             style="@style/AppTheme.settings_button"
     />
 </LinearLayout>

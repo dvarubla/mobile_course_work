@@ -9,6 +9,10 @@ public class Config implements IConfig{
         map=new HashMap<>();
     }
 
+    private Config(HashMap<Name,Object> map){
+        this.map=map;
+    }
+
     @Override
     public void setDefaults(){
         putValue(Name.ACCEL, 0.7);
@@ -17,6 +21,13 @@ public class Config implements IConfig{
         putValue(Name.ENERGY_LOSS, 0.01);
         putValue(Name.BG_COLOR, 0xFFFFEDBB);
         putValue(Name.OBJ_COLOR, 0xFF0529B2);
+    }
+
+    @Override
+    public void putAll(IConfig config) {
+        for(IConfig.Name name: IConfig.Name.values()){
+            putValue(name, config.getValue(name));
+        }
     }
 
     @Override

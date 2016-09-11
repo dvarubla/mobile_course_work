@@ -3,18 +3,28 @@ package study.courseproject.task4;
 import study.courseproject.task3.IConfig;
 
 class JumpObjSettingsModel implements IJumpObjSettingsModel {
-    private IConfig config;
+    private IPersistentConfig config;
 
-    JumpObjSettingsModel(IConfig config){
+    JumpObjSettingsModel(IPersistentConfig config){
         this.config=config;
     }
     @Override
     public <T> void set(IConfig.Name name, T value){
-        config.putValue(name, value);
+        config.getConfig().putValue(name, value);
     }
 
     @Override
     public <T> T get(IConfig.Name name) {
-        return config.getValue(name);
+        return config.getConfig().getValue(name);
+    }
+
+    @Override
+    public void save(){
+        config.save();
+    }
+
+    @Override
+    public void reset(){
+        config.reset();
     }
 }

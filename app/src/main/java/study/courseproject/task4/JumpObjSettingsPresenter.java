@@ -21,13 +21,17 @@ class JumpObjSettingsPresenter implements IJumpObjSettingsPresenter {
     @Override
     public void setView(IJumpObjSettingsView view){
         this.view=view;
+        initView();
+    }
+
+    private void initView(){
         for(Map.Entry<IConfig.Name, DoubleConstraint> entry: doubleMap.entrySet()){
             view.setSeekBarValue(
                     entry.getKey(),
                     IJumpObjSettingsView.MIN+(int)(
-                    (model.<Double>get(entry.getKey())-entry.getValue().min) /
-                    (entry.getValue().max-entry.getValue().min)*(
-                    IJumpObjSettingsView.MAX-IJumpObjSettingsView.MIN)
+                            (model.<Double>get(entry.getKey())-entry.getValue().min) /
+                                    (entry.getValue().max-entry.getValue().min)*(
+                                    IJumpObjSettingsView.MAX-IJumpObjSettingsView.MIN)
                     )
             );
         }
@@ -61,7 +65,18 @@ class JumpObjSettingsPresenter implements IJumpObjSettingsPresenter {
     }
 
     @Override
+    public void onExit() {
+        model.save();
+    }
+
+    @Override
     public void colorChanged(IConfig.Name name, int value) {
         model.set(name, value);
+    }
+
+    @Override
+    public void onReset() {
+        model.reset();
+        initView();
     }
 }

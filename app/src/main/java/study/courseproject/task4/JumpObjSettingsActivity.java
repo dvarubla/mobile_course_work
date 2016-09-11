@@ -2,8 +2,6 @@ package study.courseproject.task4;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.util.Pair;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +13,6 @@ import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import study.courseproject.ItemSingleton;
 import study.courseproject.R;
-import study.courseproject.task3.Config;
 import study.courseproject.task3.IConfig;
 
 import java.util.HashMap;
@@ -49,6 +46,12 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
             public void onClick(View v) {
                 Intent intent = new Intent(JumpObjSettingsActivity.this, ConfJumpObjsActivity.class);
                 startActivity(intent);
+            }
+        });
+        findViewById(R.id.reset_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onReset();
             }
         });
     }
@@ -127,13 +130,12 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
             presenter=s.getItem();
             presenter.setView(this);
         } else {
-            ItemSingleton<IConfig> configS=ItemSingleton.getInstance(IConfig.class);
-            IConfig c;
+            ItemSingleton<IPersistentConfig> configS=ItemSingleton.getInstance(IPersistentConfig.class);
+            IPersistentConfig c;
             if(configS.hasItem()) {
                 c=configS.getItem();
             } else {
-                c = new Config();
-                c.setDefaults();
+                c = new PersistentConfig(this);
                 configS.setItem(c);
             }
             presenter = new JumpObjSettingsPresenter(new JumpObjSettingsModel(c));
@@ -149,8 +151,9 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
     }
 
     @Override
-    public void onDestroy(){
-        super.onDestroy();
+    public void onStop(){
+        super.onStop();
+        presenter.onExit();
         if(!needSave){
             ItemSingleton.getInstance(IJumpObjSettingsPresenter.class).removeItem();
         }

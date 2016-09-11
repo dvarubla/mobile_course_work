@@ -1,6 +1,8 @@
 package study.courseproject.task3;
 
 public interface IConfig {
+    void putAll(IConfig config);
+
     enum Name {
         ACCEL,
         HORIZ_SPEED,

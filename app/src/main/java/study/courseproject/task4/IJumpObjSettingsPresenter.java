@@ -6,4 +6,5 @@ interface IJumpObjSettingsPresenter {
     void setView(IJumpObjSettingsView view);
 
     void seekBarChanged(IConfig.Name name, int value);
+    void colorChanged(IConfig.Name name, int value);
 }

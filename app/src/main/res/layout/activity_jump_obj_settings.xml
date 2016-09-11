@@ -12,7 +12,9 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_marginBottom="2dp"
+>
     <Button
             android:text="@string/settings_view"
             android:id="@+id/gotoView"
@@ -41,6 +43,7 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_acceleration"/>
     <SeekBar
+            style="@style/AppTheme.seek_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/seekBarAccel"/>
@@ -49,6 +52,7 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_horizontal_speed"/>
     <SeekBar
+            style="@style/AppTheme.seek_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/seekBarHorizSpeed"/>
@@ -57,6 +61,7 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_friction_coefficient"/>
     <SeekBar
+            style="@style/AppTheme.seek_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/seekBarFrictionCoeff"/>
@@ -65,27 +70,48 @@
             android:layout_height="wrap_content"
             android:text="@string/settings_energy_loss_when_collide"/>
     <SeekBar
+            style="@style/AppTheme.seek_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/seekBarEnergyLoss"/>
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/settings_background_color"
-    />
-    <View android:layout_width="match_parent"
-          android:layout_margin="4dp"
-          android:layout_height="25dp"
-          android:background="@android:color/black"/>
-    <TextView
+            android:text="@string/settings_set_color"/>
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/settings_foreground_color"
+            android:orientation="horizontal"
+            android:gravity="center"
+    >
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_background_color"
+            android:textAllCaps="false"
+            android:id="@+id/buttonBgColor"
+            style="@style/AppTheme.settings_button"
     />
-    <View android:layout_width="match_parent"
-          android:layout_margin="4dp"
-          android:layout_height="25dp"
-          android:background="@android:color/black"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_object_color"
+            android:textAllCaps="false"
+            android:id="@+id/buttonObjColor"
+            style="@style/AppTheme.settings_button"
+    />
+    </LinearLayout>
+    <TextView
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_object"
+            android:background="@android:color/black"
+            android:textColor="@android:color/white"
+            android:textAppearance="?android:textAppearanceLarge"
+    />
 
 </LinearLayout>
 </ScrollView>

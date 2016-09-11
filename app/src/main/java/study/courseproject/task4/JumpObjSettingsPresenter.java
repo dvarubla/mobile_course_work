@@ -8,19 +8,20 @@ import java.util.Map;
 class JumpObjSettingsPresenter implements IJumpObjSettingsPresenter {
     private double EPSILON=1e-6;
 
-    private HashMap<IConfig.Name, DoubleConstraint> map;
+    private HashMap<IConfig.Name, DoubleConstraint> doubleMap;
+    private IConfig.Name colors[];
     private IJumpObjSettingsView view;
     private IJumpObjSettingsModel model;
 
     JumpObjSettingsPresenter(IJumpObjSettingsModel model){
         this.model=model;
-        initHashMap();
+        initMaps();
     }
 
     @Override
     public void setView(IJumpObjSettingsView view){
         this.view=view;
-        for(Map.Entry<IConfig.Name, DoubleConstraint> entry: map.entrySet()){
+        for(Map.Entry<IConfig.Name, DoubleConstraint> entry: doubleMap.entrySet()){
             view.setSeekBarValue(
                     entry.getKey(),
                     IJumpObjSettingsView.MIN+(int)(
@@ -30,19 +31,23 @@ class JumpObjSettingsPresenter implements IJumpObjSettingsPresenter {
                     )
             );
         }
+        for(IConfig.Name colorName: colors){
+            view.setColor(colorName, model.<Integer>get(colorName));
+        }
     }
 
-    private void initHashMap(){
-        map=new HashMap<>();
-        map.put(IConfig.Name.ACCEL, new DoubleConstraint(0, 0.7));
-        map.put(IConfig.Name.HORIZ_SPEED, new DoubleConstraint(0, 0.7));
-        map.put(IConfig.Name.FRICTION_COEFF, new DoubleConstraint(0, 2));
-        map.put(IConfig.Name.ENERGY_LOSS, new DoubleConstraint(0, 0.8));
+    private void initMaps(){
+        doubleMap =new HashMap<>();
+        doubleMap.put(IConfig.Name.ACCEL, new DoubleConstraint(0, 0.7));
+        doubleMap.put(IConfig.Name.HORIZ_SPEED, new DoubleConstraint(0, 0.7));
+        doubleMap.put(IConfig.Name.FRICTION_COEFF, new DoubleConstraint(0, 2));
+        doubleMap.put(IConfig.Name.ENERGY_LOSS, new DoubleConstraint(0, 0.8));
+        colors=new IConfig.Name[]{IConfig.Name.BG_COLOR, IConfig.Name.OBJ_COLOR};
     }
 
     @Override
     public void seekBarChanged(IConfig.Name name, int value) {
-        DoubleConstraint c=map.get(name);
+        DoubleConstraint c= doubleMap.get(name);
         double resValue=c.min+(double)(value-IJumpObjSettingsView.MIN) /
                 (IJumpObjSettingsView.MAX-IJumpObjSettingsView.MIN)*
                 (c.max-c.min)
@@ -53,5 +58,10 @@ class JumpObjSettingsPresenter implements IJumpObjSettingsPresenter {
             resValue=c.max;
         }
         model.set(name, resValue);
+    }
+
+    @Override
+    public void colorChanged(IConfig.Name name, int value) {
+        model.set(name, value);
     }
 }

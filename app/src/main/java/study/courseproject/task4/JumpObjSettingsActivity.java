@@ -1,10 +1,17 @@
 package study.courseproject.task4;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.util.Pair;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
+import com.flask.colorpicker.ColorPickerView;
+import com.flask.colorpicker.OnColorSelectedListener;
+import com.flask.colorpicker.builder.ColorPickerClickListener;
+import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import study.courseproject.ItemSingleton;
 import study.courseproject.R;
 import study.courseproject.task3.Config;
@@ -13,17 +20,27 @@ import study.courseproject.task3.IConfig;
 import java.util.HashMap;
 
 public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpObjSettingsView{
+    private class ColorBtn{
+        public int id;
+        public int color;
+        ColorBtn(int id){
+            this.id=id;
+        }
+    }
     private boolean needSave;
     private IJumpObjSettingsPresenter presenter;
-    private HashMap<IConfig.Name, Integer> idsMap;
+    private HashMap<IConfig.Name, Integer> idsSeekbarMap;
+    private HashMap<IConfig.Name, ColorBtn> idsColorBtnMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jump_obj_settings);
 
-        initMap();
+        initMaps();
         processSeekBars();
+        processColorBtns();
         createParts();
 
         findViewById(R.id.gotoView).setOnClickListener(new View.OnClickListener() {
@@ -36,7 +53,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
     }
 
     private void processSeekBars(){
-        for(final HashMap.Entry<IConfig.Name, Integer> entry: idsMap.entrySet()){
+        for(final HashMap.Entry<IConfig.Name, Integer> entry: idsSeekbarMap.entrySet()){
             SeekBar bar=(SeekBar)findViewById(entry.getValue());
             bar.setMax(MAX);
             bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -53,6 +70,41 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
                     presenter.seekBarChanged(entry.getKey(), seekBar.getProgress());
+                }
+            });
+        }
+    }
+
+    private void processColorBtns(){
+        for(final HashMap.Entry<IConfig.Name, ColorBtn> entry: idsColorBtnMap.entrySet()){
+            findViewById(entry.getValue().id).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ColorPickerDialogBuilder
+                        .with(JumpObjSettingsActivity.this)
+                        .setTitle("Choose color")
+                        .initialColor(idsColorBtnMap.get(entry.getKey()).color)
+                        .wheelType(ColorPickerView.WHEEL_TYPE.FLOWER)
+                        .density(10)
+                        .lightnessSliderOnly()
+                        .setOnColorSelectedListener(new OnColorSelectedListener() {
+                            @Override
+                            public void onColorSelected(int selectedColor) {
+                            }
+                        })
+                        .setPositiveButton("ok", new ColorPickerClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
+                                idsColorBtnMap.get(entry.getKey()).color=selectedColor;
+                                presenter.colorChanged(entry.getKey(), selectedColor);
+                            }
+                        })
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {}
+                        })
+                        .build()
+                        .show();
                 }
             });
         }
@@ -93,23 +145,24 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
         }
     }
 
-    private void initMap() {
-        this.idsMap=new HashMap<>();
-        add(R.id.seekBarAccel, IConfig.Name.ACCEL);
-        add(R.id.seekBarHorizSpeed, IConfig.Name.HORIZ_SPEED);
-        add(R.id.seekBarEnergyLoss, IConfig.Name.ENERGY_LOSS);
-        add(R.id.seekBarFrictionCoeff, IConfig.Name.FRICTION_COEFF);
-    }
-
-    private void add(
-            int id,
-            IConfig.Name name
-    ){
-        this.idsMap.put(name, id);
+    private void initMaps() {
+        idsSeekbarMap =new HashMap<>();
+        idsSeekbarMap.put(IConfig.Name.ACCEL, R.id.seekBarAccel);
+        idsSeekbarMap.put(IConfig.Name.HORIZ_SPEED, R.id.seekBarHorizSpeed);
+        idsSeekbarMap.put(IConfig.Name.ENERGY_LOSS, R.id.seekBarEnergyLoss);
+        idsSeekbarMap.put(IConfig.Name.FRICTION_COEFF, R.id.seekBarFrictionCoeff);
+        idsColorBtnMap =new HashMap<>();
+        idsColorBtnMap.put(IConfig.Name.BG_COLOR, new ColorBtn(R.id.buttonBgColor));
+        idsColorBtnMap.put(IConfig.Name.OBJ_COLOR, new ColorBtn(R.id.buttonObjColor));
     }
 
     @Override
     public void setSeekBarValue(IConfig.Name name, int value) {
-        ((SeekBar)findViewById(idsMap.get(name))).setProgress(value);
+        ((SeekBar)findViewById(idsSeekbarMap.get(name))).setProgress(value);
+    }
+
+    @Override
+    public void setColor(IConfig.Name name, int value) {
+        idsColorBtnMap.get(name).color=value;
     }
 }

@@ -18,13 +18,15 @@
         android:id="@+id/lin"
         android:layout_alignParentTop="true"
 >
-    <Button
-            android:text="@string/settings_view"
+    <ImageButton
+            android:src="@drawable/ic_navigate_next_black_24dp"
+            android:contentDescription="@string/settings_view"
             android:id="@+id/gotoView"
             style="@style/AppTheme.settings_button"
     />
-    <Button
-            android:text="@string/settings_reset"
+    <ImageButton
+            android:src="@drawable/ic_restore_black_24dp"
+            android:contentDescription="@string/settings_reset"
             android:id="@+id/reset_button"
             style="@style/AppTheme.settings_button"
     />

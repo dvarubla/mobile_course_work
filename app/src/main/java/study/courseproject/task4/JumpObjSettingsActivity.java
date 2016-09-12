@@ -13,8 +13,8 @@ import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import study.courseproject.ItemSingleton;
 import study.courseproject.R;
-import study.courseproject.task3.ConfigDefaultsSetter;
 import study.courseproject.task3.IConfigName;
+import study.courseproject.task3.ITask3ConfigName;
 
 import java.util.HashMap;
 
@@ -82,7 +82,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
 
     private void setPreviewColor(IConfigName name, int color){
         TextView v=(TextView) findViewById(R.id.color_preview);
-        if(name== IConfigName.BG_COLOR){
+        if(name== ITask3ConfigName.BG_COLOR){
             v.setBackgroundColor(color);
         } else {
             v.setTextColor(color);
@@ -136,7 +136,9 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
             if(configS.hasItem()) {
                 c=configS.getItem();
             } else {
-                c = new PersistentConfig(this, new ConfigDefaultsSetter());
+                c = new PersistentConfig(this, new ConfigDefaultsSetter(
+                        new study.courseproject.task3.ConfigDefaultsSetter()
+                ));
                 configS.setItem(c);
             }
             presenter = new JumpObjSettingsPresenter(new JumpObjSettingsModel(c));
@@ -162,13 +164,14 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
 
     private void initMaps() {
         idsSeekbarMap =new HashMap<>();
-        idsSeekbarMap.put(IConfigName.ACCEL, R.id.seek_bar_accel);
-        idsSeekbarMap.put(IConfigName.HORIZ_SPEED, R.id.seek_bar_horiz_speed);
-        idsSeekbarMap.put(IConfigName.ENERGY_LOSS, R.id.seek_bar_energy_loss);
-        idsSeekbarMap.put(IConfigName.FRICTION_COEFF, R.id.seek_bar_friction_coeff);
+        idsSeekbarMap.put(ITask3ConfigName.ACCEL, R.id.seek_bar_accel);
+        idsSeekbarMap.put(ITask3ConfigName.HORIZ_SPEED, R.id.seek_bar_horiz_speed);
+        idsSeekbarMap.put(ITask3ConfigName.ENERGY_LOSS, R.id.seek_bar_energy_loss);
+        idsSeekbarMap.put(ITask3ConfigName.FRICTION_COEFF, R.id.seek_bar_friction_coeff);
+        idsSeekbarMap.put(ITask4ConfigName.SOUND_VOLUME, R.id.seek_bar_volume);
         idsColorBtnMap =new HashMap<>();
-        idsColorBtnMap.put(IConfigName.BG_COLOR, new ColorBtn(R.id.button_bg_color));
-        idsColorBtnMap.put(IConfigName.OBJ_COLOR, new ColorBtn(R.id.button_obj_color));
+        idsColorBtnMap.put(ITask3ConfigName.BG_COLOR, new ColorBtn(R.id.button_bg_color));
+        idsColorBtnMap.put(ITask3ConfigName.OBJ_COLOR, new ColorBtn(R.id.button_obj_color));
     }
 
     @Override

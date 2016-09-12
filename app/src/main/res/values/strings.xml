@@ -30,4 +30,5 @@
     <string name="settings_object">Object</string>
     <string name="settings_set_color">Set color</string>
     <string name="settings_choose_color">Choose color</string>
+    <string name="volume">Volume</string>
 </resources>

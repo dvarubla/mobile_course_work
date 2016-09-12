@@ -19,14 +19,16 @@ public class ConfJumpObjsActivity extends AppCompatActivity{
         if(configS.hasItem()) {
             c=configS.getItem();
         } else {
-            c = new PersistentConfig(this, new ConfigDefaultsSetter());
+            c = new PersistentConfig(this, new ConfigDefaultsSetter(
+                    new study.courseproject.task3.ConfigDefaultsSetter()
+            ));
             configS.setItem(c);
         }
         presenter=new JumpObjsFact(
                 new JumpTriangleFact(
                         this,
                         c.getConfig(),
-                        new JumpTriangleSoundModelFact(c.getConfig(), new SoundPlayer(this))
+                        new JumpTriangleSoundModelFact(c.getConfig(), new SoundPlayer(this, c.getConfig()))
                 ),
                 c.getConfig()
         ).create(layout);

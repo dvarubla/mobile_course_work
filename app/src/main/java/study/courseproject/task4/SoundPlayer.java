@@ -7,19 +7,22 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 import study.courseproject.R;
+import study.courseproject.task3.IConfig;
 
 class SoundPlayer implements ISoundPlayer{
     private SoundPool pool;
+    private IConfig config;
     private int soundId;
     private int MAX_STREAMS=6;
 
-    SoundPlayer(Context context){
+    SoundPlayer(Context context, IConfig config){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
             createPoolLollipop();
         } else {
             createPoolOld();
         }
         soundId=pool.load(context, R.raw.bell, 1);
+        this.config=config;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -38,6 +41,7 @@ class SoundPlayer implements ISoundPlayer{
 
     @Override
     public void play(){
-        pool.play(soundId, 1.0f, 1.0f, 1, 0, 1f);
+        float volume=(float)config.<Double>getValue(ITask4ConfigName.SOUND_VOLUME).doubleValue();
+        pool.play(soundId, volume, volume, 1, 0, 1f);
     }
 }

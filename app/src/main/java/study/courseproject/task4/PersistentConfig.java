@@ -2,10 +2,7 @@ package study.courseproject.task4;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import study.courseproject.task3.Config;
-import study.courseproject.task3.IConfig;
-import study.courseproject.task3.IConfigDefaultsSetter;
-import study.courseproject.task3.IConfigName;
+import study.courseproject.task3.*;
 
 class PersistentConfig implements IPersistentConfig{
     private class ConfigName{
@@ -23,15 +20,16 @@ class PersistentConfig implements IPersistentConfig{
     private boolean configRead;
     private IConfigDefaultsSetter defSetter;
     private ConfigName doubleNames[]={
-        new ConfigName(IConfigName.ACCEL, "accel"),
-        new ConfigName(IConfigName.HORIZ_SPEED, "horizSpeed"),
-        new ConfigName(IConfigName.FRICTION_COEFF, "frictionCoeff"),
-        new ConfigName(IConfigName.ENERGY_LOSS, "energyLoss")
+        new ConfigName(ITask3ConfigName.ACCEL, "accel"),
+        new ConfigName(ITask3ConfigName.HORIZ_SPEED, "horizSpeed"),
+        new ConfigName(ITask3ConfigName.FRICTION_COEFF, "frictionCoeff"),
+        new ConfigName(ITask3ConfigName.ENERGY_LOSS, "energyLoss"),
+        new ConfigName(ITask4ConfigName.SOUND_VOLUME, "soundVolume")
     };
 
     private ConfigName intNames[]={
-        new ConfigName(IConfigName.BG_COLOR, "bgColor"),
-        new ConfigName(IConfigName.OBJ_COLOR, "objColor")
+        new ConfigName(ITask3ConfigName.BG_COLOR, "bgColor"),
+        new ConfigName(ITask3ConfigName.OBJ_COLOR, "objColor")
     };
 
     PersistentConfig(Context ctx, IConfigDefaultsSetter defSetter){

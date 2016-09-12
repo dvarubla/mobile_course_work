@@ -5,7 +5,7 @@ import android.os.Looper;
 
 import java.util.concurrent.ExecutorService;
 
-class JumpTriangleModel implements IJumpTriangleModel {
+public class JumpTriangleModel implements IJumpTriangleModel {
     private static double DT=0.25f;
     private static int SLEEP_TMT=100;
     private static int STOP_TMT=2000;
@@ -32,7 +32,7 @@ class JumpTriangleModel implements IJumpTriangleModel {
     private boolean friction;
     private boolean stopped;
 
-    JumpTriangleModel(ExecutorService service, IConfig config){
+    public JumpTriangleModel(ExecutorService service, IConfig config){
         this.service = service;
         handler=new Handler(Looper.getMainLooper());
         accel=config.getValue(IConfig.Name.ACCEL);
@@ -102,6 +102,7 @@ class JumpTriangleModel implements IJumpTriangleModel {
         double time=DT+ prevVertTimeLeft;
         double dx = vertSpeed * time + accel * time * time / 2;
         if ((y + dx) > MAX_Y) {
+            listener.notifyCollide();
             double elapsedTime = (
                     -vertSpeed + Math.sqrt(vertSpeed * vertSpeed + 2 * accel * (MAX_Y - y))
             ) / accel;
@@ -138,10 +139,12 @@ class JumpTriangleModel implements IJumpTriangleModel {
         x+=prevHorizDxLeft;
         prevHorizDxLeft=0;
         if(x>MAX_X){
+            listener.notifyCollide();
             prevHorizDxLeft=-(x-MAX_X);
             x=MAX_X;
             horizSpeed*=-1;
         } else if(x<MIN_X){
+            listener.notifyCollide();
             prevHorizDxLeft=MIN_X-x;
             x=MIN_X;
             horizSpeed*=-1;
@@ -157,7 +160,7 @@ class JumpTriangleModel implements IJumpTriangleModel {
         }
     }
 
-    void setListener(IJumpTrianglePresenter listener) {
+    public void setListener(IJumpTriangleModelListener listener) {
         this.listener = listener;
     }
 }

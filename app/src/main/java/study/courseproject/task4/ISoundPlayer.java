@@ -1,0 +1,5 @@
+package study.courseproject.task4;
+
+interface ISoundPlayer {
+    void play();
+}

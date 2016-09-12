@@ -5,9 +5,9 @@ class JumpTrianglePresenter implements IJumpTrianglePresenter {
     private IJumpObjsContainer container;
     private IJumpTriangleModel model;
     private DisplayLimits limits;
-    JumpTrianglePresenter(IJumpTriangleView view, IJumpTriangleModel model){
+
+    JumpTrianglePresenter(IJumpTriangleView view){
         this.view=view;
-        this.model=model;
     }
 
     @Override
@@ -37,7 +37,14 @@ class JumpTrianglePresenter implements IJumpTrianglePresenter {
         this.container.remove(this);
     }
 
+    @Override
+    public void notifyCollide() {}
+
     void setParent(IJumpObjsContainer container) {
         this.container=container;
+    }
+
+    void setModel(IJumpTriangleModel model) {
+        this.model = model;
     }
 }

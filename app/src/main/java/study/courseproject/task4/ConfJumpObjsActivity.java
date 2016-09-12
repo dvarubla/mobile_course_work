@@ -22,7 +22,14 @@ public class ConfJumpObjsActivity extends AppCompatActivity{
             c = new PersistentConfig(this);
             configS.setItem(c);
         }
-        presenter=new JumpObjsFact(new JumpTriangleFact(this, c.getConfig()), c.getConfig()).create(layout);
+        presenter=new JumpObjsFact(
+                new JumpTriangleFact(
+                        this,
+                        c.getConfig(),
+                        new JumpTriangleSoundModelFact(c.getConfig(), new SoundPlayer(this))
+                ),
+                c.getConfig()
+        ).create(layout);
     }
 
     @Override

@@ -18,4 +18,5 @@
     <string name="settings_background_color">Цвет фона</string>
     <string name="settings_acceleration">Ускорение</string>
     <string name="settings">Настройки</string>
+    <string name="volume">Громкость</string>
 </resources>

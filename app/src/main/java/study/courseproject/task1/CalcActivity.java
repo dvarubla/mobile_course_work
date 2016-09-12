@@ -30,10 +30,8 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
 
         setContentView(R.layout.activity_calc);
 
-        needSave=false;
-        textView=(TextView)this.findViewById(R.id.textView);
         scrollView=(HorizontalScrollView)this.findViewById(R.id.scrollView);
-
+        textView=(TextView)this.findViewById(R.id.textView);
         if(savedInstanceState!=null){
             scrollView.post(new Runnable() {
                 @Override
@@ -45,25 +43,28 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
                 }
             });
         }
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        needSave=false;
 
         setTextButtonClick(
                 (Button)findViewById(android.R.id.content).getRootView().findViewWithTag("point_button")
         );
-
         findViewById(R.id.backspace_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 presenter.onBackspaceClick();
             }
         });
-
         findViewById(R.id.reset_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 presenter.onResetClick();
             }
         });
-
         processNumberButtons();
         initHashMap();
         processOperatorButtons();

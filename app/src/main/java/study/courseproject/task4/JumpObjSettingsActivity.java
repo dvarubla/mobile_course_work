@@ -36,7 +36,11 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jump_obj_settings);
+    }
 
+    @Override
+    public void onStart(){
+        super.onStart();
         initMaps();
         processSeekBars();
         processColorBtns();

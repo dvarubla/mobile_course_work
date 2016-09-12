@@ -14,6 +14,11 @@ public class ConfJumpObjsActivity extends AppCompatActivity{
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jump_obj);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
         final RelativeLayout layout=(RelativeLayout)findViewById(R.id.jump_obj_layout);
         ItemSingleton<IPersistentConfig> configS=ItemSingleton.getInstance(IPersistentConfig.class);
         IPersistentConfig c;

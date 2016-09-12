@@ -13,8 +13,13 @@ public class SnowmanActivity extends AppCompatActivity implements ISnowmanView{
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        needSave=false;
         setContentView(R.layout.activity_snowman);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        needSave=false;
         createParts();
     }
 

@@ -9,11 +9,15 @@ import android.os.Build;
 import study.courseproject.R;
 import study.courseproject.task3.IConfig;
 
+import java.util.ArrayList;
+
 class SoundPlayer implements ISoundPlayer{
     private SoundPool pool;
     private IConfig config;
     private int soundId;
-    private int MAX_STREAMS=6;
+    private boolean stopped;
+    private ArrayList<Integer> streams;
+    private static int MAX_STREAMS=6;
 
     SoundPlayer(Context context, IConfig config){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
@@ -23,6 +27,8 @@ class SoundPlayer implements ISoundPlayer{
         }
         soundId=pool.load(context, R.raw.bell, 1);
         this.config=config;
+        stopped=false;
+        streams = new ArrayList<>();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -40,8 +46,24 @@ class SoundPlayer implements ISoundPlayer{
     }
 
     @Override
-    public void play(){
-        float volume=(float)config.<Double>getValue(Task4ConfigName.SOUND_VOLUME).doubleValue();
-        pool.play(soundId, volume, volume, 1, 0, 1f);
+    public synchronized void play(){
+        if(!stopped) {
+            float volume = (float) config.<Double>getValue(Task4ConfigName.SOUND_VOLUME).doubleValue();
+            streams.add(pool.play(soundId, volume, volume, 1, 0, 1f));
+        }
+    }
+
+    @Override
+    public synchronized void stop() {
+        stopped=true;
+        for(Integer stream : streams) {
+            pool.stop(stream);
+        }
+        streams.clear();
+    }
+
+    @Override
+    public synchronized void resume() {
+        stopped=false;
     }
 }

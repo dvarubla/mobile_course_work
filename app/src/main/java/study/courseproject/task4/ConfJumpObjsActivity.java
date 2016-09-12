@@ -9,6 +9,7 @@ import study.courseproject.task3.*;
 
 public class ConfJumpObjsActivity extends AppCompatActivity{
     private IJumpObjsPresenter presenter;
+    private SoundPlayer player;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,19 +25,32 @@ public class ConfJumpObjsActivity extends AppCompatActivity{
             ));
             configS.setItem(c);
         }
+        player=new SoundPlayer(this, c.getConfig());
         presenter=new JumpObjsFact(
                 new JumpTriangleFact(
                         this,
                         c.getConfig(),
-                        new JumpTriangleSoundModelFact(c.getConfig(), new SoundPlayer(this, c.getConfig()))
+                        new JumpTriangleSoundModelFact(c.getConfig(), player)
                 ),
                 c.getConfig()
         ).create(layout);
     }
 
     @Override
-    public void onDestroy(){
-        super.onDestroy();
+    public void onPause(){
+        super.onPause();
+        player.stop();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        player.resume();
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
         presenter.stop();
     }
 }

@@ -122,8 +122,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/settings_object"
-            android:background="@android:color/black"
-            android:textColor="@android:color/white"
             android:textAppearance="?android:textAppearanceLarge"
             android:id="@+id/color_preview"
     />

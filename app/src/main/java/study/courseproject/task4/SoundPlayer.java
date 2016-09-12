@@ -16,7 +16,6 @@ class SoundPlayer implements ISoundPlayer{
     private IConfig config;
     private int soundId;
     private boolean stopped;
-    private ArrayList<Integer> streams;
     private static int MAX_STREAMS=6;
 
     SoundPlayer(Context context, IConfig config){
@@ -28,7 +27,6 @@ class SoundPlayer implements ISoundPlayer{
         soundId=pool.load(context, R.raw.bell, 1);
         this.config=config;
         stopped=false;
-        streams = new ArrayList<>();
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -49,21 +47,25 @@ class SoundPlayer implements ISoundPlayer{
     public synchronized void play(){
         if(!stopped) {
             float volume = (float) config.<Double>getValue(Task4ConfigName.SOUND_VOLUME).doubleValue();
-            streams.add(pool.play(soundId, volume, volume, 1, 0, 1f));
+            pool.play(soundId, volume, volume, 1, 0, 1f);
         }
     }
 
     @Override
     public synchronized void stop() {
         stopped=true;
-        for(Integer stream : streams) {
-            pool.stop(stream);
-        }
-        streams.clear();
+        pool.release();
     }
 
     @Override
     public synchronized void resume() {
         stopped=false;
+        pool.autoResume();
+    }
+
+    @Override
+    public synchronized void pause() {
+        stopped=true;
+        pool.autoPause();
     }
 }

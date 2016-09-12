@@ -44,7 +44,7 @@ public class ConfJumpObjsActivity extends AppCompatActivity{
     @Override
     public void onPause(){
         super.onPause();
-        player.stop();
+        player.pause();
     }
 
     @Override

@@ -4,4 +4,6 @@ interface ISoundPlayer {
     void play();
     void stop();
     void resume();
+
+    void pause();
 }

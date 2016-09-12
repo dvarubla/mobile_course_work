@@ -137,7 +137,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
                 c=configS.getItem();
             } else {
                 c = new PersistentConfig(this, new ConfigDefaultsSetter(
-                        new study.courseproject.task3.ConfigDefaultsSetter()
+                        new study.courseproject.task3.ConfigDefaultsSetter(this), this
                 ));
                 configS.setItem(c);
             }

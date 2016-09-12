@@ -1,5 +1,7 @@
 package study.courseproject;
 
+import android.content.Context;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -23,5 +25,11 @@ public class Util {
         }
 
         return result;
+    }
+
+    public static float getFloatVal(Context ctx, int id){
+        TypedValue v = new TypedValue();
+        ctx.getResources().getValue(id, v, true);
+        return v.getFloat();
     }
 }

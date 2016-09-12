@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="jo_accel" type="dimen" format="float">0.3</item>
+    <item name="jo_horiz_speed" type="dimen" format="float">0.2</item>
+    <item name="jo_friction_coeff" type="dimen" format="float">0.3</item>
+    <item name="jo_energy_loss" type="dimen" format="float">0.05</item>
+    <color name="jo_bg_color">#FFFFEDBB</color>
+    <color name="jo_obj_color">#FF0529B2</color>
+</resources>

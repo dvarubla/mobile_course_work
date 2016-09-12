@@ -1,10 +1,10 @@
 package study.courseproject.task4;
 
-import study.courseproject.task3.IConfig;
+import study.courseproject.task3.IConfigName;
 
 interface IJumpObjSettingsModel {
-    <T> void set(IConfig.Name name, T value);
-    <T> T get(IConfig.Name name);
+    <T> void set(IConfigName name, T value);
+    <T> T get(IConfigName name);
 
     void save();
 

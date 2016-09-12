@@ -1,10 +1,10 @@
 package study.courseproject.task4;
 
-import study.courseproject.task3.IConfig;
+import study.courseproject.task3.IConfigName;
 
 interface IJumpObjSettingsView {
     int MIN=0;
     int MAX=200;
-    void setSeekBarValue(IConfig.Name name, int value);
-    void setColor(IConfig.Name name, int value);
+    void setSeekBarValue(IConfigName name, int value);
+    void setColor(IConfigName name, int value);
 }

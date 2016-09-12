@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import study.courseproject.task3.Config;
 import study.courseproject.task3.IConfig;
+import study.courseproject.task3.IConfigDefaultsSetter;
+import study.courseproject.task3.IConfigName;
 
 class PersistentConfig implements IPersistentConfig{
     private class ConfigName{
-        IConfig.Name intName;
+        IConfigName intName;
         String strName;
-        ConfigName(IConfig.Name intName, String strName){
+        ConfigName(IConfigName intName, String strName){
             this.intName=intName;
             this.strName=strName;
         }
@@ -19,20 +21,22 @@ class PersistentConfig implements IPersistentConfig{
     private IConfig savedConfig;
     private IConfig unsavedConfig;
     private boolean configRead;
+    private IConfigDefaultsSetter defSetter;
     private ConfigName doubleNames[]={
-        new ConfigName(IConfig.Name.ACCEL, "accel"),
-        new ConfigName(IConfig.Name.HORIZ_SPEED, "horizSpeed"),
-        new ConfigName(IConfig.Name.FRICTION_COEFF, "frictionCoeff"),
-        new ConfigName(IConfig.Name.ENERGY_LOSS, "energyLoss")
+        new ConfigName(IConfigName.ACCEL, "accel"),
+        new ConfigName(IConfigName.HORIZ_SPEED, "horizSpeed"),
+        new ConfigName(IConfigName.FRICTION_COEFF, "frictionCoeff"),
+        new ConfigName(IConfigName.ENERGY_LOSS, "energyLoss")
     };
 
     private ConfigName intNames[]={
-        new ConfigName(IConfig.Name.BG_COLOR, "bgColor"),
-        new ConfigName(IConfig.Name.OBJ_COLOR, "objColor")
+        new ConfigName(IConfigName.BG_COLOR, "bgColor"),
+        new ConfigName(IConfigName.OBJ_COLOR, "objColor")
     };
 
-    PersistentConfig(Context ctx){
+    PersistentConfig(Context ctx, IConfigDefaultsSetter defSetter){
         this.ctx=ctx;
+        this.defSetter=defSetter;
         configRead=false;
     }
 
@@ -40,7 +44,7 @@ class PersistentConfig implements IPersistentConfig{
         if(!configRead){
             SharedPreferences p=ctx.getSharedPreferences(PREFS_NAME, 0);
             IConfig config=new Config();
-            config.setDefaults();
+            defSetter.setDefaults(config);
             for(ConfigName name: doubleNames){
                 if(p.contains(name.strName)){
                     config.putValue(name.intName, Double.longBitsToDouble(p.getLong(name.strName, 0)));
@@ -73,6 +77,6 @@ class PersistentConfig implements IPersistentConfig{
     }
 
     public void reset(){
-        unsavedConfig.setDefaults();
+        defSetter.setDefaults(unsavedConfig);
     }
 }

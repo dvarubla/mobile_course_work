@@ -1,17 +1,10 @@
 package study.courseproject.task3;
 
+import java.util.Map;
+
 public interface IConfig {
     void putAll(IConfig config);
-
-    enum Name {
-        ACCEL,
-        HORIZ_SPEED,
-        FRICTION_COEFF,
-        ENERGY_LOSS,
-        BG_COLOR,
-        OBJ_COLOR
-    }
-    <T> T getValue(Name key);
-    <T> void putValue(Name key, T value);
-    void setDefaults();
+    <T> T getValue(IConfigName key);
+    <T> void putValue(IConfigName key, T value);
+    Map<IConfigName, Object> getMap();
 }

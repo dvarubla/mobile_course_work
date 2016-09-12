@@ -26,7 +26,7 @@ class JumpTriangleView extends View implements IJumpTriangleView {
     }
 
     void setConfig(IConfig config){
-        this.color=config.getValue(IConfig.Name.OBJ_COLOR);
+        this.color=config.getValue(IConfigName.OBJ_COLOR);
     }
 
     private void createPath(){

@@ -1,13 +1,13 @@
 package study.courseproject.task4;
 
-import study.courseproject.task3.IConfig;
+import study.courseproject.task3.IConfigName;
 
 interface IJumpObjSettingsPresenter {
     void setView(IJumpObjSettingsView view);
 
-    void seekBarChanged(IConfig.Name name, int value);
+    void seekBarChanged(IConfigName name, int value);
     void onExit();
-    void colorChanged(IConfig.Name name, int value);
+    void colorChanged(IConfigName name, int value);
 
     void onReset();
 }

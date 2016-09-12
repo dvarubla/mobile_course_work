@@ -13,7 +13,8 @@ import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import study.courseproject.ItemSingleton;
 import study.courseproject.R;
-import study.courseproject.task3.IConfig;
+import study.courseproject.task3.ConfigDefaultsSetter;
+import study.courseproject.task3.IConfigName;
 
 import java.util.HashMap;
 
@@ -27,8 +28,8 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
     }
     private boolean needSave;
     private IJumpObjSettingsPresenter presenter;
-    private HashMap<IConfig.Name, Integer> idsSeekbarMap;
-    private HashMap<IConfig.Name, ColorBtn> idsColorBtnMap;
+    private HashMap<IConfigName, Integer> idsSeekbarMap;
+    private HashMap<IConfigName, ColorBtn> idsColorBtnMap;
 
 
     @Override
@@ -57,7 +58,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
     }
 
     private void processSeekBars(){
-        for(final HashMap.Entry<IConfig.Name, Integer> entry: idsSeekbarMap.entrySet()){
+        for(final HashMap.Entry<IConfigName, Integer> entry: idsSeekbarMap.entrySet()){
             SeekBar bar=(SeekBar)findViewById(entry.getValue());
             bar.setMax(MAX);
             bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -79,9 +80,9 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
         }
     }
 
-    private void setPreviewColor(IConfig.Name name, int color){
+    private void setPreviewColor(IConfigName name, int color){
         TextView v=(TextView) findViewById(R.id.color_preview);
-        if(name== IConfig.Name.BG_COLOR){
+        if(name== IConfigName.BG_COLOR){
             v.setBackgroundColor(color);
         } else {
             v.setTextColor(color);
@@ -89,7 +90,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
     }
 
     private void processColorBtns(){
-        for(final HashMap.Entry<IConfig.Name, ColorBtn> entry: idsColorBtnMap.entrySet()){
+        for(final HashMap.Entry<IConfigName, ColorBtn> entry: idsColorBtnMap.entrySet()){
             findViewById(entry.getValue().id).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -135,7 +136,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
             if(configS.hasItem()) {
                 c=configS.getItem();
             } else {
-                c = new PersistentConfig(this);
+                c = new PersistentConfig(this, new ConfigDefaultsSetter());
                 configS.setItem(c);
             }
             presenter = new JumpObjSettingsPresenter(new JumpObjSettingsModel(c));
@@ -161,22 +162,22 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
 
     private void initMaps() {
         idsSeekbarMap =new HashMap<>();
-        idsSeekbarMap.put(IConfig.Name.ACCEL, R.id.seek_bar_accel);
-        idsSeekbarMap.put(IConfig.Name.HORIZ_SPEED, R.id.seek_bar_horiz_speed);
-        idsSeekbarMap.put(IConfig.Name.ENERGY_LOSS, R.id.seek_bar_energy_loss);
-        idsSeekbarMap.put(IConfig.Name.FRICTION_COEFF, R.id.seek_bar_friction_coeff);
+        idsSeekbarMap.put(IConfigName.ACCEL, R.id.seek_bar_accel);
+        idsSeekbarMap.put(IConfigName.HORIZ_SPEED, R.id.seek_bar_horiz_speed);
+        idsSeekbarMap.put(IConfigName.ENERGY_LOSS, R.id.seek_bar_energy_loss);
+        idsSeekbarMap.put(IConfigName.FRICTION_COEFF, R.id.seek_bar_friction_coeff);
         idsColorBtnMap =new HashMap<>();
-        idsColorBtnMap.put(IConfig.Name.BG_COLOR, new ColorBtn(R.id.button_bg_color));
-        idsColorBtnMap.put(IConfig.Name.OBJ_COLOR, new ColorBtn(R.id.button_obj_color));
+        idsColorBtnMap.put(IConfigName.BG_COLOR, new ColorBtn(R.id.button_bg_color));
+        idsColorBtnMap.put(IConfigName.OBJ_COLOR, new ColorBtn(R.id.button_obj_color));
     }
 
     @Override
-    public void setSeekBarValue(IConfig.Name name, int value) {
+    public void setSeekBarValue(IConfigName name, int value) {
         ((SeekBar)findViewById(idsSeekbarMap.get(name))).setProgress(value);
     }
 
     @Override
-    public void setColor(IConfig.Name name, int value) {
+    public void setColor(IConfigName name, int value) {
         idsColorBtnMap.get(name).color=value;
         setPreviewColor(name, value);
     }

@@ -19,7 +19,7 @@ public class ConfJumpObjsActivity extends AppCompatActivity{
         if(configS.hasItem()) {
             c=configS.getItem();
         } else {
-            c = new PersistentConfig(this);
+            c = new PersistentConfig(this, new ConfigDefaultsSetter());
             configS.setItem(c);
         }
         presenter=new JumpObjsFact(

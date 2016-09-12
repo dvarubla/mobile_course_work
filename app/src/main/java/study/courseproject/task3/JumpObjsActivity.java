@@ -13,7 +13,8 @@ public class JumpObjsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_jump_obj);
         final RelativeLayout layout=(RelativeLayout)findViewById(R.id.jump_obj_layout);
         IConfig config=new Config();
-        config.setDefaults();
+        IConfigDefaultsSetter defSetter=new ConfigDefaultsSetter();
+        defSetter.setDefaults(config);
         presenter=new JumpObjsFact(
                 new JumpTriangleFact(this, config, new JumpTriangleModelFact(config)),
                 config

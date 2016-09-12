@@ -9,7 +9,7 @@ class JumpObjsView implements IJumpObjsView{
     private RelativeLayout layout;
     JumpObjsView(RelativeLayout layout, IConfig config){
         this.layout=layout;
-        layout.setBackgroundColor(config.<Integer>getValue(IConfig.Name.BG_COLOR));
+        layout.setBackgroundColor(config.<Integer>getValue(IConfigName.BG_COLOR));
     }
 
     void setPresenter(final IJumpObjsPresenter presenter){

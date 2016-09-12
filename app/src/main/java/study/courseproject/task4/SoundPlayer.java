@@ -41,7 +41,7 @@ class SoundPlayer implements ISoundPlayer{
 
     @Override
     public void play(){
-        float volume=(float)config.<Double>getValue(ITask4ConfigName.SOUND_VOLUME).doubleValue();
+        float volume=(float)config.<Double>getValue(Task4ConfigName.SOUND_VOLUME).doubleValue();
         pool.play(soundId, volume, volume, 1, 0, 1f);
     }
 }

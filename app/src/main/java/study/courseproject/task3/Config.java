@@ -4,26 +4,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Config implements IConfig{
-    private HashMap<IConfigName, Object> map;
+    private HashMap<ConfigName, Object> map;
 
     public Config(){
         map=new HashMap<>();
     }
 
     @Override
-    public Map<IConfigName, Object> getMap() {
+    public Map<ConfigName, Object> getMap() {
         return map;
     }
 
     @Override
     public void putAll(IConfig config) {
-        for(Map.Entry<IConfigName, Object> name: config.getMap().entrySet()){
+        for(Map.Entry<ConfigName, Object> name: config.getMap().entrySet()){
             putValue(name.getKey(), name.getValue());
         }
     }
 
     @Override
-    public <T> T getValue(IConfigName key) {
+    public <T> T getValue(ConfigName key) {
         if(!map.containsKey(key)){
             throw new NullPointerException("Map does not contain value");
         }
@@ -32,7 +32,7 @@ public class Config implements IConfig{
     }
 
     @Override
-    public <T> void putValue(IConfigName key, T value) {
+    public <T> void putValue(ConfigName key, T value) {
         map.put(key, value);
     }
 }

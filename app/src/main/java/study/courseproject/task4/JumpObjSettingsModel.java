@@ -1,6 +1,6 @@
 package study.courseproject.task4;
 
-import study.courseproject.task3.IConfigName;
+import study.courseproject.task3.ConfigName;
 
 class JumpObjSettingsModel implements IJumpObjSettingsModel {
     private IPersistentConfig config;
@@ -9,12 +9,12 @@ class JumpObjSettingsModel implements IJumpObjSettingsModel {
         this.config=config;
     }
     @Override
-    public <T> void set(IConfigName name, T value){
+    public <T> void set(ConfigName name, T value){
         config.getConfig().putValue(name, value);
     }
 
     @Override
-    public <T> T get(IConfigName name) {
+    public <T> T get(ConfigName name) {
         return config.getConfig().getValue(name);
     }
 

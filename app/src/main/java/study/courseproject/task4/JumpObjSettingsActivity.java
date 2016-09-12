@@ -13,8 +13,8 @@ import com.flask.colorpicker.builder.ColorPickerClickListener;
 import com.flask.colorpicker.builder.ColorPickerDialogBuilder;
 import study.courseproject.ItemSingleton;
 import study.courseproject.R;
-import study.courseproject.task3.IConfigName;
-import study.courseproject.task3.ITask3ConfigName;
+import study.courseproject.task3.ConfigName;
+import study.courseproject.task3.Task3ConfigName;
 
 import java.util.HashMap;
 
@@ -28,8 +28,8 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
     }
     private boolean needSave;
     private IJumpObjSettingsPresenter presenter;
-    private HashMap<IConfigName, Integer> idsSeekbarMap;
-    private HashMap<IConfigName, ColorBtn> idsColorBtnMap;
+    private HashMap<ConfigName, Integer> idsSeekbarMap;
+    private HashMap<ConfigName, ColorBtn> idsColorBtnMap;
 
 
     @Override
@@ -58,7 +58,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
     }
 
     private void processSeekBars(){
-        for(final HashMap.Entry<IConfigName, Integer> entry: idsSeekbarMap.entrySet()){
+        for(final HashMap.Entry<ConfigName, Integer> entry: idsSeekbarMap.entrySet()){
             SeekBar bar=(SeekBar)findViewById(entry.getValue());
             bar.setMax(MAX);
             bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -80,9 +80,9 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
         }
     }
 
-    private void setPreviewColor(IConfigName name, int color){
+    private void setPreviewColor(ConfigName name, int color){
         TextView v=(TextView) findViewById(R.id.color_preview);
-        if(name== ITask3ConfigName.BG_COLOR){
+        if(name== Task3ConfigName.BG_COLOR){
             v.setBackgroundColor(color);
         } else {
             v.setTextColor(color);
@@ -90,7 +90,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
     }
 
     private void processColorBtns(){
-        for(final HashMap.Entry<IConfigName, ColorBtn> entry: idsColorBtnMap.entrySet()){
+        for(final HashMap.Entry<ConfigName, ColorBtn> entry: idsColorBtnMap.entrySet()){
             findViewById(entry.getValue().id).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -164,23 +164,23 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
 
     private void initMaps() {
         idsSeekbarMap =new HashMap<>();
-        idsSeekbarMap.put(ITask3ConfigName.ACCEL, R.id.seek_bar_accel);
-        idsSeekbarMap.put(ITask3ConfigName.HORIZ_SPEED, R.id.seek_bar_horiz_speed);
-        idsSeekbarMap.put(ITask3ConfigName.ENERGY_LOSS, R.id.seek_bar_energy_loss);
-        idsSeekbarMap.put(ITask3ConfigName.FRICTION_COEFF, R.id.seek_bar_friction_coeff);
-        idsSeekbarMap.put(ITask4ConfigName.SOUND_VOLUME, R.id.seek_bar_volume);
+        idsSeekbarMap.put(Task3ConfigName.ACCEL, R.id.seek_bar_accel);
+        idsSeekbarMap.put(Task3ConfigName.HORIZ_SPEED, R.id.seek_bar_horiz_speed);
+        idsSeekbarMap.put(Task3ConfigName.ENERGY_LOSS, R.id.seek_bar_energy_loss);
+        idsSeekbarMap.put(Task3ConfigName.FRICTION_COEFF, R.id.seek_bar_friction_coeff);
+        idsSeekbarMap.put(Task4ConfigName.SOUND_VOLUME, R.id.seek_bar_volume);
         idsColorBtnMap =new HashMap<>();
-        idsColorBtnMap.put(ITask3ConfigName.BG_COLOR, new ColorBtn(R.id.button_bg_color));
-        idsColorBtnMap.put(ITask3ConfigName.OBJ_COLOR, new ColorBtn(R.id.button_obj_color));
+        idsColorBtnMap.put(Task3ConfigName.BG_COLOR, new ColorBtn(R.id.button_bg_color));
+        idsColorBtnMap.put(Task3ConfigName.OBJ_COLOR, new ColorBtn(R.id.button_obj_color));
     }
 
     @Override
-    public void setSeekBarValue(IConfigName name, int value) {
+    public void setSeekBarValue(ConfigName name, int value) {
         ((SeekBar)findViewById(idsSeekbarMap.get(name))).setProgress(value);
     }
 
     @Override
-    public void setColor(IConfigName name, int value) {
+    public void setColor(ConfigName name, int value) {
         idsColorBtnMap.get(name).color=value;
         setPreviewColor(name, value);
     }

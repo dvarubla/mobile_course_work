@@ -5,10 +5,10 @@ import android.support.v4.util.Pair;
 
 import java.util.LinkedList;
 
-public class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
+class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
 
     abstract class ModelTask extends AsyncTask<Void, Void, Pair<String,Exception>>{
-        public ModelTask(){
+        ModelTask(){
             super();
         }
         @Override
@@ -51,7 +51,7 @@ public class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
     private boolean dontAddTasks;
     private LinkedList<ModelTask> tasks;
 
-    public CalcModelAsync(ICalcModel model){
+    CalcModelAsync(ICalcModel model){
         tasks=new LinkedList<>();
         dontAddTasks=false;
         this.model=model;
@@ -110,7 +110,7 @@ public class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
     }
 
     @Override
-    public void addOperator(final CalcOpTypes.OpType type) {
+    public void addOperator(final CalcOpType type) {
         addTask(new ModelTask(){
             @Override
             protected void doTask() {

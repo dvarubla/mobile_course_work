@@ -33,13 +33,13 @@ public class CalcPresenterOperatorsTest {
     public void testMod(){
         attachView(v, s);
         p.onTextButtonClick("10");
-        p.onOpButtonClick(CalcOpTypes.OpType.MOD);
+        p.onOpButtonClick(CalcOpType.MOD);
         p.onTextButtonClick("3");
-        p.onOpButtonClick(CalcOpTypes.OpType.MOD);
+        p.onOpButtonClick(CalcOpType.MOD);
         p.onTextButtonClick("100");
         reset(v);
         attachView(v, s);
-        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        p.onOpButtonClick(CalcOpType.EQ);
         verify(v).setTextViewText(eq("1"), anyBoolean(), eq(false));
     }
 
@@ -47,13 +47,13 @@ public class CalcPresenterOperatorsTest {
     public void testFloatMod(){
         attachView(v, s);
         p.onTextButtonClick("10.6");
-        p.onOpButtonClick(CalcOpTypes.OpType.MOD);
+        p.onOpButtonClick(CalcOpType.MOD);
         p.onTextButtonClick("3.1");
-        p.onOpButtonClick(CalcOpTypes.OpType.MOD);
+        p.onOpButtonClick(CalcOpType.MOD);
         p.onTextButtonClick("100.9");
         reset(v);
         attachView(v, s);
-        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        p.onOpButtonClick(CalcOpType.EQ);
         verify(v).setTextViewText(eq("2"), anyBoolean(), eq(false));
     }
 
@@ -61,13 +61,13 @@ public class CalcPresenterOperatorsTest {
     public void testDiv(){
         attachView(v, s);
         p.onTextButtonClick("31");
-        p.onOpButtonClick(CalcOpTypes.OpType.DIV);
+        p.onOpButtonClick(CalcOpType.DIV);
         p.onTextButtonClick("3");
-        p.onOpButtonClick(CalcOpTypes.OpType.DIV);
+        p.onOpButtonClick(CalcOpType.DIV);
         p.onTextButtonClick("2");
         reset(v);
         attachView(v, s);
-        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        p.onOpButtonClick(CalcOpType.EQ);
         verify(v).setTextViewText(eq("5"), anyBoolean(), eq(false));
     }
 
@@ -75,13 +75,13 @@ public class CalcPresenterOperatorsTest {
     public void testDivFloat(){
         attachView(v, s);
         p.onTextButtonClick("32.6");
-        p.onOpButtonClick(CalcOpTypes.OpType.DIV);
+        p.onOpButtonClick(CalcOpType.DIV);
         p.onTextButtonClick("3.1");
-        p.onOpButtonClick(CalcOpTypes.OpType.DIV);
+        p.onOpButtonClick(CalcOpType.DIV);
         p.onTextButtonClick("2.1");
         reset(v);
         attachView(v, s);
-        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        p.onOpButtonClick(CalcOpType.EQ);
         verify(v).setTextViewText(eq("5"), anyBoolean(), eq(false));
     }
 
@@ -89,11 +89,11 @@ public class CalcPresenterOperatorsTest {
     public void testDivZero(){
         attachView(v, s);
         p.onTextButtonClick("32");
-        p.onOpButtonClick(CalcOpTypes.OpType.DIV);
+        p.onOpButtonClick(CalcOpType.DIV);
         p.onTextButtonClick("0");
         reset(v);
         attachView(v, s);
-        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        p.onOpButtonClick(CalcOpType.EQ);
         verify(v).setTextViewText(Matchers.eq(R.string.division_by_zero), anyBoolean(), eq(true));
     }
 
@@ -101,11 +101,11 @@ public class CalcPresenterOperatorsTest {
     public void testModZero(){
         attachView(v, s);
         p.onTextButtonClick("32");
-        p.onOpButtonClick(CalcOpTypes.OpType.MOD);
+        p.onOpButtonClick(CalcOpType.MOD);
         p.onTextButtonClick("0");
         reset(v);
         attachView(v, s);
-        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        p.onOpButtonClick(CalcOpType.EQ);
         verify(v).setTextViewText(eq(R.string.division_by_zero), anyBoolean(), eq(true));
     }
 
@@ -115,7 +115,7 @@ public class CalcPresenterOperatorsTest {
         p.onTextButtonClick("...");
         reset(v);
         attachView(v, s);
-        p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        p.onOpButtonClick(CalcOpType.PLUS);
 
         verify(v).setTextViewText(eq(R.string.calc_syntax_error), anyBoolean(), eq(true));
     }
@@ -124,11 +124,11 @@ public class CalcPresenterOperatorsTest {
     public void testMinusAfterError() throws InterruptedException {
         attachView(v, s);
         p.onTextButtonClick("....");
-        p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        p.onOpButtonClick(CalcOpType.PLUS);
 
         reset(v);
         attachView(v, s);
-        p.onOpButtonClick(CalcOpTypes.OpType.MINUS);
+        p.onOpButtonClick(CalcOpType.MINUS);
         verify(v).setTextViewText(eq("-"), anyBoolean(), eq(false));
     }
 }

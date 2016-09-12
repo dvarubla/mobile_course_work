@@ -52,7 +52,7 @@ public class AsyncPresenterTest {
                 asyncModel.notifyResult("RESULT");
                 return null;
             }
-        }).when(model).addOperator(any(CalcOpTypes.OpType.class));
+        }).when(model).addOperator(any(CalcOpType.class));
 
         doAnswer(new Answer<Void>() {
             @Override
@@ -67,16 +67,16 @@ public class AsyncPresenterTest {
             public Void answer(InvocationOnMock invocation) throws Throwable {
                 for(int i=0; i<numOps; i++) {
                     asyncModel.addNumber("");
-                    asyncModel.addOperator(CalcOpTypes.OpType.PLUS);
+                    asyncModel.addOperator(CalcOpType.PLUS);
                 }
                 return null;
             }
-        }).when(presenter).onOpButtonClick(any(CalcOpTypes.OpType.class));
+        }).when(presenter).onOpButtonClick(any(CalcOpType.class));
 
-        asyncPresenter.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        asyncPresenter.onOpButtonClick(CalcOpType.PLUS);
 
         assertTrue(signal.await(1, TimeUnit.SECONDS));
-        verify(model, times(3)).addOperator(eq(CalcOpTypes.OpType.PLUS));
+        verify(model, times(3)).addOperator(eq(CalcOpType.PLUS));
         verify(model, times(3)).addNumber(eq(""));
         verify(presenter).notifyResult(eq("RESULT"));
     }
@@ -91,26 +91,26 @@ public class AsyncPresenterTest {
                 signal.get().countDown();
                 return null;
             }
-        }).when(model).addOperator(eq(CalcOpTypes.OpType.PLUS));
+        }).when(model).addOperator(eq(CalcOpType.PLUS));
 
         doAnswer(new Answer<Void>() {
             @Override
             public Void answer(InvocationOnMock invocation) throws Throwable {
                 asyncModel.addNumber("");
-                asyncModel.addOperator(CalcOpTypes.OpType.PLUS);
+                asyncModel.addOperator(CalcOpType.PLUS);
                 return null;
             }
-        }).when(presenter).onOpButtonClick(any(CalcOpTypes.OpType.class));
+        }).when(presenter).onOpButtonClick(any(CalcOpType.class));
 
-        asyncPresenter.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        asyncPresenter.onOpButtonClick(CalcOpType.PLUS);
         assertTrue(signal.get().await(1, TimeUnit.SECONDS));
         signal.reset();
         Thread.sleep(100);
-        asyncPresenter.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        asyncPresenter.onOpButtonClick(CalcOpType.PLUS);
         assertTrue(signal.get().await(1, TimeUnit.SECONDS));
         signal.reset();
         Thread.sleep(100);
-        asyncPresenter.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        asyncPresenter.onOpButtonClick(CalcOpType.PLUS);
         assertTrue(signal.get().await(1, TimeUnit.SECONDS));
     }
 
@@ -121,14 +121,14 @@ public class AsyncPresenterTest {
         doAnswer(new Answer<Void>() {
             @Override
             public Void answer(InvocationOnMock invocation) throws Throwable {
-                if(invocation.getArguments()[0]==CalcOpTypes.OpType.PLUS){
+                if(invocation.getArguments()[0]== CalcOpType.PLUS){
                     asyncModel.notifyError(new Exception());
                 } else {
                     asyncModel.notifyResult("");
                 }
                 return null;
             }
-        }).when(model).addOperator(any(CalcOpTypes.OpType.class));
+        }).when(model).addOperator(any(CalcOpType.class));
 
         doAnswer(new Answer<Void>() {
             @Override
@@ -142,13 +142,13 @@ public class AsyncPresenterTest {
             @Override
             public Void answer(InvocationOnMock invocation) throws Throwable {
                 asyncModel.addNumber("");
-                asyncModel.addOperator((CalcOpTypes.OpType) invocation.getArguments()[0]);
+                asyncModel.addOperator((CalcOpType) invocation.getArguments()[0]);
                 return null;
             }
-        }).when(presenter).onOpButtonClick(any(CalcOpTypes.OpType.class));
+        }).when(presenter).onOpButtonClick(any(CalcOpType.class));
 
-        asyncPresenter.onOpButtonClick(CalcOpTypes.OpType.PLUS);
-        asyncPresenter.onOpButtonClick(CalcOpTypes.OpType.MINUS);
+        asyncPresenter.onOpButtonClick(CalcOpType.PLUS);
+        asyncPresenter.onOpButtonClick(CalcOpType.MINUS);
         assertTrue(signal.get().await(1, TimeUnit.SECONDS));
         verify(presenter, times(0)).notifyResult(anyString());
     }
@@ -163,7 +163,7 @@ public class AsyncPresenterTest {
                 asyncModel.notifyResult("");
                 return null;
             }
-        }).when(model).addOperator(any(CalcOpTypes.OpType.class));
+        }).when(model).addOperator(any(CalcOpType.class));
 
         doAnswer(new Answer<Void>() {
             @Override
@@ -177,20 +177,20 @@ public class AsyncPresenterTest {
             @Override
             public Void answer(InvocationOnMock invocation) throws Throwable {
                 asyncModel.addNumber("");
-                asyncModel.addOperator(CalcOpTypes.OpType.PLUS);
+                asyncModel.addOperator(CalcOpType.PLUS);
                 return null;
             }
-        }).when(presenter).onOpButtonClick(any(CalcOpTypes.OpType.class));
+        }).when(presenter).onOpButtonClick(any(CalcOpType.class));
 
-        asyncPresenter.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        asyncPresenter.onOpButtonClick(CalcOpType.PLUS);
         assertTrue(signal.get().await(1, TimeUnit.SECONDS));
         signal.reset();
 
-        asyncPresenter.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        asyncPresenter.onOpButtonClick(CalcOpType.PLUS);
         assertTrue(signal.get().await(1, TimeUnit.SECONDS));
         signal.reset();
 
-        asyncPresenter.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        asyncPresenter.onOpButtonClick(CalcOpType.PLUS);
         assertTrue(signal.get().await(1, TimeUnit.SECONDS));
     }
 
@@ -202,7 +202,7 @@ public class AsyncPresenterTest {
                 asyncModel.notifyResult("");
                 return null;
             }
-        }).when(model).addOperator(any(CalcOpTypes.OpType.class));
+        }).when(model).addOperator(any(CalcOpType.class));
 
         doAnswer(new Answer<Void>() {
             @Override
@@ -215,14 +215,14 @@ public class AsyncPresenterTest {
             @Override
             public Void answer(InvocationOnMock invocation) throws Throwable {
                 asyncModel.addNumber("");
-                asyncModel.addOperator(CalcOpTypes.OpType.PLUS);
+                asyncModel.addOperator(CalcOpType.PLUS);
                 return null;
             }
-        }).when(presenter).onOpButtonClick(any(CalcOpTypes.OpType.class));
+        }).when(presenter).onOpButtonClick(any(CalcOpType.class));
 
-        asyncPresenter.onOpButtonClick(CalcOpTypes.OpType.PLUS);
-        asyncPresenter.onOpButtonClick(CalcOpTypes.OpType.PLUS);
-        verify(presenter, times(1)).onOpButtonClick(any(CalcOpTypes.OpType.class));
+        asyncPresenter.onOpButtonClick(CalcOpType.PLUS);
+        asyncPresenter.onOpButtonClick(CalcOpType.PLUS);
+        verify(presenter, times(1)).onOpButtonClick(any(CalcOpType.class));
     }
 
     class SignalContainer{

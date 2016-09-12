@@ -41,17 +41,17 @@ public class CalcPresenterClearTest {
     public void testClearAfterOp(){
         attachView(v, s);
         p.onTextButtonClick("15");
-        p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        p.onOpButtonClick(CalcOpType.PLUS);
         p.onTextButtonClick("222");
-        p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        p.onOpButtonClick(CalcOpType.PLUS);
         p.onTextButtonClick("2");
         p.onResetClick();
         p.onTextButtonClick("5");
-        p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        p.onOpButtonClick(CalcOpType.PLUS);
         p.onTextButtonClick("5");
         reset(v);
         attachView(v, s);
-        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        p.onOpButtonClick(CalcOpType.EQ);
         verify(v).setTextViewText(eq("10"), anyBoolean(), eq(false));
     }
 }

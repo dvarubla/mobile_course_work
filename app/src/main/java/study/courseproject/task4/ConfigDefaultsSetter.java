@@ -12,6 +12,6 @@ class ConfigDefaultsSetter implements IConfigDefaultsSetter {
     @Override
     public void setDefaults(IConfig config) {
         setter.setDefaults(config);
-        config.putValue(ITask4ConfigName.SOUND_VOLUME, 0.5);
+        config.putValue(Task4ConfigName.SOUND_VOLUME, 0.5);
     }
 }

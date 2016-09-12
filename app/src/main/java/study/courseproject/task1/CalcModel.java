@@ -11,7 +11,7 @@ class CalcModel implements ICalcModel {
     private BigDecimal bFloats[];
     private int currentOp;
     private boolean floatMode;
-    private CalcOpTypes.OpType type;
+    private CalcOpType type;
 
     CalcModel(){
         bInts=new BigInteger[NUM_OPS];
@@ -178,7 +178,7 @@ class CalcModel implements ICalcModel {
     }
 
     @Override
-    public void addOperator(CalcOpTypes.OpType type){
+    public void addOperator(CalcOpType type){
         try {
             if (currentOp == NUM_OPS) {
                 performAction();

@@ -4,14 +4,14 @@ import android.util.Log;
 
 import study.courseproject.R;
 
-public class CalcPresenter implements ICalcPresenter{
+class CalcPresenter implements ICalcPresenter{
     private ICalcView view;
     private ICalcModel model;
     private boolean needClear;
     private boolean textChanged;
     private boolean error;
 
-    public CalcPresenter(ICalcView view, ICalcModel model){
+    CalcPresenter(ICalcView view, ICalcModel model){
         this.view=view;
         this.model=model;
         needClear=false;
@@ -39,14 +39,14 @@ public class CalcPresenter implements ICalcPresenter{
     }
 
     @Override
-    public void onOpButtonClick(CalcOpTypes.OpType type){
+    public void onOpButtonClick(CalcOpType type){
         if(type==null){
             notifyError(new NullPointerException("Op type must not be null"));
             return;
         }
         String str=view.getTextViewText();
 
-        if((str.length()==0 || error) && type==CalcOpTypes.OpType.MINUS){
+        if((str.length()==0 || error) && type== CalcOpType.MINUS){
             addText("-");
         } else if(str.length()!=0){
             if(textChanged) {

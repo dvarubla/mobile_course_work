@@ -22,7 +22,7 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
     private boolean needSave;
     private HorizontalScrollView scrollView;
 
-    private HashMap<String, CalcOpTypes.OpType> map;
+    private HashMap<String, CalcOpType> map;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -99,13 +99,13 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
 
     private void initHashMap(){
         this.map=new HashMap<>();
-        map.put(getString(R.string.operator_plus), CalcOpTypes.OpType.PLUS);
-        map.put(getString(R.string.operator_minus), CalcOpTypes.OpType.MINUS);
-        map.put(getString(R.string.operator_mul), CalcOpTypes.OpType.MUL);
-        map.put(getString(R.string.operator_float_div), CalcOpTypes.OpType.FLOAT_DIV);
-        map.put(getString(R.string.operator_div), CalcOpTypes.OpType.DIV);
-        map.put(getString(R.string.operator_mod), CalcOpTypes.OpType.MOD);
-        map.put(getString(R.string.operator_eq), CalcOpTypes.OpType.EQ);
+        map.put(getString(R.string.operator_plus), CalcOpType.PLUS);
+        map.put(getString(R.string.operator_minus), CalcOpType.MINUS);
+        map.put(getString(R.string.operator_mul), CalcOpType.MUL);
+        map.put(getString(R.string.operator_float_div), CalcOpType.FLOAT_DIV);
+        map.put(getString(R.string.operator_div), CalcOpType.DIV);
+        map.put(getString(R.string.operator_mod), CalcOpType.MOD);
+        map.put(getString(R.string.operator_eq), CalcOpType.EQ);
     }
 
     private void processNumberButtons(){

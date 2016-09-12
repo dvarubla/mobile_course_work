@@ -8,5 +8,5 @@ interface ICalcModel {
 
     void replaceNumber(String number);
 
-    void addOperator(CalcOpTypes.OpType type);
+    void addOperator(CalcOpType type);
 }

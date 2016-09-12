@@ -1,10 +1,10 @@
 package study.courseproject.task1;
 
-public class CalcPresenterAsync implements ICalcPresenterAsync {
+class CalcPresenterAsync implements ICalcPresenterAsync {
     private ICalcPresenter presenter;
     private boolean working;
 
-    public CalcPresenterAsync(ICalcPresenter presenter){
+    CalcPresenterAsync(ICalcPresenter presenter){
         working=false;
         this.presenter=presenter;
     }
@@ -32,7 +32,7 @@ public class CalcPresenterAsync implements ICalcPresenterAsync {
     }
 
     @Override
-    public void onOpButtonClick(CalcOpTypes.OpType type) {
+    public void onOpButtonClick(CalcOpType type) {
         if(!working) {
             presenter.onOpButtonClick(type);
         }

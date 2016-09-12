@@ -60,20 +60,20 @@ public class CalcPresenterBackspaceTest {
         attachView(v, s);
         p.onTextButtonClick("1");
         p.onTextButtonClick("2");
-        p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        p.onOpButtonClick(CalcOpType.PLUS);
         p.onTextButtonClick("4");
         p.onTextButtonClick("5");
 
-        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        p.onOpButtonClick(CalcOpType.EQ);
 
         p.onBackspaceClick();
 
-        p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        p.onOpButtonClick(CalcOpType.PLUS);
         p.onTextButtonClick("2");
 
         reset(v);
         attachView(v, s);
-        p.onOpButtonClick(CalcOpTypes.OpType.EQ);
+        p.onOpButtonClick(CalcOpType.EQ);
         verify(v).setTextViewText(eq("2"), anyBoolean(), eq(false));
     }
 
@@ -82,11 +82,11 @@ public class CalcPresenterBackspaceTest {
         attachView(v, s);
         p.onTextButtonClick("1");
         p.onTextButtonClick("2");
-        p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        p.onOpButtonClick(CalcOpType.PLUS);
         p.onTextButtonClick("4");
         p.onTextButtonClick("5");
 
-        p.onOpButtonClick(CalcOpTypes.OpType.PLUS);
+        p.onOpButtonClick(CalcOpType.PLUS);
         reset(v);
 
         attachView(v, s);

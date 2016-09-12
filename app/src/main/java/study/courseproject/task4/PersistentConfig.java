@@ -6,9 +6,9 @@ import study.courseproject.task3.*;
 
 class PersistentConfig implements IPersistentConfig{
     private class ConfigName{
-        IConfigName intName;
+        study.courseproject.task3.ConfigName intName;
         String strName;
-        ConfigName(IConfigName intName, String strName){
+        ConfigName(study.courseproject.task3.ConfigName intName, String strName){
             this.intName=intName;
             this.strName=strName;
         }
@@ -20,16 +20,16 @@ class PersistentConfig implements IPersistentConfig{
     private boolean configRead;
     private IConfigDefaultsSetter defSetter;
     private ConfigName doubleNames[]={
-        new ConfigName(ITask3ConfigName.ACCEL, "accel"),
-        new ConfigName(ITask3ConfigName.HORIZ_SPEED, "horizSpeed"),
-        new ConfigName(ITask3ConfigName.FRICTION_COEFF, "frictionCoeff"),
-        new ConfigName(ITask3ConfigName.ENERGY_LOSS, "energyLoss"),
-        new ConfigName(ITask4ConfigName.SOUND_VOLUME, "soundVolume")
+        new ConfigName(Task3ConfigName.ACCEL, "accel"),
+        new ConfigName(Task3ConfigName.HORIZ_SPEED, "horizSpeed"),
+        new ConfigName(Task3ConfigName.FRICTION_COEFF, "frictionCoeff"),
+        new ConfigName(Task3ConfigName.ENERGY_LOSS, "energyLoss"),
+        new ConfigName(Task4ConfigName.SOUND_VOLUME, "soundVolume")
     };
 
     private ConfigName intNames[]={
-        new ConfigName(ITask3ConfigName.BG_COLOR, "bgColor"),
-        new ConfigName(ITask3ConfigName.OBJ_COLOR, "objColor")
+        new ConfigName(Task3ConfigName.BG_COLOR, "bgColor"),
+        new ConfigName(Task3ConfigName.OBJ_COLOR, "objColor")
     };
 
     PersistentConfig(Context ctx, IConfigDefaultsSetter defSetter){

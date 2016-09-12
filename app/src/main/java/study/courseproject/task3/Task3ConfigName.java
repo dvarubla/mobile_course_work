@@ -1,6 +1,6 @@
 package study.courseproject.task3;
 
-public enum ITask3ConfigName implements IConfigName{
+public enum Task3ConfigName implements ConfigName {
     ACCEL,
     HORIZ_SPEED,
     FRICTION_COEFF,

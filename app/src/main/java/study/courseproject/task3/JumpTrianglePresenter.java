@@ -16,9 +16,10 @@ class JumpTrianglePresenter implements IJumpTrianglePresenter {
     }
 
     @Override
-    public void setAllCoords(float x, float y, float maxX, float maxY) {
+    public void setTouchCoords(float x, float y, float maxX, float maxY) {
         view.setMaxCoords(maxX, maxY);
         this.limits=view.getLimits();
+        //перевод координат касания в координаты модели
         x=(Math.min(Math.max(x, limits.minX), limits.maxX)-limits.minX)/(limits.maxX-limits.minX);
         y=(Math.min(Math.max(y, limits.minY), limits.maxY)-limits.minY)/(limits.maxY-limits.minY);
         model.start(x, y);
@@ -26,6 +27,7 @@ class JumpTrianglePresenter implements IJumpTrianglePresenter {
 
     @Override
     public void setCoords(float x, float y){
+        //перевод координат модели в координаты экрана
         view.setCoords(
                 x*(limits.maxX-limits.minX)+limits.minX,
                 y*(limits.maxY-limits.minY)+limits.minY

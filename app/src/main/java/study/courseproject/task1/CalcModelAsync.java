@@ -7,6 +7,8 @@ import java.util.LinkedList;
 
 class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
 
+    //асинхронная задача
+    //отдельный класс для уменьшения дублирования кода
     abstract class ModelTask extends AsyncTask<Void, Void, Pair<String,Exception>>{
         ModelTask(){
             super();
@@ -14,28 +16,36 @@ class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
         @Override
         protected Pair<String, Exception> doInBackground(Void... voids) {
             doTask();
-            if(exc!=null){
+            //если произошла ошибка, все остальные задачи отменяются
+            if(exception !=null){
                 cancelTasks(this);
             }
-            Pair<String,Exception> ret=new Pair<>(result,exc);
+            Pair<String,Exception> ret=new Pair<>(result, exception);
             result=null;
-            exc=null;
+            exception =null;
+            //возврат в главный поток
             return ret;
         }
 
         protected abstract void doTask();
 
+        //выполняется в главном потоке
         @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
         @Override
         protected  void onPostExecute(Pair<String,Exception> pair){
+
             if(!tasks.isEmpty()) {
+                //удаление текущей (завершённой) задачи
                 tasks.removeFirst();
             }
             if(pair.second!=null){
+                //произошла ошибка, но теперь снова можно добавлять задачи
                 dontAddTasks=false;
                 listener.notifyError(pair.second);
             } else if (tasks.isEmpty()) {
+                //все задачи завершены, можно сообщить результат
                 if (pair.first != null) {
+                    //есть какой-то результат
                     listener.notifyResult(pair.first);
                 } else {
                     listener.notifyFinish();
@@ -46,9 +56,14 @@ class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
 
     private ICalcModel model;
     private ICalcModelAsyncListener listener;
+
+    //результаты
     private String result;
-    private Exception exc;
+    private Exception exception;
+
+    //не добавлять задачи
     private boolean dontAddTasks;
+    //список задач
     private LinkedList<ModelTask> tasks;
 
     CalcModelAsync(ICalcModel model){
@@ -60,7 +75,7 @@ class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
     public void setListener(ICalcModelAsyncListener listener) {
         this.listener=listener;
     }
-
+    //отменить все задачи
     private synchronized void cancelTasks(ModelTask exceptThis){
         dontAddTasks=true;
         for(ModelTask t:tasks){
@@ -70,7 +85,7 @@ class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
         }
         tasks.clear();
     }
-
+    //добавить задачу
     private synchronized void addTask(ModelTask task){
         if(!dontAddTasks) {
             listener.notifyWorking();
@@ -79,6 +94,7 @@ class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
         }
     }
 
+    //асинхронные задачи для модели
     @Override
     public void reset() {
         addTask(new ModelTask(){
@@ -119,6 +135,7 @@ class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
         });
     }
 
+    //вызываются в фоновом потоке
     @Override
     public void notifyResult(String s) {
         result=s;
@@ -126,6 +143,6 @@ class CalcModelAsync implements ICalcModelAsync, ICalcModelListener{
 
     @Override
     public void notifyError(Exception exc) {
-        this.exc=exc;
+        this.exception =exc;
     }
 }

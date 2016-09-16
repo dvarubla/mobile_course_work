@@ -6,10 +6,14 @@ import android.os.Looper;
 import java.util.concurrent.ExecutorService;
 
 public class JumpTriangleModel implements IJumpTriangleModel {
+    //промежуток времени, который соотвествует одной итерации
     private static double DT=0.25f;
+    //промежуток времени между итерациями
     private static int SLEEP_TMT=100;
+    //промежуток времени после остановки объекта до его удаления
     private static int STOP_TMT=2000;
     private static double EPSILON =1e-5;
+    //максимальные и минимальные координаты
     private static double MAX_X=1;
     private static double MAX_Y=1;
     private static double MIN_X=0;
@@ -19,17 +23,25 @@ public class JumpTriangleModel implements IJumpTriangleModel {
     private IJumpTriangleModelListener listener;
     private Handler handler;
 
+    //координаты объекта
     private double x, y;
+    //скорости по горизонтали и вертикали
     private double vertSpeed;
     private double horizSpeed;
+    //потеря энергии при падении
     private double energyLoss;
+    //коэффициент трения
     private double frictionCoeff;
+    //ускорение движения вниз
     private double accel;
 
+    //остатки времени и перемещения с предыдущей итерации
     private double prevVertTimeLeft;
     private double prevHorizDxLeft;
 
+    //активно ли трение (то есть объект движется только по горизонтали)
     private boolean friction;
+    //остановился ли объект
     private boolean stopped;
 
     public JumpTriangleModel(ExecutorService service, IConfig config){
@@ -82,6 +94,7 @@ public class JumpTriangleModel implements IJumpTriangleModel {
         });
     }
 
+    //установить координаты объекта
     private synchronized void setCoords(){
         handler.post(new Runnable() {
             private float x;
@@ -98,15 +111,19 @@ public class JumpTriangleModel implements IJumpTriangleModel {
         }.setCoords((float)x,(float)y));
     }
 
+    //выполнять прыгающее движение объекта
     private void jump(){
         double time=DT+ prevVertTimeLeft;
         double dx = vertSpeed * time + accel * time * time / 2;
         if ((y + dx) > MAX_Y) {
+            //слишком большое перемещение, нужно остаться в MAX_Y
+            //а остаток времени сохранить
             listener.notifyCollide();
             double elapsedTime = (
                     -vertSpeed + Math.sqrt(vertSpeed * vertSpeed + 2 * accel * (MAX_Y - y))
             ) / accel;
             y = MAX_Y;
+            //вычислить энергию и отнять потерю
             double energy = (float) Math.pow(vertSpeed + accel * (elapsedTime), 2) / 2;
             energy -= energyLoss;
             if (energy < EPSILON) {
@@ -122,12 +139,13 @@ public class JumpTriangleModel implements IJumpTriangleModel {
         }
     }
 
+    //выполнять горизонтальное движение
     private void doHorizMove(){
         if(friction) {
             double sign=Math.signum(horizSpeed);
             horizSpeed=Math.abs(horizSpeed);
             double dx=horizSpeed*DT-frictionCoeff*accel*DT*DT/2;
-            if(horizSpeed*dx<EPSILON){
+            if(dx<EPSILON){
                 stopped=true;
                 return;
             }
@@ -138,6 +156,8 @@ public class JumpTriangleModel implements IJumpTriangleModel {
         }
         x+=prevHorizDxLeft;
         prevHorizDxLeft=0;
+        //слишком большое перемещение, нужно остаться в MAX_X или MIN_X
+        //а остаток перемещения сохранить
         if(x>MAX_X){
             listener.notifyCollide();
             prevHorizDxLeft=-(x-MAX_X);
@@ -151,6 +171,7 @@ public class JumpTriangleModel implements IJumpTriangleModel {
         }
     }
 
+    //итерация
     private void performIteration(){
         if(!friction){
             jump();

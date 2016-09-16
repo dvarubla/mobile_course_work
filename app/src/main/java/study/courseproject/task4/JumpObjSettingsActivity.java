@@ -19,6 +19,7 @@ import study.courseproject.task3.Task3ConfigName;
 import java.util.HashMap;
 
 public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpObjSettingsView{
+    //для хранения цвета, выбранного в диалоге, и id кнопки
     private class ColorBtn{
         public int id;
         public int color;
@@ -26,6 +27,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
             this.id=id;
         }
     }
+    //нужно ли сохранять presenter
     private boolean needSave;
     private IJumpObjSettingsPresenter presenter;
     private HashMap<ConfigName, Integer> idsSeekbarMap;
@@ -61,6 +63,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
         });
     }
 
+    //установить обработчик изменения и максимальное значение
     private void processSeekBars(){
         for(final HashMap.Entry<ConfigName, Integer> entry: idsSeekbarMap.entrySet()){
             SeekBar bar=(SeekBar)findViewById(entry.getValue());
@@ -83,7 +86,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
             });
         }
     }
-
+    //установить цвет в виджете для предпросмотра
     private void setPreviewColor(ConfigName name, int color){
         TextView v=(TextView) findViewById(R.id.color_preview);
         if(name== Task3ConfigName.BG_COLOR){
@@ -93,6 +96,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
         }
     }
 
+    //настроить появление диалога при нажатии на кнопку
     private void processColorBtns(){
         for(final HashMap.Entry<ConfigName, ColorBtn> entry: idsColorBtnMap.entrySet()){
             findViewById(entry.getValue().id).setOnClickListener(new View.OnClickListener() {
@@ -113,6 +117,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
                         .setPositiveButton(getString(R.string.ok), new ColorPickerClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int selectedColor, Integer[] allColors) {
+                                //сохранить цвет
                                 idsColorBtnMap.get(entry.getKey()).color=selectedColor;
                                 presenter.colorChanged(entry.getKey(), selectedColor);
                                 setPreviewColor(entry.getKey(), selectedColor);
@@ -166,6 +171,7 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
         }
     }
 
+    //установить соответствий название параметра-id виджета или объект для хранения цвета.
     private void initMaps() {
         idsSeekbarMap =new HashMap<>();
         idsSeekbarMap.put(Task3ConfigName.ACCEL, R.id.seek_bar_accel);
@@ -178,11 +184,13 @@ public class JumpObjSettingsActivity extends AppCompatActivity implements IJumpO
         idsColorBtnMap.put(Task3ConfigName.OBJ_COLOR, new ColorBtn(R.id.button_obj_color));
     }
 
+    //установить значение слайдера
     @Override
     public void setSeekBarValue(ConfigName name, int value) {
         ((SeekBar)findViewById(idsSeekbarMap.get(name))).setProgress(value);
     }
 
+    //установить цвет
     @Override
     public void setColor(ConfigName name, int value) {
         idsColorBtnMap.get(name).color=value;

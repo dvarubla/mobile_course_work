@@ -3,6 +3,7 @@ package study.courseproject.task3;
 import java.util.HashMap;
 import java.util.Map;
 
+//конфигурация
 public class Config implements IConfig{
     private HashMap<ConfigName, Object> map;
 
@@ -15,6 +16,7 @@ public class Config implements IConfig{
         return map;
     }
 
+    //импорт из другого объекта
     @Override
     public void putAll(IConfig config) {
         for(Map.Entry<ConfigName, Object> name: config.getMap().entrySet()){

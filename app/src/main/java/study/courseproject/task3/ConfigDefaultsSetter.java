@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat;
 import study.courseproject.R;
 import study.courseproject.Util;
 
+//класс для установки параметров конфигурации
 public class ConfigDefaultsSetter implements IConfigDefaultsSetter{
     private Context ctx;
     public ConfigDefaultsSetter(Context ctx){

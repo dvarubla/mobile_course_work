@@ -19,7 +19,7 @@ class JumpObjsPresenter implements IJumpObjsPresenter, IJumpObjsContainer {
     public void onTouchDown(float x, float y) {
         IJumpTrianglePresenter p=fact.create(this, executor);
         view.addView(p.getView());
-        p.setAllCoords(x, y, maxX, maxY);
+        p.setTouchCoords(x, y, maxX, maxY);
     }
 
     @Override

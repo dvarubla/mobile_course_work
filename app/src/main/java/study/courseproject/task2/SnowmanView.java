@@ -20,11 +20,13 @@ public class SnowmanView extends SnowmanGenView{
         ballColors=new int[]{0,0,0,0};
     }
 
+    //установить цвет шара
     void setBallColor(int ballId, int ballColor){
         ballColors[ballId]=ballColor;
         invalidate();
     }
 
+    //получить цвет шара, если индекс начинается с 1
     private int getBallColor(int ballId){
         return ballColors[ballId-1];
     }

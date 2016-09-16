@@ -5,12 +5,17 @@ import java.math.BigInteger;
 
 class CalcModel implements ICalcModel {
     private final int NUM_OPS=2;
+    //число знаков после запятой в результате
     private final int SCALE=10;
     private ICalcModelListener listener;
+    //операнды
     private BigInteger bInts[];
     private BigDecimal bFloats[];
+    //индекс операнда в массиве
     private int currentOp;
+    //используются ли вещественные числа
     private boolean floatMode;
+    //тип операции
     private CalcOpType type;
 
     CalcModel(){
@@ -23,17 +28,20 @@ class CalcModel implements ICalcModel {
         this.listener=listener;
     }
 
+    //сброс
     @Override
     public void reset(){
         currentOp=0;
         floatMode=false;
     }
 
+    //обработка ошибок
     private void processError(Exception exc){
         reset();
         listener.notifyError(exc);
     }
 
+    //добавить число
     @Override
     public void addNumber(String number){
         try {
@@ -44,6 +52,7 @@ class CalcModel implements ICalcModel {
         }
     }
 
+    //заменить число
     @Override
     public void replaceNumber(String number){
         try {
@@ -53,16 +62,19 @@ class CalcModel implements ICalcModel {
         }
     }
 
+    //добавить число указанным элементом в массив чисел
     private void addNumberWithIndex(String number, int index){
         if(index>=NUM_OPS){
             throw new ArrayIndexOutOfBoundsException("Op index is greater than array size");
         }
 
         try {
+            //определение режима вычислений
             if(number.contains(".") || floatMode){
                 if(number.equals(".")){
                     number="0";
                 }
+                //перевод всех целых чисел в вещественные
                 if(!floatMode){
                     for(int i=0; i<index; i++){
                         bFloats[i] = new BigDecimal(bInts[i]);
@@ -79,6 +91,7 @@ class CalcModel implements ICalcModel {
 
     }
 
+    //проверка деления на 0
     private void checkDivZero(){
         if(
                 (floatMode && bFloats[1].equals(BigDecimal.ZERO))
@@ -88,10 +101,12 @@ class CalcModel implements ICalcModel {
         }
     }
 
+    //выполнить операцию
     private void performAction(){
         if(type==null){
             throw new NullPointerException("Op type is null");
         }
+        //разные типы операций
         switch(type){
             case EQ:
                 if(floatMode){
@@ -128,6 +143,7 @@ class CalcModel implements ICalcModel {
             case FLOAT_DIV:
                 currentOp=1;
                 checkDivZero();
+                //если можно поделить без остатка, то вещественные числа не используются
                 if(!floatMode){
                     BigInteger tInts[]=bInts[0].divideAndRemainder(bInts[1]);
                     if(tInts[1].equals(BigInteger.ZERO)){
@@ -164,6 +180,7 @@ class CalcModel implements ICalcModel {
             default:
                 throw new IllegalArgumentException("Unknown op type "+type);
         }
+        //оповещение о результате
         if(floatMode){
             listener.notifyResult(bFloats[0].stripTrailingZeros().toPlainString());
         } else {
@@ -171,12 +188,14 @@ class CalcModel implements ICalcModel {
         }
     }
 
+    //округлить числа
     private void convertNumbersToInteger(){
         for(int i=0; i<NUM_OPS; i++){
             bInts[i]=bFloats[i].setScale(0, BigDecimal.ROUND_HALF_UP).toBigInteger();
         }
     }
 
+    //добавить оператор
     @Override
     public void addOperator(CalcOpType type){
         try {

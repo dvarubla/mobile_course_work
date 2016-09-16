@@ -16,8 +16,11 @@ class JumpTriangleView extends View implements IJumpTriangleView {
     private float maxX;
     private float maxY;
     private float strokeWidth;
+    //частное x и y
     private static float XY_PROPORTION=1.0f/1.5f;
+    //на сколько надо разделить высоту объекта, чтобы получить толщину линии
     private static float STROKE_WIDTH_DIV=5;
+    //на сколько нужно разделить высоту экрана, чтобы получить высоту объекта
     private static float Y_SIZE_DIV=7;
 
     public JumpTriangleView(Context context) {
@@ -29,6 +32,7 @@ class JumpTriangleView extends View implements IJumpTriangleView {
         this.color=config.getValue(Task3ConfigName.OBJ_COLOR);
     }
 
+    //создание треугольника
     private void createPath(){
         path=new Path();
         path.moveTo(strokeWidth/2, height-1-strokeWidth/2);
@@ -37,6 +41,7 @@ class JumpTriangleView extends View implements IJumpTriangleView {
         path.close();
     }
 
+    //настройка параметров рисования
     private void createPaint(){
         paint=new Paint();
         paint.setFlags(Paint.ANTI_ALIAS_FLAG);

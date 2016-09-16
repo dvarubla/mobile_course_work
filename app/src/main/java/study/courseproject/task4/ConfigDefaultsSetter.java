@@ -5,7 +5,7 @@ import study.courseproject.R;
 import study.courseproject.Util;
 import study.courseproject.task3.IConfig;
 import study.courseproject.task3.IConfigDefaultsSetter;
-
+//класс для установки параметров конфигурации
 class ConfigDefaultsSetter implements IConfigDefaultsSetter {
     private IConfigDefaultsSetter setter;
     private Context ctx;

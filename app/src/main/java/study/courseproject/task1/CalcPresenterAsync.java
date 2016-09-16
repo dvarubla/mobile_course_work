@@ -2,6 +2,7 @@ package study.courseproject.task1;
 
 class CalcPresenterAsync implements ICalcPresenterAsync {
     private ICalcPresenter presenter;
+    /*происходит ли выполнение задач*/
     private boolean working;
 
     CalcPresenterAsync(ICalcPresenter presenter){

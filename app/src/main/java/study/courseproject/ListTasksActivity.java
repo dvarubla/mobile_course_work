@@ -36,6 +36,7 @@ public class ListTasksActivity extends AppCompatActivity {
         });
     }
 
+    //подстановка цифр в текст кнопок и добавления обработчиков
     private void processButtons(){
         int i=1;
         for(View item: Util.getViewsByTag(findViewById(android.R.id.content).getRootView(), "menu_button")){
@@ -44,6 +45,7 @@ public class ListTasksActivity extends AppCompatActivity {
             bt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    //запустить другой объект класса Activity
                     Intent intent = new Intent(ListTasksActivity.this, classes[activityId]);
                     startActivity(intent);
                 }

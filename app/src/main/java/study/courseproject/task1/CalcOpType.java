@@ -1,5 +1,6 @@
 package study.courseproject.task1;
 
+//тип операции
 public enum CalcOpType {
     PLUS,
     MINUS,

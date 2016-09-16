@@ -28,13 +28,14 @@ class SnowmanModel implements ISnowmanModel{
     }
 
     private void createBall(final int id, int sleepMsec, int initialColor, int deltaColor){
+        //уведомление об установке цвета в основном потоке
         service.submit(new BallRunnable(sleepMsec, initialColor, deltaColor, new IBallRunnableListener() {
             @Override
             public void notifyColorChange(final int color) {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        listener.notifyColor(id, color);
+                        listener.notifyColorSet(id, color);
                     }
                 });
             }

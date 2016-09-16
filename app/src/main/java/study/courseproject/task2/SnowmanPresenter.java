@@ -10,7 +10,7 @@ class SnowmanPresenter implements ISnowmanPresenter{
     }
 
     @Override
-    public void notifyColor(int ballId, int color) {
+    public void notifyColorSet(int ballId, int color) {
         view.setBallColor(ballId, color);
     }
 

@@ -13,12 +13,17 @@ class PersistentConfig implements IPersistentConfig{
             this.strName=strName;
         }
     }
+    //название SharedPreferences
     private static final String PREFS_NAME = "Task4Prefs";
     private Context ctx;
+    //сохранённые и несохранённые конфигурации
     private IConfig savedConfig;
     private IConfig unsavedConfig;
+    //была ли прочитана конфигурация из настроек
     private boolean configRead;
     private IConfigDefaultsSetter defSetter;
+    //названия параметров из перечисления и из SharedPreferences
+
     private ConfigName doubleNames[]={
         new ConfigName(Task3ConfigName.ACCEL, "accel"),
         new ConfigName(Task3ConfigName.HORIZ_SPEED, "horizSpeed"),
@@ -38,16 +43,19 @@ class PersistentConfig implements IPersistentConfig{
         configRead=false;
     }
 
+    //получить настройки
     public IConfig getConfig(){
         if(!configRead){
             SharedPreferences p=ctx.getSharedPreferences(PREFS_NAME, 0);
             IConfig config=new Config();
             defSetter.setDefaults(config);
+            //получить вещественные параметры
             for(ConfigName name: doubleNames){
                 if(p.contains(name.strName)){
                     config.putValue(name.intName, Double.longBitsToDouble(p.getLong(name.strName, 0)));
                 }
             }
+            //получить целочисленные параметры
             for(ConfigName name: intNames){
                 if(p.contains(name.strName)){
                     config.putValue(name.intName, p.getInt(name.strName, 0));
@@ -61,12 +69,15 @@ class PersistentConfig implements IPersistentConfig{
         return unsavedConfig;
     }
 
+    //сохранить настройки
     public void save(){
         SharedPreferences p=ctx.getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = p.edit();
+        //записать вещественные параметры
         for(ConfigName name: doubleNames){
             editor.putLong(name.strName, Double.doubleToLongBits(unsavedConfig.<Double>getValue(name.intName)));
         }
+        //записать целочисленные параметры
         for(ConfigName name: intNames){
             editor.putInt(name.strName, unsavedConfig.<Integer>getValue(name.intName));
         }

@@ -19,6 +19,7 @@ class SoundPlayer implements ISoundPlayer{
     private static int MAX_STREAMS=6;
 
     SoundPlayer(Context context, IConfig config){
+        //различные методы создания из-за deprecation
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
             createPoolLollipop();
         } else {
@@ -43,6 +44,7 @@ class SoundPlayer implements ISoundPlayer{
         pool=new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);
     }
 
+    //воспроизводить звук
     @Override
     public synchronized void play(){
         if(!stopped) {

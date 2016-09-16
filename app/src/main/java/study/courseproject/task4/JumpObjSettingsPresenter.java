@@ -29,6 +29,7 @@ class JumpObjSettingsPresenter implements IJumpObjSettingsPresenter {
         for(Map.Entry<ConfigName, DoubleConstraint> entry: doubleMap.entrySet()){
             view.setSeekBarValue(
                     entry.getKey(),
+                    //преобразование из значения вещественного параметра значение ползунка слайдера
                     IJumpObjSettingsView.MIN+(int)(
                             (model.<Double>get(entry.getKey())-entry.getValue().min) /
                                     (entry.getValue().max-entry.getValue().min)*(
@@ -42,22 +43,26 @@ class JumpObjSettingsPresenter implements IJumpObjSettingsPresenter {
     }
 
     private void initMaps(){
+        //соответствия название параметра — максимальное и минимальное значение
         doubleMap =new HashMap<>();
         doubleMap.put(Task3ConfigName.ACCEL, new DoubleConstraint(0, 0.7));
         doubleMap.put(Task3ConfigName.HORIZ_SPEED, new DoubleConstraint(0, 0.7));
         doubleMap.put(Task3ConfigName.FRICTION_COEFF, new DoubleConstraint(0, 2));
         doubleMap.put(Task3ConfigName.ENERGY_LOSS, new DoubleConstraint(0, 0.8));
         doubleMap.put(Task4ConfigName.SOUND_VOLUME, new DoubleConstraint(0, 1));
+        //названия параметров цветов
         colors=new Task3ConfigName[]{Task3ConfigName.BG_COLOR, Task3ConfigName.OBJ_COLOR};
     }
 
     @Override
     public void seekBarChanged(ConfigName name, int value) {
         DoubleConstraint c= doubleMap.get(name);
+        //преобразование из значения ползунка слайдера в значение вещественного параметра
         double resValue=c.min+(double)(value-IJumpObjSettingsView.MIN) /
                 (IJumpObjSettingsView.MAX-IJumpObjSettingsView.MIN)*
                 (c.max-c.min)
                 ;
+        //обработка крайних значений
         if(Math.abs(value-c.min)<EPSILON){
             resValue=c.min;
         } else if(Math.abs(value-c.max)<EPSILON){

@@ -8,6 +8,7 @@ import study.courseproject.R;
 
 public class SnowmanActivity extends AppCompatActivity implements ISnowmanView{
     private ISnowmanPresenter presenter;
+    /*нужно ли сохранять presenter*/
     private boolean needSave;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -47,11 +48,13 @@ public class SnowmanActivity extends AppCompatActivity implements ISnowmanView{
     public void onStop(){
         super.onStop();
         if(!needSave){
+            //остановить потоки
             presenter.close();
             ItemSingleton.getInstance(ISnowmanPresenter.class).removeItem();
         }
     }
 
+    //установить цвет шара
     @Override
     public void setBallColor(int ballId, int color){
         ((SnowmanView)findViewById(R.id.snowman_view)).setBallColor(ballId, color);

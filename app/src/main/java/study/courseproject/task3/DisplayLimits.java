@@ -1,5 +1,6 @@
 package study.courseproject.task3;
 
+//максимальные и минимальные координаты
 class DisplayLimits {
     float minX;
     float maxX;

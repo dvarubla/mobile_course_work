@@ -7,8 +7,11 @@ import study.courseproject.R;
 class CalcPresenter implements ICalcPresenter{
     private ICalcView view;
     private ICalcModel model;
+    //нужно ли очистить циферблат
     private boolean needClear;
+    //изменился ли текст на циферблате
     private boolean textChanged;
+    //произошла ли ошибка
     private boolean error;
 
     CalcPresenter(ICalcView view, ICalcModel model){
@@ -23,6 +26,7 @@ class CalcPresenter implements ICalcPresenter{
         addText(text);
     }
 
+    //добавить символы на циферблат
     private void addText(String text){
         error=false;
         String prev=(needClear)?"":this.view.getTextViewText();
@@ -38,6 +42,7 @@ class CalcPresenter implements ICalcPresenter{
         this.view=v;
     }
 
+    //добавление оператора
     @Override
     public void onOpButtonClick(CalcOpType type){
         if(type==null){
@@ -47,8 +52,10 @@ class CalcPresenter implements ICalcPresenter{
         String str=view.getTextViewText();
 
         if((str.length()==0 || error) && type== CalcOpType.MINUS){
+            //унарный минус
             addText("-");
         } else if(str.length()!=0){
+            //если текст не изменился, то просто меняем оператор
             if(textChanged) {
                 model.addNumber(str);
                 textChanged =false;
@@ -72,6 +79,7 @@ class CalcPresenter implements ICalcPresenter{
         }
     }
 
+    //сброс
     @Override
     public void onResetClick() {
         error=false;
@@ -80,11 +88,13 @@ class CalcPresenter implements ICalcPresenter{
         view.setTextViewText("", false, false);
     }
 
+    //получен какой-то результат
     @Override
     public void notifyResult(String s) {
         view.setTextViewText(s, false, false);
     }
 
+    //произошла ошибка
     @Override
     public void notifyError(Exception exc){
         needClear=true;

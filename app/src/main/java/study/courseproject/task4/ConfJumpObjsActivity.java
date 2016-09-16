@@ -41,6 +41,7 @@ public class ConfJumpObjsActivity extends AppCompatActivity{
         ).create(layout);
     }
 
+    //при паузе должен сразу же выключаться звук
     @Override
     public void onPause(){
         super.onPause();

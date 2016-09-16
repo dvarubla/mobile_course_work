@@ -1,6 +1,8 @@
 package study.courseproject.task1;
 
 import android.content.DialogInterface;
+import android.os.Build;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,13 +18,18 @@ import study.courseproject.R;
 import study.courseproject.Util;
 
 public class CalcActivity extends AppCompatActivity implements ICalcView{
+    /*название ключа в bundle*/
     private final static String SCROLL_POSITION="scroll_position";
     private ICalcPresenter presenter;
-    private TextView textView;
+    /*циферблат*/
+    private TextView numberTextView;
+    /*нужно ли сохранять presenter*/
     private boolean needSave;
+    /*для прокрутки циферблата*/
     private HorizontalScrollView scrollView;
 
-    private HashMap<String, CalcOpType> map;
+    /*соответствия текст кнопки — тип оператора*/
+    private HashMap<String, CalcOpType> opTypesMap;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -31,7 +38,8 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         setContentView(R.layout.activity_calc);
 
         scrollView=(HorizontalScrollView)this.findViewById(R.id.scrollView);
-        textView=(TextView)this.findViewById(R.id.textView);
+        numberTextView =(TextView)this.findViewById(R.id.textView);
+        /*восстановление прокрутки*/
         if(savedInstanceState!=null){
             scrollView.post(new Runnable() {
                 @Override
@@ -50,9 +58,11 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         super.onStart();
         needSave=false;
 
+        /*установка обработчиков кнопок*/
         setTextButtonClick(
                 (Button)findViewById(android.R.id.content).getRootView().findViewWithTag("point_button")
         );
+
         findViewById(R.id.backspace_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,17 +108,19 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         });
     }
 
+    /*установка соответствий текст кнопки — тип оператора*/
     private void initHashMap(){
-        this.map=new HashMap<>();
-        map.put(getString(R.string.operator_plus), CalcOpType.PLUS);
-        map.put(getString(R.string.operator_minus), CalcOpType.MINUS);
-        map.put(getString(R.string.operator_mul), CalcOpType.MUL);
-        map.put(getString(R.string.operator_float_div), CalcOpType.FLOAT_DIV);
-        map.put(getString(R.string.operator_div), CalcOpType.DIV);
-        map.put(getString(R.string.operator_mod), CalcOpType.MOD);
-        map.put(getString(R.string.operator_eq), CalcOpType.EQ);
+        this.opTypesMap =new HashMap<>();
+        opTypesMap.put(getString(R.string.operator_plus), CalcOpType.PLUS);
+        opTypesMap.put(getString(R.string.operator_minus), CalcOpType.MINUS);
+        opTypesMap.put(getString(R.string.operator_mul), CalcOpType.MUL);
+        opTypesMap.put(getString(R.string.operator_float_div), CalcOpType.FLOAT_DIV);
+        opTypesMap.put(getString(R.string.operator_div), CalcOpType.DIV);
+        opTypesMap.put(getString(R.string.operator_mod), CalcOpType.MOD);
+        opTypesMap.put(getString(R.string.operator_eq), CalcOpType.EQ);
     }
 
+    //подстановка цифр в текст кнопок и добавление обработчиков
     private void processNumberButtons(){
         int i=1;
         for(View item: Util.getViewsByTag(findViewById(android.R.id.content).getRootView(), "number_button")){
@@ -119,6 +131,7 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         }
     }
 
+    //добавление обработчиков
     private void processOperatorButtons(){
         for(View item: Util.getViewsByTag(findViewById(android.R.id.content).getRootView(), "operator_button")){
             if(item instanceof Button) {
@@ -126,7 +139,7 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
                 bt.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        presenter.onOpButtonClick(map.get(bt.getText().toString()));
+                        presenter.onOpButtonClick(opTypesMap.get(bt.getText().toString()));
                     }
                 });
             }
@@ -148,6 +161,7 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         }
     }
 
+    //показать сообщение о непредвиденной ошибки
     @Override
     public void showError(String str){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -163,26 +177,28 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         dialog.show();
     }
 
+    //получить текст циферблата
     @Override
     public String getTextViewText() {
-        return textView.getText().toString();
+        return numberTextView.getText().toString();
     }
 
-    @SuppressWarnings("deprecation")
+    //установить текст циферблата
     @Override
     public void setTextViewText(String str, boolean scrollRight, boolean error) {
-        textView.setText(str);
+        numberTextView.setText(str);
         if(error){
-            textView.setTextAppearance(this, R.style.AppTheme_calc_text_view_err);
+            TextViewCompat.setTextAppearance(numberTextView, R.style.AppTheme_calc_text_view_err);
         } else {
-            textView.setTextAppearance(this, R.style.AppTheme_calc_text_view_normal);
+            TextViewCompat.setTextAppearance(numberTextView, R.style.AppTheme_calc_text_view_normal);
         }
         scroll(scrollRight);
     }
 
+    //установить текст циферблата, используя id ресурса
     @Override
-    public void setTextViewText(int str, boolean scrollRight, boolean error){
-        setTextViewText(getString(str), scrollRight, error);
+    public void setTextViewText(int strResId, boolean scrollRight, boolean error){
+        setTextViewText(getString(strResId), scrollRight, error);
     }
 
     private void scroll(final boolean scrollRight){

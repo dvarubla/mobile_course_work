@@ -20,11 +20,15 @@ import study.courseproject.Util;
 public class CalcActivity extends AppCompatActivity implements ICalcView{
     /*название ключа в bundle*/
     private final static String SCROLL_POSITION="scroll_position";
+    private final static String TEXTVIEW_ERR="textview_err";
+
     private ICalcPresenter presenter;
     /*циферблат*/
     private TextView numberTextView;
     /*нужно ли сохранять presenter*/
     private boolean needSave;
+    //установлен ли цвет текста цветом ошибки
+    private boolean numberTextViewErr;
     /*для прокрутки циферблата*/
     private HorizontalScrollView scrollView;
 
@@ -50,6 +54,7 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
                     );
                 }
             });
+            setTextViewAppearance(savedInstanceState.getBoolean(TEXTVIEW_ERR));
         }
     }
 
@@ -151,6 +156,7 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
         super.onSaveInstanceState(outState);
         needSave=true;
         outState.putInt(SCROLL_POSITION, scrollView.getScrollX());
+        outState.putBoolean(TEXTVIEW_ERR, numberTextViewErr);
     }
 
     @Override
@@ -187,12 +193,18 @@ public class CalcActivity extends AppCompatActivity implements ICalcView{
     @Override
     public void setTextViewText(String str, boolean scrollRight, boolean error) {
         numberTextView.setText(str);
+        setTextViewAppearance(error);
+        scroll(scrollRight);
+    }
+
+    //установить цвет текста в зависимости от ошибки
+    private void setTextViewAppearance(boolean error){
+        numberTextViewErr=error;
         if(error){
             TextViewCompat.setTextAppearance(numberTextView, R.style.AppTheme_calc_text_view_err);
         } else {
             TextViewCompat.setTextAppearance(numberTextView, R.style.AppTheme_calc_text_view_normal);
         }
-        scroll(scrollRight);
     }
 
     //установить текст циферблата, используя id ресурса

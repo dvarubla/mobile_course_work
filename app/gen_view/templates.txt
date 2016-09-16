@@ -58,7 +58,7 @@ public class SnowmanGenView extends View {
     private void drawPath(Canvas c, int strokeColor, float strokeWidth){
         paint.setColor(strokeColor);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(strokeWidth);
+        paint.setStrokeWidth(Math.max(strokeWidth, 1.0f/scale));
         c.drawPath(path, paint);
     }
     
@@ -81,7 +81,6 @@ draw_method:
     protected void draw_${name}(Canvas c${args}){
         path.reset();
         \${path_calls}
-        invalidate();
     }
 
 ###
